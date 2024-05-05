@@ -94,4 +94,54 @@ Route::get('/registration', function () {
     return view('register');
 })->name('registration');
 
+Route::get('/flares', function () {
+    return view('flares');
+})->name('flares');
 
+Route::get('/flares-overview', function () {
+    return view('flares-overview');
+})->name('flares-overview');
+
+Route::get('/flares-news', function () {
+    return view('flares-news');
+})->name('flares-news');
+
+Route::get('/launchers', function () {
+    return view('launchers');
+})->name('launchers');
+
+Route::get('/launchers-overview', function () {
+    return view('launchers-overview');
+})->name('launchers-overview');
+
+Route::get('/launchers-news', function () {
+    return view('launchers-news');
+})->name('launchers-news');
+
+Route::get('/firequick-accessories', function () {
+    return view('firequick-accessories');
+})->name('firequick-accessories');
+
+Route::get('/fire-accessories-overview', function () {
+    return view('fire-accessories-overview');
+})->name('fire-accessories-overview');
+
+Route::get('/fire-news', function () {
+    return view('fire-news');
+})->name('fire-news');
+
+Route::get('/services', function () {
+    return view('services');
+})->name('services');
+
+Route::get('/launcher-repair-services', function () {
+    return view('launcher-repair-services');
+})->name('launcher-repair-services');
+
+Route::get('/fire-training-services', function () {
+    return view('fire-training-services');
+})->name('fire-training-services');
+
+Route::get('/safety-training-videos', function () {
+    return view('safety-training-videos');
+})->name('safety-training-videos');
