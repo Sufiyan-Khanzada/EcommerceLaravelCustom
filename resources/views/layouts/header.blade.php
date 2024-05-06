@@ -54,8 +54,67 @@
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('about')}}">About Us</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('about')}}">About Us</a></li> -->
+
                         <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('about')}}" data-toggle="dropdown">About</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{{route('company.history')}}">Company History</a></li>
+								<li><a href="{{route('careers')}}">Careers</a></li>
+                                <li><a href="{{asset('testimonials')}}">Testinomials</a></li>
+                                <li><a href="{{asset('faq')}}">FAQs</a></li>
+                                <li><a href="{{asset('documents')}}">Documents</a></li>
+                                <li><a href="{{asset('news')}}">News</a></li>
+                            </ul>
+                        </li> 
+
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('flares')}}" data-toggle="dropdown">Flares</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{{route('flares-overview')}}">Overview</a></li>
+								<li><a href="{{route('flares')}}">Flares for Sale</a></li>
+                                <li><a href="{{asset('flares-news')}}">News</a></li>
+                               
+                            </ul>
+                        </li> 
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('launchers')}}" data-toggle="dropdown">Launchers</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{{route('launchers-overview')}}">Overview</a></li>
+								<li><a href="{{route('launchers')}}">Launchers for Sale</a></li>
+                                <li><a href="{{asset('launchers-news')}}">News</a></li>
+                               
+                            </ul>
+                        </li> 
+
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('firequick-accessories')}}" data-toggle="dropdown">Fire Accessories</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
+								<li><a href="{{route('firequick-accessories')}}">Fire Accessories for Sale</a></li>
+                                <li><a href="{{asset('fire-news')}}">News</a></li>
+                               
+                            </ul>
+                        </li> 
+
+
+
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('services')}}" data-toggle="dropdown">Services</a>
+                            <ul class="dropdown-menu">
+								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
+								<li><a href="{{route('launcher-repair-services')}}">Launch Repair Services</a></li>
+                                <li><a href="{{asset('fire-training-services')}}">Fire Traning Services</a></li>
+                                <li><a href="{{asset('safety-training-videos')}}">Safety Traning Videos</a></li>
+                                
+                               
+                            </ul>
+                        </li> 
+
+                        <!-- <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('shop')}}">Sidebar Shop</a></li>
@@ -65,7 +124,7 @@
                                 <li><a href="{{asset('my-account')}}">My Account</a></li>
                                 <li><a href="{{asset('wishlist')}}">Wishlist</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="nav-item"><a class="nav-link" href="{{asset('gallery')}}">Gallery</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{asset('contact-us')}}">Contact Us</a></li>
                     </ul>
