@@ -115,9 +115,7 @@
     </div>
     <!-- End Wishlist -->
 
-    <!-- Start Instagram Feed  -->
-    @include('widgets.instagram')
-    <!-- End Instagram Feed  -->
+  
 @endsection
 @section('css')
 <style type="text/css">
