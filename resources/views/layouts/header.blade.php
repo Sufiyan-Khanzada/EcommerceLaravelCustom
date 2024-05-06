@@ -46,7 +46,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" class="logo" alt="" height="60" style="margin-left:-76px;"></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -57,7 +57,7 @@
                         <!-- <li class="nav-item"><a class="nav-link" href="{{route('about')}}">About Us</a></li> -->
 
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('about')}}" data-toggle="dropdown">About</a>
+                            <a href="#" class="nav-link dropdown-toggle " href="{{route('about')}}" data-toggle="dropdown">About</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('company.history')}}">Company History</a></li>
 								<li><a href="{{route('careers')}}">Careers</a></li>
@@ -70,7 +70,7 @@
 
 
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('flares')}}" data-toggle="dropdown">Flares</a>
+                            <a href="#" class="nav-link dropdown-toggle" href="{{route('flares')}}" data-toggle="dropdown">Flares</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('flares-overview')}}">Overview</a></li>
 								<li><a href="{{route('flares')}}">Flares for Sale</a></li>
@@ -80,7 +80,7 @@
                         </li> 
 
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('launchers')}}" data-toggle="dropdown">Launchers</a>
+                            <a href="#" class="nav-link dropdown-toggle " href="{{route('launchers')}}" data-toggle="dropdown">Launchers</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('launchers-overview')}}">Overview</a></li>
 								<li><a href="{{route('launchers')}}">Launchers for Sale</a></li>
@@ -91,7 +91,7 @@
 
 
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('firequick-accessories')}}" data-toggle="dropdown">Fire Accessories</a>
+                            <a href="#" class="nav-link dropdown-toggle " href="{{route('firequick-accessories')}}" data-toggle="dropdown">Fire Items</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
 								<li><a href="{{route('firequick-accessories')}}">Fire Accessories for Sale</a></li>
@@ -103,7 +103,7 @@
 
 
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" href="{{route('services')}}" data-toggle="dropdown">Services</a>
+                            <a href="#" class="nav-link dropdown-toggle " href="{{route('services')}}" data-toggle="dropdown">Services</a>
                             <ul class="dropdown-menu">
 								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
 								<li><a href="{{route('launcher-repair-services')}}">Launch Repair Services</a></li>
@@ -126,7 +126,7 @@
                             </ul>
                         </li> -->
                         <li class="nav-item"><a class="nav-link" href="{{asset('gallery')}}">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('contact-us')}}">Contact Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{asset('contact-us')}}">Contact</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -134,7 +134,7 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <!-- <li class="search"><a href="#"><i class="fa fa-search"></i></a></li> -->
                         <li class="side-menu">
 							<a href="{{route('cart')}}">
 								<i class="fa fa-shopping-bag"></i>

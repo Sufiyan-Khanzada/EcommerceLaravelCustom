@@ -8,6 +8,8 @@
    <!-- Custom CSS -->
    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 <link href="{{asset('css/jquery.toast.css')}}" rel="stylesheet">
+
+
 <style>
    .myimages{
     height:200px !important;
