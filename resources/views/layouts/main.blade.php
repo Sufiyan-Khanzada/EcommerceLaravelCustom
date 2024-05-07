@@ -8,8 +8,8 @@
     <!--Any config settings you want to fetch you will get in $config array, -->
     <?php //echo $config['COMPANY']; ?>
     <title>{{isset($title)?$title:''}}</title>
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{asset('images/apple-touch-icon.png')}}">
+    <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{asset('assets/images/apple-touch-icon.png')}}">
   
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('layouts.links')

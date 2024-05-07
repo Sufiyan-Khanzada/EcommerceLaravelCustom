@@ -1,193 +1,205 @@
-    <!-- Start Main Top -->
-    <div class="main-top">
-        <div class="container-fluid">
-            <div class="text-slid-box">
-                <div class="row">
-                    <div id="offer-box" class="carouselTicker">
-                        <ul class="offer-box">
-                            <li>
-                                Our offices are open Monday thru Friday 8.00 am to 4.00 pm PT.  If you have any questions please call the office on 760-377-5766 during these times.
-                            </li>
-                            <li>
-                                ***PLEASE NOTE THAT OUR WEBSITE ORDERING IS CURRENTLY UNAVAILABLE.  PLEASE CALL THE OFFICE ON 760-377-5766 TO PLACE ANY ORDERS.  WE APOLOGIZE FOR THE INCONVENIENCE***
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    
-                    <div class="right-phone-box">
-                        <p>Call US <a href="tel:760-377-5766">(760) 377-5766</a>,<a href="tel:855-374-3473">855-FPI-FIRE (855-374-3473)</a></p>
-                    </div>
-                
-                </div>
-                <div class="col-md-6">
-                    <div class="login-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-                            <option>Register Here</option>
-                            <option>Sign In</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Main Top -->
+<div class="marquee">
+        		<b>
+        			Our offices are open Monday thru Friday 8.00 am to 4.00 pm PT.  If you have any questions please call the office on 760-377-5766 during these times.        		</b>
+        	</div>
+        
+                 	<div class="marquee">
+        		<b>
+        			***PLEASE NOTE THAT OUR WEBSITE ORDERING IS CURRENTLY UNAVAILABLE.  PLEASE CALL THE OFFICE ON 760-377-5766 TO PLACE ANY ORDERS.  WE APOLOGIZE FOR THE INCONVENIENCE***        		</b>
+        	</div>
+        
+         
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Header -->
+		<header id="header" class="header-transparent dark">
+		
+			<div id="header-wrap">
+				<div class="container">
+					
+					<div class="row">
+						<div class="col-xs-12 col-sm-5 col-md-5">
+							<!--Logo-->
+							<div id="logo">
+								<a href="https://www.firequick.com/" class="logo" data-dark-logo="https://www.firequick.com/assets/images/services-training/logo.png">
+									<img src="https://www.firequick.com/assets/images/services-training/logo.png" alt="Polo Logo">
+								</a>
 
-    <!-- Start Main Top -->
-    <header class="main-header">
-        <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-            <div class="container">
-                <!-- Start Header Navigation -->
-                <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                    <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/logo.png')}}" class="logo" alt="" height="60" style="margin-left:-76px;"></a>
-                </div>
-                <!-- End Header Navigation -->
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="{{route('about')}}">About Us</a></li> -->
-
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " href="{{route('about')}}" data-toggle="dropdown">About</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('company.history')}}">Company History</a></li>
-								<li><a href="{{route('careers')}}">Careers</a></li>
-                                <li><a href="{{asset('testimonials')}}">Testinomials</a></li>
-                                <li><a href="{{asset('faq')}}">FAQs</a></li>
-                                <li><a href="{{asset('documents')}}">Documents</a></li>
-                                <li><a href="{{asset('news')}}">News</a></li>
-                            </ul>
-                        </li> 
+							</div>
+							<!--End: Logo-->
+						
+						</div>
+						<div class="col-xs-12 col-sm-7 col-md-7">
+							
+							<div class="top-header-right">
+								<a href="tel:760-377-5766">Call (760) 377-5766</a><span style="color: #fff;">,</span>&nbsp;<a href="tel:855-374-3473">855-FPI-FIRE (855-374-3473)</a>
+							</div>
+							<div class="site_needguns_wrap">
+									<div class="top-header-left new-btn-div" style="display:none;>
+						<a href="http://www.gunstores.net/about/about.aspx?d=wxmmLYeS6Ig=&u=&g=&z=tMxIW4mepAM=">
+                                    <span>Need guns? Visit Firequick Firearms here!</span>
+                                </a>
+					
 
 
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" href="{{route('flares')}}" data-toggle="dropdown">Flares</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('flares-overview')}}">Overview</a></li>
-								<li><a href="{{route('flares')}}">Flares for Sale</a></li>
-                                <li><a href="{{asset('flares-news')}}">News</a></li>
-                               
-                            </ul>
-                        </li> 
+					</div>
+								
+								<div id="google_translate_element" class="google-translate"></div>
+							</div>
+					<!--Header Extras-->
+					<div class="header-extras">
+						<ul>
+							
+							<li>
+							
+<div class="top-header-second top-header-left">
 
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " href="{{route('launchers')}}" data-toggle="dropdown">Launchers</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('launchers-overview')}}">Overview</a></li>
-								<li><a href="{{route('launchers')}}">Launchers for Sale</a></li>
-                                <li><a href="{{asset('launchers-news')}}">News</a></li>
-                               
-                            </ul>
-                        </li> 
+					
+					<div>
+						<a href="https://www.firequick.com/page/login">
+                                        <i class="fa fa-sign-in"></i><span>Login</span>
+                                    </a>
+					
 
-
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " href="{{route('firequick-accessories')}}" data-toggle="dropdown">Fire Items</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
-								<li><a href="{{route('firequick-accessories')}}">Fire Accessories for Sale</a></li>
-                                <li><a href="{{asset('fire-news')}}">News</a></li>
-                               
-                            </ul>
-                        </li> 
+						<a href="https://www.firequick.com/page/registration">
+                                        <i class="fa fa-user-plus"></i><span>Register</span>
+                                    </a>
+					
 
 
+					</div>
 
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " href="{{route('services')}}" data-toggle="dropdown">Services</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('fire-accessories-overview')}}">Overview</a></li>
-								<li><a href="{{route('launcher-repair-services')}}">Launch Repair Services</a></li>
-                                <li><a href="{{asset('fire-training-services')}}">Fire Traning Services</a></li>
-                                <li><a href="{{asset('safety-training-videos')}}">Safety Traning Videos</a></li>
-                                
-                               
-                            </ul>
-                        </li> 
+					
+				</div>								
+							
+							</li>
+							
+							<li class="hidden-xs">
+								<!--shopping cart-->
+								<div id="shopping-cart">
+									<a href="https://www.firequick.com/page/cart">
+                                        <span class="shopping-cart-items" style="height: 19px;
+										   text-align:center;
+											padding: 5px;
+											right: -11px;
+											top: -12px;
+											width: 19px;
+										">0</span>
+                                        <i class="fa fa-shopping-cart"></i></a>
+								</div>
+								<!--end: shopping cart-->
+							</li>
+							
+							
+						</ul>
+					</div>
+					<!--end: Header Extras-->
+						
+						
+						</div>
+					</div>
+					
 
-                        <!-- <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
-                            <ul class="dropdown-menu">
-								<li><a href="{{route('shop')}}">Sidebar Shop</a></li>
-								<li><a href="{{route('shop-detail')}}">Shop Detail</a></li>
-                                <li><a href="{{asset('cart')}}">Cart</a></li>
-                                <li><a href="{{asset('checkout')}}">Checkout</a></li>
-                                <li><a href="{{asset('my-account')}}">My Account</a></li>
-                                <li><a href="{{asset('wishlist')}}">Wishlist</a></li>
-                            </ul>
-                        </li> -->
-                        <li class="nav-item"><a class="nav-link" href="{{asset('gallery')}}">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{asset('contact-us')}}">Contact</a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+					<!--Top Search Form-->
+					<!-- <div id="top-search">
+                        <form action="search-results-page.html" method="get">
+                            <input type="text" name="q" class="form-control" value="" placeholder="Start typing & press  &quot;Enter&quot;">
+                        </form>
+                    </div> -->
+					<!--end: Top Search Form-->
 
-                <!-- Start Atribute Navigation -->
-                <div class="attr-nav">
-                    <ul>
-                        <!-- <li class="search"><a href="#"><i class="fa fa-search"></i></a></li> -->
-                        <li class="side-menu">
-							<a href="{{route('cart')}}">
-								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">3</span>
-								<p>My Cart</p>
-							</a>
-						</li>
-                    </ul>
-                </div>
-                <!-- End Atribute Navigation -->
-            </div>
-            <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
-            <!-- End Side Menu -->
-        </nav>
-        <!-- End Navigation -->
-    </header>
-    <!-- End Main Top -->
 
-    <!-- Start Top Search -->
-    <div class="top-search">
-        <div class="container">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
-            </div>
-        </div>
-    </div>
-    <!-- End Top Search -->
+					<!--Navigation Resposnive Trigger-->
+					<div id="mainMenu-trigger">
+						<button class="lines-button x"> <span class="lines"></span> </button>
+					</div>
+					<!--end: Navigation Resposnive Trigger-->
+
+				</div>
+			</div>
+			
+								<!--Navigation-->
+					<div id="mainMenu" class="light">
+						<div class="container">
+							
+							
+							<nav>
+								<ul>
+									<li><a href="https://www.firequick.com/">Home</a>
+									</li>
+									
+									</li>
+									<li class="dropdown"><a href="https://www.firequick.com/page/24/About">About</a><ul class="dropdown-menu"><li><a href="https://www.firequick.com/page/36/Company-history">Company history</a></li><li><a href="https://www.firequick.com/page/37/Careers">Careers</a></li><li><a href="https://www.firequick.com/page/38/Testimonials">Testimonials</a></li><li><a href="https://www.firequick.com/page/35/FAQ">FAQ</a></li><li><a href="https://www.firequick.com/page/documents">Documents</a></li><li><a href="https://www.firequick.com/page/news">News</a></li></ul></li>									<!--<li><a href="https://www.firequick.com/page/products">Products</a>-->
+									
+									
+									
+									
+									<li class="dropdown"><a href="https://www.firequick.com/page/products/category/3">Flares</a>
+										<ul class="dropdown-menu">
+											<li><a href="https://www.firequick.com/page/flare-overview">Overview</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/products/category/3">Flares For Sale</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/flare-news">News</a>
+											</li>
+										</ul>
+
+
+									</li>
+									<li class="dropdown"><a href="https://www.firequick.com/page/products/category/2">Launchers</a>
+										<ul class="dropdown-menu">
+											<li><a href="https://www.firequick.com/page/launchers-overview">Overview</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/products/category/2">Launchers For Sale</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/launcher-news">News</a>
+											</li>
+										</ul>
+
+
+									</li>
+									<li class="dropdown"><a href="https://www.firequick.com/page/products/category/4">Fire Accessories</a>
+										<ul class="dropdown-menu">
+											<li><a href="https://www.firequick.com/page/fire-accessories-overview">Overview</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/products/category/4">Fire Accessories For Sale</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/fire-accessories-news">News</a>
+											</li>
+										</ul>
+
+
+									</li>
+									
+									
+									
+									
+									
+									
+									
+									
+									<li class="dropdown"><a href="/page/23/Services">Services</a>
+										<ul class="dropdown-menu">
+											<li><a href="https://www.firequick.com/page/23/Services">Overview</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/launcher-repair-services">Launcher repair services</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/fire-training-services">Fire Training Services</a>
+											</li>
+											<li><a href="https://www.firequick.com/page/safety-training-videos">Safety Training Videos</a>
+										</ul>
+
+
+									</li>
+									<li><a href="https://www.firequick.com/page/gallery">Gallery</a>
+									</li>
+									<li><a href="https://www.firequick.com/page/contact-us">Contact Us</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!--end: Navigation-->
+
+		</header>
+		<!-- end: Header -->
