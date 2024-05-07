@@ -1,35 +1,36 @@
     <!-- Start Main Top -->
     <div class="main-top">
         <div class="container-fluid">
-            <div class="row">
             <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
-                            <ul class="offer-box">
-                                <li>
-        		                    Our offices are open Monday thru Friday 8.00 am to 4.00 pm PT.  If you have any questions please call the office on 760-377-5766 during these times.
-                                </li>
-                                <li>
-        			                ***PLEASE NOTE THAT OUR WEBSITE ORDERING IS CURRENTLY UNAVAILABLE.  PLEASE CALL THE OFFICE ON 760-377-5766 TO PLACE ANY ORDERS.  WE APOLOGIZE FOR THE INCONVENIENCE***
-                                </li>
-                                
-                            </ul>
-                        </div>
+                <div class="row">
+                    <div id="offer-box" class="carouselTicker">
+                        <ul class="offer-box">
+                            <li>
+                                Our offices are open Monday thru Friday 8.00 am to 4.00 pm PT.  If you have any questions please call the office on 760-377-5766 during these times.
+                            </li>
+                            <li>
+                                ***PLEASE NOTE THAT OUR WEBSITE ORDERING IS CURRENTLY UNAVAILABLE.  PLEASE CALL THE OFFICE ON 760-377-5766 TO PLACE ANY ORDERS.  WE APOLOGIZE FOR THE INCONVENIENCE***
+                            </li>
+                            
+                        </ul>
                     </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    
                     <div class="right-phone-box">
                         <p>Call US <a href="tel:760-377-5766">(760) 377-5766</a>,<a href="tel:855-374-3473">855-FPI-FIRE (855-374-3473)</a></p>
                     </div>
                 
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="login-box">
-						<select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-							<option>Register Here</option>
-							<option>Sign In</option>
-						</select>
-					</div>
-                    
+                <div class="col-md-6">
+                    <div class="login-box">
+                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
+                            <option>Register Here</option>
+                            <option>Sign In</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
