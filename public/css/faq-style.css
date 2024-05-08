@@ -1,0 +1,30 @@
+.card
+{
+    margin-bottom: 4px;
+    background: rgb(95,176,228);
+}
+.card-header {
+    border: solid 1px #f87415;
+    border-radius: 4px;
+    padding-left: 5px;
+    background: rgb(246, 114, 18);
+    padding: 10px;
+}
+.card-header h5{
+    line-height: 1.5;
+    font-weight: 600;
+}
+.card-header a
+{
+    color: white;
+}
+.card-block {
+    color: black;
+    padding: 12px;
+    background-color: white;
+    border: 1px solid;
+}
+a:focus
+{
+    outline:none;
+}
