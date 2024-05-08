@@ -1,78 +1,96 @@
 @extends('layouts.main')
 @section('content')
-      <!-- Start All Title Box -->
-      <div class="all-title-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2>News</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">News</li>
-                    </ul>
-                </div>
-            </div>
+     <!-- Menu Start Section --><section id="page-title" class="background-overlay" data-parallax-image="https://www.firequick.com/assets/images/banner/banner.jpg">
+    <div class="container">
+        <div class="page-title">
+            <h1 class="text-uppercase text-medium">news</h1>
+       <!--      <span>Home > Company History</span> -->
         </div>
     </div>
-    <!-- End All Title Box -->
+</section>
 
-    <!-- Start About Page  -->
-    <div class="about-box-main">
-        <div class="container">
-            
-        <div class="row my-5">
-            <div class="col-sm-12 col-lg-12">
-                <div class="blog-block">
-                <div class="blog-image">
-                
-                </div>
-                    <img src="{{asset('images/new-01.jpg')}}">
-                    <div class="blog-meta">
-                <span class="meta-date">Date: January 1, 2024</span>
-                <span class="meta-author">Author: John Doe</span>
-            </div>
-                    <h2 class="noo-sh-title-top">We are <span>Freshshop</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a class="btn hvr-hover" href="#">Read More</a>
-                </div>
-            </div>
-            <div class="col-sm-12 col-lg-12">
-                <div class="blog-block">
-                    
-                    <div class="blog-image">
-                    <img src="{{asset('images/new-02.jpg')}}">
-                </div>
-                    <div class="blog-meta">
-                <span class="meta-date">Date: January 1, 2024</span>
-                <span class="meta-author">Author: John Doe</span>
-            </div>
-                    <h2 class="noo-sh-title-top">We are <span>Freshshop</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a class="btn hvr-hover" href="#">Read More</a>
-                </div>
-            </div>
-            <div class="col-sm-12 col-lg-12">
-                <div class="blog-block">
-                <div class="blog-image">
-                    <img src="{{asset('images/flare-post-news.png')}}">
-                </div>
-                    <div class="blog-meta">
-                <span class="meta-date">Date: January 1, 2024</span>
-                <span class="meta-author">Author: John Doe</span>
-            </div>
-                    <h2 class="noo-sh-title-top">We are <span>Freshshop</span></h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <a class="btn hvr-hover" href="#">Read More</a>
-                </div>
-            </div>
-        </div>
 
-           
-        </div>
-    </div>
-    <!-- End About Page -->
+        
+        
+        <section id="page-content" class="sidebar-right">
+            <div class="container">
+                <div class="row">
+                    <!-- content -->
+                    <div class="content col-md-offset-1 col-md-10">
+                        <!-- Blog -->
+                        <div id="blog" class="single-post">
+                            <!-- Post single item-->
+                           
+                          
+                             <div class="post-item">
+                                <div class="post-item-wrap">
+                                    <div class="post-image">
+                                        <a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher">
+                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/launcher/launcher-post-news.jpg">
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="post-item-description">
+                                        <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 15, 2018</span>
+                                        <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
+                                        <h2><a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
+                                        <p>In final preparation for the release of its much-anticipated Large Format Launcher, Firequick Products accomplished final field testing operations with Cal Fire SLO in May.</p>
 
-    
+                                        <a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            
+                            <div class="post-item">
+                                <div class="post-item-wrap">
+                                    <div class="post-image">
+                                        <a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production">
+                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/flare/flare-post-news.png">
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="post-item-description">
+                                        <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 15, 2018</span>
+                                        <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
+                                        <h2><a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
+                                        <p>In final preparation for the release of its much-anticipated Large Format Launcher, Firequick Products accomplished final field testing operations with Cal Fire SLO in May.</p>
+
+                                        <a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="post-item">
+                                <div class="post-item-wrap">
+                                    <div class="post-image">
+                                        <a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products">
+                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/fire-accessories/accessories-post-box.jpg">
+                                        </a>
+                                        
+                                    </div>
+                                    <div class="post-item-description">
+                                        <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 9, 2018</span>
+                                        <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
+                                        <h2><a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products">Wiley-X available at Firequick Products!</a></h2>
+                                        <p>We know that wild land firefighters face the toughest conditions in the fire industry when they are battling fierce wildfires. Firequick chose Wiley-X high-performance protective</p>
+
+                                        <a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- end: Post single item-->
+                        </div>
+
+                    </div>
+                    <!-- end: content -->
+                </div>
+            </div>
+        </section><!-- Start footer -->
 @endsection
 @section('css')
 <style type="text/css">

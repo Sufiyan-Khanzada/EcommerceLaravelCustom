@@ -56,12 +56,12 @@
 
 					
 					<div>
-						<a href="https://www.firequick.com/page/login">
+						<a href="{{route('login')}}">
                                         <i class="fa fa-sign-in"></i><span>Login</span>
                                     </a>
 					
 
-						<a href="https://www.firequick.com/page/registration">
+						<a href="{{route('registration')}}">
                                         <i class="fa fa-user-plus"></i><span>Register</span>
                                     </a>
 					
@@ -125,11 +125,11 @@
 							
 							<nav>
 								<ul>
-									<li><a href="https://www.firequick.com/">Home</a>
+									<li><a href="{{route('home')}}">Home</a>
 									</li>
 									
 									</li>
-									<li class="dropdown"><a href="https://www.firequick.com/page/24/About">About</a><ul class="dropdown-menu"><li><a href="https://www.firequick.com/page/36/Company-history">Company history</a></li><li><a href="https://www.firequick.com/page/37/Careers">Careers</a></li><li><a href="https://www.firequick.com/page/38/Testimonials">Testimonials</a></li><li><a href="https://www.firequick.com/page/35/FAQ">FAQ</a></li><li><a href="https://www.firequick.com/page/documents">Documents</a></li><li><a href="https://www.firequick.com/page/news">News</a></li></ul></li>									<!--<li><a href="https://www.firequick.com/page/products">Products</a>-->
+									<li class="dropdown"><a href="{{route('about')}}">About</a><ul class="dropdown-menu"><li><a href="https://www.firequick.com/page/36/Company-history">Company history</a></li><li><a href="https://www.firequick.com/page/37/Careers">Careers</a></li><li><a href="https://www.firequick.com/page/38/Testimonials">Testimonials</a></li><li><a href="{{route('faq')}}">FAQ</a></li><li><a href="https://www.firequick.com/page/documents">Documents</a></li><li><a href="https://www.firequick.com/page/news">News</a></li></ul></li>									<!--<li><a href="https://www.firequick.com/page/products">Products</a>-->
 									
 									
 									
@@ -164,7 +164,7 @@
 											</li>
 											<li><a href="https://www.firequick.com/page/products/category/4">Fire Accessories For Sale</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/fire-accessories-news">News</a>
+											<li><a href="{{route('news')}}">News</a>
 											</li>
 										</ul>
 
@@ -193,7 +193,7 @@
 									</li>
 									<li><a href="https://www.firequick.com/page/gallery">Gallery</a>
 									</li>
-									<li><a href="https://www.firequick.com/page/contact-us">Contact Us</a>
+									<li><a href="{{route('contact-us')}}">Contact Us</a>
 									</li>
 								</ul>
 							</nav>
