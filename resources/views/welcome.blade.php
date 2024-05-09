@@ -168,7 +168,7 @@
             
             <div class="col-md-4">
                 <div class="testimonial-content">
-                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="https://www.firequick.com/admin/assets/images/a45be115dcea08f49f7a7e38a0432ab2.jpg')}}" alt="" class="img-responsive">
+                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="{{asset('admin/images/a45be115dcea08f49f7a7e38a0432ab2.jpg')}}" alt="" class="img-responsive">
                         <p>
                             We have been using Firequick products for years including the launchers and hand thrown devices. We have used them for both wildland fire fighting operations and controlled burns because they work! The amount of time and energy they have saved my crew cannot be overemphasized. Thanks for a great product.                        </p>
                 </div>
@@ -181,7 +181,7 @@
             
             <div class="col-md-4">
                 <div class="testimonial-content">
-                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="https://www.firequick.com/admin/assets/images/20b3ad47bde34a5b18be4a9867263548.jpg')}}" alt="" class="img-responsive">
+                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="{{asset('admin/images/20b3ad47bde34a5b18be4a9867263548.jpg')}}" alt="" class="img-responsive">
                         <p>
                             I have been working with Firequick for a number of years and it has been a pleasure. The company delivers such outstanding customer service and has great products, made by reliable people.                        </p>
                 </div>
@@ -194,7 +194,7 @@
             
             <div class="col-md-4">
                 <div class="testimonial-content">
-                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="https://www.firequick.com/admin/assets/images/ec50eb8024ed9de4259697d07b33401e.jpg')}}" alt="" class="img-responsive">
+                    <img style="border:2px solid #222222 !important; width:420px; height:220px; padding-bottom: 0px !important ; " src="{{asset('admin/images/ec50eb8024ed9de4259697d07b33401e.jpg')}}" alt="" class="img-responsive">
                         <p>
                             I have hands-on experience with the Firequick production process. Their product quality and performance is second to none and the customer service is top-notch.                        </p>
                 </div>
