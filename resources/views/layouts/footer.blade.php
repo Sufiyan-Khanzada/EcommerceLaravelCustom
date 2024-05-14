@@ -22,7 +22,7 @@
                         <ul>
                             
                             <li><a href=""></a></li>
-                            <li><a href="https://www.firequick.com/">Home</a></li>
+                            <li><a href="{{ route('home') }}">Home</a></li>
                             <li><a href="https://www.firequick.com/page/products/category/3">Flares</a></li>
                             <li><a href="https://www.firequick.com/page/products/category/2">Launchers</a></li>
                             <li><a href="https://www.firequick.com/page/products/category/4">Firequick Accessories</a></li>
@@ -35,7 +35,7 @@
         <li> <a href="https://www.firequick.com/page/23/Services" >Services</a></li>
                                                         
                             
-        <li> <a href="https://www.firequick.com/page/35/FAQ" >FAQ</a></li>
+        <li> <a href="{{ route('faq') }}" >FAQ</a></li>
                                                         <li><a href="https://www.firequick.com/page/gallery">Gallery</a></li>
                             
                         </ul>
@@ -45,13 +45,13 @@
                 <div class="widget">
                     <h4>Customer Service</h4>
                         <ul>
-                                    <li> <a href="https://www.firequick.com/page/24/About-Us">About Us</a></li>
-                                    <li> <a href="https://www.firequick.com/page/28/Privacy-Policy">Privacy Policy</a></li>
-                                    <li> <a href="https://www.firequick.com/page/26/Customer-Service">Customer Service</a></li>
-                                    <li> <a href="https://www.firequick.com/page/32/Orders-and-Returns">Orders and Returns</a></li>
-                                    <li> <a href="https://www.firequick.com/page/33/Shipping-Information">Shipping Information</a></li>
-                                    <li> <a href="https://www.firequick.com/page/34/Terms-of-Use">Terms of Use</a></li>
-                                                        <li><a href="https://www.firequick.com/page/contact-us">Contact Us</a></li>
+                                    <li> <a href="{{ route('about') }}">About Us</a></li>
+                                    <li> <a href="{{ route('privacy.policy') }}">Privacy Policy</a></li>
+                                    <li> <a href="{{ route('customer.service') }}">Customer Service</a></li>
+                                    <li> <a href="{{ route('order.return') }}">Orders and Returns</a></li>
+                                    <li> <a href="{{ route('shipping.information') }}">Shipping Information</a></li>
+                                    <li> <a href="{{ route('term.use') }}">Terms of Use</a></li>
+                                                        <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                         </ul>
                 </div>
             </div>

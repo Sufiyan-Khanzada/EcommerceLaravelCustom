@@ -25,6 +25,11 @@ Route::get('/careers', [IndexController::class, 'careers'])->name('careers');
 Route::get('/faq', [IndexController::class, 'faq'])->name('faq');
 Route::get('/documents', [IndexController::class, 'documents'])->name('documents');
 Route::get('/news', [IndexController::class, 'news'])->name('news');
+Route::get('/customer-service', [IndexController::class, 'customerService'])->name('customer.service');
+Route::get('/privacy-policy', [IndexController::class, 'privacyPolicy'])->name('privacy.policy');
+Route::get('/order-and-return', [IndexController::class, 'orderReturn'])->name('order.return');
+Route::get('/shipping-information', [IndexController::class, 'shippingInformation'])->name('shipping.information');
+Route::get('/term-and-use', [IndexController::class, 'termAndUse'])->name('term.use');
 
 
 
