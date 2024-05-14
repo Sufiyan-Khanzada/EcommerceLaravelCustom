@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\IndexController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,41 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-
-Route::get('/company-history', function () {
-    return view('company-history');
-})->name('company.history');
+Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/about', [IndexController::class, 'about'])->name('about');
+Route::get('/company-history', [IndexController::class, 'companyHistory'])->name('company.history');
+Route::get('/testimonials', [IndexController::class, 'testimonials'])->name('testimonials');
+Route::get('/careers', [IndexController::class, 'careers'])->name('careers');
+Route::get('/faq', [IndexController::class, 'faq'])->name('faq');
+Route::get('/documents', [IndexController::class, 'documents'])->name('documents');
+Route::get('/news', [IndexController::class, 'news'])->name('news');
 
 
-Route::get('/testimonials', function () {
-    return view('testimonials');
-})->name('testimonials');
 
-
-Route::get('/careers', function () {
-    return view('careers');
-})->name('careers');
-
-
-Route::get('/faq', function () {
-    return view('faq');
-})->name('faq');
-
-Route::get('/documents', function () {
-    return view('documents');
-})->name('documents');
-
-Route::get('/news', function () {
-    return view('news');
-})->name('news');
 
 
 
