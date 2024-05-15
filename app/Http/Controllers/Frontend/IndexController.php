@@ -5,12 +5,24 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Product;
+use App\Models\Testimonials;
 
 class IndexController extends Controller
 {
     public function index(){
         
-        return view('welcome');
+       $data = [ 
+        "frontProducts" =>  Product::select('products.image_id', 'products.discripition', 'categories.title')
+        ->join('categories', 'products.category_id', '=', 'categories.category_id')
+        ->where('products.status', 1)
+        ->limit(4)
+        ->get(),
+        "testimonials" => Testimonials::get(),
+    ];
+
+    
+        return view('welcome')->with(compact('data'));
     }
 
     public function about(){
