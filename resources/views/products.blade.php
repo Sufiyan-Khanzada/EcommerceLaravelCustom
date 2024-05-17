@@ -44,17 +44,22 @@
                                             background-color: #ff4000;
                                             
                                         }
+                                        #my-ul .active {
+                                            color: white;
+                                            background-color: #ff4000;
+                                        }
 
                                     </style>
                                     <div id="mydiv">
-                                                                            <ul id="my-ul">
-                                        <a href="https://www.firequick.com/page/products"><li>All Products</li></a>
-                                                                                <a href="https://www.firequick.com/page/products/category/2"> <li     >Launchers</li></a>
-                                                                                <a href="https://www.firequick.com/page/products/category/3"> <li  style=' color: white;  background-color: #ff4000; '   >Flares</li></a>
-                                                                                <a href="https://www.firequick.com/page/products/category/4"> <li     >Firequick Accessories</li></a>
-                                                                                <a href="https://www.firequick.com/page/products/category/5"> <li     >Kits and Combos</li></a>
-                                                                                <a href="https://www.firequick.com/page/products/category/6"> <li     >Wiley X Tactical Eyewear and Gloves</li></a>
-                                        
+                                        <ul id="my-ul">
+                                        <a href="{{route('products')}}">
+                                            <li class={{($currentCategory == null) ? 'active': null}}>All Products</li>
+                                        </a>
+                                        @foreach($categories as $category)
+                                            <a href="{{route('products', ['categoryId' => $category->category_id])}}"> 
+                                                <li class={{($currentCategory?->category_id == $category->category_id) ? 'active': null}}>{{$category->title}}</li>
+                                            </a>
+                                        @endforeach
                                     </ul>
                                     </div> 
                                 </div>
@@ -68,9 +73,9 @@
                                     <div class="grid-item">
                                         <div class="product">
                                             <div class="product-image" style="width: 320px; height:250px;">
-                                                <a href="{{route('single.product')}}"><img   alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
+                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
                                                 </a>
-                                                <a href="{{route('single.product')}}"><img alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
+                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
                                                 </a>
                                                 
                                                 <div class="product-overlay">
@@ -79,9 +84,9 @@
                                             </div>
 
                                             <div class="product-description">
-                                                <div class="product-category">Flares</div>
+                                                <div class="product-category">{{$currentCategory?->title}}</div>
                                                 <div class="product-title">
-                                                    <h3><a href="{{route('single.product')}}">{{$product->title}}</a></h3>
+                                                    <h3><a href="{{route('single.product', ['productId' => $product->product_id])}}">{{$product->title}}</a></h3>
                                                 </div>
 
                                                 <div class="product-price"> <br>

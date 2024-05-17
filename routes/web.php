@@ -31,11 +31,14 @@ Route::get('/order-and-return', [IndexController::class, 'orderReturn'])->name('
 Route::get('/shipping-information', [IndexController::class, 'shippingInformation'])->name('shipping.information');
 Route::get('/term-and-use', [IndexController::class, 'termAndUse'])->name('term.use');
 
-Route::get('/flares', [IndexController::class, 'flares'])->name('flares');
+Route::get('/products/{categoryId?}', 
+    [IndexController::class, 'productsList'])
+    ->name('products');
 
-Route::get('/single-product', function () {
-    return view('product-detail');
-})->name('single.product');
+Route::get('/single-product/{productId}', 
+    [IndexController::class, 'singleProduct'])
+    ->name('single.product');
+
 
 Route::get('/cart', function () {
     return view('cart');

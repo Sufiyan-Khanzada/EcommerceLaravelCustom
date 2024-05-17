@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Testimonials;
+use App\Models\Category;
 
 class IndexController extends Controller
 {
@@ -131,20 +132,36 @@ class IndexController extends Controller
         return view('term-use')->with(compact('data'));
     }
 
-    public function flares()
-    {
-        return $this->productsByCategory(3);
-    }
+    public function productsList($categoryId = null) {
 
-    public function productsByCategory($categoryId) {
-
-        $products = Product::where('category_id', 'LIKE', $categoryId)
-            ->orWhere('category_id', 'LIKE', $categoryId . ',%')
-            ->orWhere('category_id', 'LIKE', '%,' . $categoryId)
-            ->orWhere('category_id', 'LIKE', '%,' . $categoryId . ',%')
-            ->get();
-
-        return view('products')->with(compact('products'));
+        $categories = Category::all();
+        $currentCategory = null;
+        if($categoryId)
+        {
+            $products = Product::where('category_id', 'LIKE', $categoryId)
+                ->orWhere('category_id', 'LIKE', $categoryId . ',%')
+                ->orWhere('category_id', 'LIKE', '%,' . $categoryId)
+                ->orWhere('category_id', 'LIKE', '%,' . $categoryId . ',%')
+                ->get();
+            $currentCategory = Category::where('category_id', $categoryId)->first();
+        }
+        else {
+            $products = Product::all();
+        }
+            
+        return view('products')->with(compact(['products', 'categories', 'currentCategory']));
     }
     
+    public function singleProduct($productId) {
+
+        $product = Product::where('product_id', $productId)->first();
+        $categories = Category::all();
+
+        if(!$product)
+        {
+            return redirect('products');
+        }
+
+        return view('product-detail')->with(compact(['product', 'categories']));
+    }
 }

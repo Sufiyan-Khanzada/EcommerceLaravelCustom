@@ -121,15 +121,15 @@
 								<!--Navigation-->
 					<div id="mainMenu" class="light">
 						<div class="container">
-							
-							
 							<nav>
 								<ul>
-									<li><a href="{{route('home')}}">Home</a>
+									<li>
+										<a href="{{route('home')}}">Home</a>
 									</li>
 									
+									<li class="dropdown">
+										<a href="{{route('about')}}">About</a>
 									</li>
-									<li class="dropdown"><a href="{{route('about')}}">About</a>
 									<ul class="dropdown-menu"><li><a href="{{route('company.history')}}">Company history</a></li>
 									<li><a href="{{route('careers')}}">Careers</a></li>
 									<li><a href="{{route('testimonials')}}">Testimonials</a></li>
@@ -140,11 +140,11 @@
 									
 									
 									
-									<li class="dropdown"><a href="{{route('flares')}}">Flares</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 3])}}">Flares</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('flares-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('flares')}}">Flares For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 3])}}">Flares For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
@@ -152,11 +152,11 @@
 
 
 									</li>
-									<li class="dropdown"><a href="{{route('launchers')}}">Launchers</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 2])}}">Launchers</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('launchers-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('launchers')}}">Launchers For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 2])}}">Launchers For Sale</a>
 											</li>
 											<li><a href="{{route('launchers-news')}}">News</a>
 											</li>
@@ -165,25 +165,17 @@
 
 									</li>
 									<li class="dropdown">
-										<a href="https://www.firequick.com/page/products/category/4">Fire Accessories</a>
+										<a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories</a>
 										<ul class="dropdown-menu">
 											<li><a href="https://www.firequick.com/page/fire-accessories-overview">Overview</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/products/category/4">Fire Accessories For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
 										</ul>
 
-
-									</li>
-									
-									
-									
-									
-									
-									
-									
+									</li>									
 									
 									<li class="dropdown">
 										<a href="/page/23/Services">Services</a>
