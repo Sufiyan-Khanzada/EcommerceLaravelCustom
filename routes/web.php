@@ -31,11 +31,11 @@ Route::get('/order-and-return', [IndexController::class, 'orderReturn'])->name('
 Route::get('/shipping-information', [IndexController::class, 'shippingInformation'])->name('shipping.information');
 Route::get('/term-and-use', [IndexController::class, 'termAndUse'])->name('term.use');
 
+Route::get('/flares', [IndexController::class, 'flares'])->name('flares');
 
-
-
-
-
+Route::get('/single-product', function () {
+    return view('product-detail');
+})->name('single.product');
 
 Route::get('/cart', function () {
     return view('cart');
@@ -78,10 +78,6 @@ Route::get('/login', function () {
 Route::get('/registration', function () {
     return view('register');
 })->name('registration');
-
-Route::get('/flares', function () {
-    return view('flares');
-})->name('flares');
 
 Route::get('/flares-overview', function () {
     return view('flares-overview');

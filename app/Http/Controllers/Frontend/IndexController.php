@@ -130,12 +130,21 @@ class IndexController extends Controller
         // dd($data);
         return view('term-use')->with(compact('data'));
     }
-    
 
-    
-    
-    
+    public function flares()
+    {
+        return $this->productsByCategory(3);
+    }
 
-    
+    public function productsByCategory($categoryId) {
+
+        $products = Product::where('category_id', 'LIKE', $categoryId)
+            ->orWhere('category_id', 'LIKE', $categoryId . ',%')
+            ->orWhere('category_id', 'LIKE', '%,' . $categoryId)
+            ->orWhere('category_id', 'LIKE', '%,' . $categoryId . ',%')
+            ->get();
+
+        return view('products')->with(compact('products'));
+    }
     
 }
