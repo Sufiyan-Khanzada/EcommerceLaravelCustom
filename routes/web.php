@@ -35,6 +35,13 @@ Route::get('/page/{pageId}/{pageTitle}', [IndexController::class, 'contentPage']
 
 
 
+Route::get('/products/{categoryId?}', 
+    [IndexController::class, 'productsList'])
+    ->name('products');
+
+Route::get('/single-product/{productId}', 
+    [IndexController::class, 'singleProduct'])
+    ->name('single.product');
 
 
 Route::get('/cart', function () {
@@ -78,10 +85,6 @@ Route::get('/login', function () {
 Route::get('/registration', function () {
     return view('register');
 })->name('registration');
-
-Route::get('/flares', function () {
-    return view('flares');
-})->name('flares');
 
 Route::get('/flares-overview', function () {
     return view('flares-overview');
