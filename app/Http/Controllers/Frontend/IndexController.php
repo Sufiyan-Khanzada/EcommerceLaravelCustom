@@ -25,44 +25,23 @@ class IndexController extends Controller
         return view('welcome')->with(compact('data'));
     }
 
-    public function about(){
-        
+
+    
+
+
+    public function contentPage($pageId, $pageTitle) {
+        // Your controller logic here
         $data = Post::where([
-            ['post_id', 24],
+            ['post_id', $pageId],
             ['type',1]
         ])->first();
         
-        return view('about')->with(compact('data'));
-    }
-
-    public function companyHistory(){
-        $data = Post::where([
-            ['post_id', 36],
-            ['type',1]
-        ])->first();
+        return view('content-page')->with(compact('data'));
+      
         
-        return view('company-history')->with(compact('data'));
     }
 
-    public function careers(){
-        $data = Post::where([
-            ['post_id', 37],
-            ['type',1]
-        ])->first();
-               
-        return view('careers')->with(compact('data'));
-    }
-
-    public function faq(){
-        
-        $data = Post::where([
-            ['post_id', 35],
-            ['type',1]
-        ])->first();
-// dd($data);
-        return view('faq')->with(compact('data'));
-    }
-
+    
     public function documents(){
         
         return view('documents');
@@ -77,14 +56,7 @@ class IndexController extends Controller
 
         return view('news')->with(compact('data'));
     }
-    public function testimonials(){
-        $data = Post::where([
-            ['post_id', 38],
-            ['type',1]
-        ])->first();
-        // dd($data);
-        return view('testimonials')->with(compact('data'));
-    }
+ 
     public function customerService(){
         $data = Post::where([
             ['post_id', 26],
