@@ -1,12 +1,13 @@
+@if(count($getNews) > 0)
+@foreach ($getNews as $getNew)
 <div class="marquee">
-        		<b>
-        			Our offices are open Monday thru Friday 8.00 am to 4.00 pm PT.  If you have any questions please call the office on 760-377-5766 during these times.        		</b>
-        	</div>
+<b>{{ $getNew->discription }}</b>
+</div>	
+@endforeach
+
+@endif
         
-                 	<div class="marquee">
-        		<b>
-        			***PLEASE NOTE THAT OUR WEBSITE ORDERING IS CURRENTLY UNAVAILABLE.  PLEASE CALL THE OFFICE ON 760-377-5766 TO PLACE ANY ORDERS.  WE APOLOGIZE FOR THE INCONVENIENCE***        		</b>
-        	</div>
+                 	
         
          
 	<!-- Wrapper -->
@@ -100,13 +101,6 @@
 					</div>
 					
 
-					<!--Top Search Form-->
-					<!-- <div id="top-search">
-                        <form action="search-results-page.html" method="get">
-                            <input type="text" name="q" class="form-control" value="" placeholder="Start typing & press  &quot;Enter&quot;">
-                        </form>
-                    </div> -->
-					<!--end: Top Search Form-->
 
 
 					<!--Navigation Resposnive Trigger-->
@@ -121,30 +115,72 @@
 								<!--Navigation-->
 					<div id="mainMenu" class="light">
 						<div class="container">
+							
+						
 							<nav>
 								<ul>
 									<li>
 										<a href="{{route('home')}}">Home</a>
 									</li>
+									<?php
+if (isset($menuItems)) {
+    foreach ($menuItems as $key => $value) {
+
+        if ($value->menu_status == 1) { // Use -> to access object properties
+            $string = str_replace(' ', '-', $value->menu_title); // Replaces all spaces with hyphens.
+            $tit = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+            $flag = false;
+            foreach ($subMenuItems as $k => $v) {
+                if ($v->submenu_status == 1) { // Use -> to access object properties
+                    if ($value->menu_id == $v->menu_id) { // Use -> to access object properties
+                        $flag = true;
+                    }
+                }
+            }
+            if ($flag == true) {
+                $a = '<li class="dropdown"><a href="' .route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]). '</a>';
+                echo $a;
+            } else {
+                $a = '<li ><a href="' . route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]) . '">' . $value->menu_title . '</a>';
+                echo $a;
+            }
+
+            if ($flag == true) {
+                echo '<ul class="dropdown-menu">';
+            }
+            foreach ($subMenuItems as $k => $v) {
+
+                $string2 = str_replace(' ', '-', $v->submenu_title); // Replaces all spaces with hyphens.
+
+                $tit2 = preg_replace('/[^A-Za-z0-9\-]/', '', $string2);
+                // echo $tit2;
+                if ($v->submenu_status == 1) { // Use -> to access object properties
+                    if ($value->menu_id == $v->menu_id) { // Use -> to access object properties
+
+                        echo '<li><a href="' . route('page', ['pageId' => $v->post_id, 'pageTitle' => $tit2]) . '">' . $v->submenu_title . '</a></li>';
+                    }
+                }
+            }
+            echo '<li><a href="' . route('documents') . '">Documents</a></li>';
+            echo '<li><a href="' . route('news') . '">News</a></li>';
+
+            if ($flag == true) {
+                echo '</ul>';
+            }
+            echo '</li>';
+        }
+    }
+}
+?>
+
 									
-									<li class="dropdown">
-										<a href="{{route('about')}}">About</a>
-									</li>
-									<ul class="dropdown-menu"><li><a href="{{route('company.history')}}">Company history</a></li>
-									<li><a href="{{route('careers')}}">Careers</a></li>
-									<li><a href="{{route('testimonials')}}">Testimonials</a></li>
-									<li><a href="{{route('faq')}}">FAQ</a></li>
-									<li><a href="{{route('documents')}}">Documents</a></li>
-									<li><a href="{{route('news')}}">News</a></li></ul></li>
 									
-									
-									
-									
-									<li class="dropdown"><a href="{{route('products', ['categoryId' => 3])}}">Flares</a>
+									<li class="dropdown"><a href="{{route('flares')}}">Flares</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('flares-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('products', ['categoryId' => 3])}}">Flares For Sale</a>
+											<li><a href="{{route('flares')}}">Flares For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
@@ -152,11 +188,11 @@
 
 
 									</li>
-									<li class="dropdown"><a href="{{route('products', ['categoryId' => 2])}}">Launchers</a>
+									<li class="dropdown"><a href="{{route('launchers')}}">Launchers</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('launchers-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('products', ['categoryId' => 2])}}">Launchers For Sale</a>
+											<li><a href="{{route('launchers')}}">Launchers For Sale</a>
 											</li>
 											<li><a href="{{route('launchers-news')}}">News</a>
 											</li>
@@ -165,17 +201,25 @@
 
 									</li>
 									<li class="dropdown">
-										<a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories</a>
+										<a href="https://www.firequick.com/page/products/category/4">Fire Accessories</a>
 										<ul class="dropdown-menu">
 											<li><a href="https://www.firequick.com/page/fire-accessories-overview">Overview</a>
 											</li>
-											<li><a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories For Sale</a>
+											<li><a href="https://www.firequick.com/page/products/category/4">Fire Accessories For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
 										</ul>
 
-									</li>									
+
+									</li>
+									
+									
+									
+									
+									
+									
+									
 									
 									<li class="dropdown">
 										<a href="/page/23/Services">Services</a>

@@ -28,6 +28,10 @@ Route::get('/privacy-policy', [IndexController::class, 'privacyPolicy'])->name('
 Route::get('/order-and-return', [IndexController::class, 'orderReturn'])->name('order.return');
 Route::get('/shipping-information', [IndexController::class, 'shippingInformation'])->name('shipping.information');
 Route::get('/term-and-use', [IndexController::class, 'termAndUse'])->name('term.use');
+Route::get('/page/{pageId}/{pageTitle}', [IndexController::class, 'contentPage'])->name('page');
+
+
+
 
 Route::get('/products/{categoryId?}', 
     [IndexController::class, 'productsList'])
