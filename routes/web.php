@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
-
-
-
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -129,3 +127,12 @@ Route::get('/fire-training-services', function () {
 Route::get('/safety-training-videos', function () {
     return view('safety-training-videos');
 })->name('safety-training-videos');
+
+// Route for user registration
+Route::post('/register', [UserController::class, 'register'])->name('register');
+
+// Route for user login
+Route::post('/login', [UserController::class, 'login'])->name('register');
+
+// Route for user logout
+Route::post('/logout', [UserController::class, 'logout'])->name('register');

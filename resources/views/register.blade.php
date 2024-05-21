@@ -17,7 +17,7 @@
 <section class="custom-section">
     <div class="container">
         <div class="row">
-            <form action="https://www.firequick.com/form/user_register_submit" method="POST">
+            <form action="{{route('register')}}" method="POST">
             <div class="col-md-8 center no-padding">
                         <div class="col-md-12">
                             <h3>Register New Account</h3>
