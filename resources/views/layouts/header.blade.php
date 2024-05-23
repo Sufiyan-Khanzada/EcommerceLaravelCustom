@@ -22,8 +22,8 @@
 						<div class="col-xs-12 col-sm-5 col-md-5">
 							<!--Logo-->
 							<div id="logo">
-								<a href="https://www.firequick.com/" class="logo" data-dark-logo="https://www.firequick.com/assets/images/services-training/logo.png">
-									<img src="https://www.firequick.com/assets/images/services-training/logo.png" alt="Polo Logo">
+								<a href="{{ route('home') }}" class="logo" data-dark-logo="{{asset('images/services-training/logo.png')}}">
+									<img src="{{asset('images/services-training/logo.png')}}" alt="Polo Logo">
 								</a>
 
 							</div>
@@ -36,7 +36,7 @@
 								<a href="tel:760-377-5766">Call (760) 377-5766</a><span style="color: #fff;">,</span>&nbsp;<a href="tel:855-374-3473">855-FPI-FIRE (855-374-3473)</a>
 							</div>
 							<div class="site_needguns_wrap">
-									<div class="top-header-left new-btn-div" style="display:none;>
+									<div class="top-header-left new-btn-div" style="display:none;">
 						<a href="http://www.gunstores.net/about/about.aspx?d=wxmmLYeS6Ig=&u=&g=&z=tMxIW4mepAM=">
                                     <span>Need guns? Visit Firequick Firearms here!</span>
                                 </a>
@@ -206,11 +206,11 @@
 
 									</li>
 									<li class="dropdown">
-										<a href="https://www.firequick.com/page/products/category/4">Fire Accessories</a>
+										<a href="{{route('firequick-accessories')}}">Fire Accessories</a>
 										<ul class="dropdown-menu">
-											<li><a href="https://www.firequick.com/page/fire-accessories-overview">Overview</a>
+											<li><a href="{{route('fire-accessories-overview')}}">Overview</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/products/category/4">Fire Accessories For Sale</a>
+											<li><a href="https://firequick.com/page/products/category/4">Fire Accessories For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
@@ -218,24 +218,17 @@
 
 
 									</li>
-									
-									
-									
-									
-									
-									
-									
-									
+
 									<li class="dropdown">
 										<a href="/page/23/Services">Services</a>
 										<ul class="dropdown-menu">
-											<li><a href="https://www.firequick.com/page/23/Services">Overview</a>
+											<li><a href="/page/23/Services">Overview</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/launcher-repair-services">Launcher repair services</a>
+											<li><a href="{{route('launcher-repair-services')}}">Launcher repair services</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/fire-training-services">Fire Training Services</a>
+											<li><a href="{{route('fire-training-services')}}">Fire Training Services</a>
 											</li>
-											<li><a href="https://www.firequick.com/page/safety-training-videos">Safety Training Videos</a>
+											<li><a href="{{route('safety-training-videos')}}">Safety Training Videos</a>
 										</ul>
 
 
