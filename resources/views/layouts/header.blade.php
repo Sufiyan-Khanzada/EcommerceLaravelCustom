@@ -122,57 +122,62 @@
 									<li>
 										<a href="{{route('home')}}">Home</a>
 									</li>
+
+
 									<?php
-if (isset($menuItems)) {
-    foreach ($menuItems as $key => $value) {
+								
+								if (isset($menuItems)) {
+									foreach ($menuItems as $key => $value) {
+										if ($value->menu_status == 1) { // Accessing object property using object syntax
+											$string = str_replace(' ', '-', $value->menu_title); // Replaces all spaces with hyphens.
+								
+											$tit = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+								
+											$flag = false;
+											foreach ($subMenuItems as $k => $v) {
+												if ($v->submenu_status == 1) { // Accessing object property using object syntax
+													if ($value->menu_id == $v->menu_id) { // Accessing object property using object syntax
+														$flag = true;
+													}
+												}
+											}
+											if ($flag == true) {
+												$a = '<li class="dropdown"><a href="' . route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]) . '">' . $value->menu_title . '</a>';
+												echo $a;
+											} else {
+												$a = '<li ><a href="' . route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]) . '">' . $value->menu_title . '</a>';
+												echo $a;
+											}
+								
+											if ($flag == true) {
+												echo '<ul class="dropdown-menu">';
+											}
+											foreach ($subMenuItems as $k => $v) {
+								
+												$string2 = str_replace(' ', '-', $v->submenu_title); // Replaces all spaces with hyphens.
+								
+												$tit2 = preg_replace('/[^A-Za-z0-9\-]/', '', $string2);
+												// echo $tit2;
+												if ($v->submenu_status == 1) { // Accessing object property using object syntax
+													if ($value->menu_id == $v->menu_id) { // Accessing object property using object syntax
+														echo '<li><a href="' . route('page', ['pageId' => $v->post_id, 'pageTitle' => $tit2]) . '">' . $v->submenu_title . '</a></li>';
+													}
+												}
+											}
+										
+											echo '<li><a href="' . route('documents') . '">Documents</a></li>';
+											echo '<li><a href="' . route('news') . '">News</a></li>';
+								
+											if ($flag == true) {
+												echo '</ul>';
+											}
+											echo '</li>';
+										}
+									}
+								}
+								
+									?>
 
-        if ($value->menu_status == 1) { // Use -> to access object properties
-            $string = str_replace(' ', '-', $value->menu_title); // Replaces all spaces with hyphens.
-            $tit = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
-
-            $flag = false;
-            foreach ($subMenuItems as $k => $v) {
-                if ($v->submenu_status == 1) { // Use -> to access object properties
-                    if ($value->menu_id == $v->menu_id) { // Use -> to access object properties
-                        $flag = true;
-                    }
-                }
-            }
-            if ($flag == true) {
-                $a = '<li class="dropdown"><a href="' .route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]). '</a>';
-                echo $a;
-            } else {
-                $a = '<li ><a href="' . route('page', ['pageId' => $value->post_id, 'pageTitle' => $tit]) . '">' . $value->menu_title . '</a>';
-                echo $a;
-            }
-
-            if ($flag == true) {
-                echo '<ul class="dropdown-menu">';
-            }
-            foreach ($subMenuItems as $k => $v) {
-
-                $string2 = str_replace(' ', '-', $v->submenu_title); // Replaces all spaces with hyphens.
-
-                $tit2 = preg_replace('/[^A-Za-z0-9\-]/', '', $string2);
-                // echo $tit2;
-                if ($v->submenu_status == 1) { // Use -> to access object properties
-                    if ($value->menu_id == $v->menu_id) { // Use -> to access object properties
-
-                        echo '<li><a href="' . route('page', ['pageId' => $v->post_id, 'pageTitle' => $tit2]) . '">' . $v->submenu_title . '</a></li>';
-                    }
-                }
-            }
-            echo '<li><a href="' . route('documents') . '">Documents</a></li>';
-            echo '<li><a href="' . route('news') . '">News</a></li>';
-
-            if ($flag == true) {
-                echo '</ul>';
-            }
-            echo '</li>';
-        }
-    }
-}
-?>
 
 									
 									

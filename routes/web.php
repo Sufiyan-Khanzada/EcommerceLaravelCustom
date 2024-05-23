@@ -84,6 +84,12 @@ Route::get('/registration', function () {
     return view('register');
 })->name('registration');
 
+
+Route::get('/flares', function () {
+    return view('flares');
+})->name('flares');
+
+
 Route::get('/flares-overview', function () {
     return view('flares-overview');
 })->name('flares-overview');
