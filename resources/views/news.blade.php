@@ -25,18 +25,18 @@
                              <div class="post-item">
                                 <div class="post-item-wrap">
                                     <div class="post-image">
-                                        <a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher">
-                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/launcher/launcher-post-news.jpg">
+                                        <a href="{{route('firequick-conducts-field-testing-of-new-large-format-launcher')}}">
+                                            <img alt="" style="height:200px;width:300px;" src="{{asset('images/launcher/launcher-post-news.jpg')}}">
                                         </a>
                                         
                                     </div>
                                     <div class="post-item-description">
                                         <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 15, 2018</span>
                                         <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
-                                        <h2><a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
+                                        <h2><a href="{{route('firequick-conducts-field-testing-of-new-large-format-launcher')}}">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
                                         <p>In final preparation for the release of its much-anticipated Large Format Launcher, Firequick Products accomplished final field testing operations with Cal Fire SLO in May.</p>
 
-                                        <a href="https://www.firequick.com/page/firequick-conducts-field-testing-of-new-large-format-launcher" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+                                        <a href="{{route('firequick-conducts-field-testing-of-new-large-format-launcher')}}" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
 
                                     </div>
                                 </div>
@@ -46,18 +46,18 @@
                             <div class="post-item">
                                 <div class="post-item-wrap">
                                     <div class="post-image">
-                                        <a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production">
-                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/flare/flare-post-news.png">
+                                        <a href="{{route('firequick-products-Inc-approves-new-large-format-flare-for-production')}}">
+                                            <img alt="" style="height:200px;width:300px;" src="{{asset('images/flare/flare-post-news.png')}}">
                                         </a>
                                         
                                     </div>
                                     <div class="post-item-description">
                                         <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 15, 2018</span>
                                         <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
-                                        <h2><a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
+                                        <h2><a href="{{route('firequick-products-Inc-approves-new-large-format-flare-for-production')}}">Firequick Conducts Field Testing of New Large Format Launcher</a></h2>
                                         <p>In final preparation for the release of its much-anticipated Large Format Launcher, Firequick Products accomplished final field testing operations with Cal Fire SLO in May.</p>
 
-                                        <a href="https://www.firequick.com/page/firequick-products-Inc-approves-new-large-format-flare-for-production" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+                                        <a href="{{route('firequick-products-Inc-approves-new-large-format-flare-for-production')}}" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
 
                                     </div>
                                 </div>
@@ -66,18 +66,18 @@
                             <div class="post-item">
                                 <div class="post-item-wrap">
                                     <div class="post-image">
-                                        <a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products">
-                                            <img alt="" style="height:200px;width:300px;" src="https://www.firequick.com/assets/images/fire-accessories/accessories-post-box.jpg">
+                                        <a href="{{route('wiley-x-available-at-firequick-products')}}">
+                                            <img alt="" style="height:200px;width:300px;" src="{{asset('images/fire-accessories/accessories-post-box.jpg')}}">
                                         </a>
                                         
                                     </div>
                                     <div class="post-item-description">
                                         <span class="post-meta-date"><i class="fa fa-calendar-o"></i>June 9, 2018</span>
                                         <span class="post-meta-comments"><a href="">Beth Sumners</a></span>
-                                        <h2><a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products">Wiley-X available at Firequick Products!</a></h2>
+                                        <h2><a href="{{route('wiley-x-available-at-firequick-products')}}">Wiley-X available at Firequick Products!</a></h2>
                                         <p>We know that wild land firefighters face the toughest conditions in the fire industry when they are battling fierce wildfires. Firequick chose Wiley-X high-performance protective</p>
 
-                                        <a href="https://www.firequick.com/page/wiley-x-available-at-firequick-products" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
+                                        <a href="{{route('wiley-x-available-at-firequick-products')}}" class="item-link">Read More <i class="fa fa-arrow-right"></i></a>
 
                                     </div>
                                 </div>
@@ -105,3 +105,6 @@
 })()
 </script>
 @endsection
+
+
+

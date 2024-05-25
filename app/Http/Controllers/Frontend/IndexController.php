@@ -57,6 +57,31 @@ class IndexController extends Controller
 
         return view('news')->with(compact('data'));
     }
+
+    public function firequickconductsfieldtestingofnews(){
+       
+
+        return view('firequick-conducts-field-testing-of-new-large-format-launcher');
+    }
+
+    public function firequickproductsIncapprovesnews(){
+       
+
+        return view('firequick-products-Inc-approves-new-large-format-flare-for-production');
+    }
+
+    public function wileyxavailableatfirequickproducts(){
+       
+
+        return view('wiley-x-available-at-firequick-products');
+    }
+
+    
+
+    
+
+    
+
  
     public function customerService(){
         $data = Post::where([

@@ -30,6 +30,10 @@ Route::get('/shipping-information', [IndexController::class, 'shippingInformatio
 Route::get('/term-and-use', [IndexController::class, 'termAndUse'])->name('term.use');
 Route::get('/page/{pageId}/{pageTitle}', [IndexController::class, 'contentPage'])->name('page');
 
+Route::get('/firequick-conducts-field-testing-of-new-large-format-launcher', [IndexController::class, 'firequickconductsfieldtestingofnews'])->name('firequick-conducts-field-testing-of-new-large-format-launcher');
+Route::get('/firequick-products-Inc-approves-new-large-format-flare-for-production', [IndexController::class, 'firequickproductsIncapprovesnews'])->name('firequick-products-Inc-approves-new-large-format-flare-for-production');
+Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
+
 
 
 
