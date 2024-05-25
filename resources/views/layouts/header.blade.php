@@ -53,22 +53,29 @@
 							
 							<li>
 							
-<div class="top-header-second top-header-left">
+				<div class="top-header-second top-header-left">
 
-					
-					<div>
-						<a href="{{route('login')}}">
-                                        <i class="fa fa-sign-in"></i><span>Login</span>
-                                    </a>
-					
+					@if(isset($user) && $user)
+						<div>
+							<a href="{{route('my-account')}}">
+								<i class="fa fa-user"></i><span>My Account</span>
+							</a>
 
-						<a href="{{route('registration')}}">
-                                        <i class="fa fa-user-plus"></i><span>Register</span>
-                                    </a>
-					
+							<a href="{{route('logout')}}">
+								<i class="fa fa-sign-out"></i><span>Logout</span>
+							</a>
+						</div>
+					@else
+						<div>
+							<a href="{{route('login')}}">
+											<i class="fa fa-sign-in"></i><span>Login</span>
+										</a>
 
-
-					</div>
+							<a href="{{route('registration')}}">
+											<i class="fa fa-user-plus"></i><span>Register</span>
+										</a>
+						</div>
+					@endif
 
 					
 				</div>								
@@ -178,14 +185,11 @@
 								
 									?>
 
-
-									
-									
-									<li class="dropdown"><a href="{{route('flares')}}">Flares</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 2])}}">Flares</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('flares-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('flares')}}">Flares For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 2])}}">Flares For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
@@ -193,11 +197,11 @@
 
 
 									</li>
-									<li class="dropdown"><a href="{{route('launchers')}}">Launchers</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 3])}}">Launchers</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('launchers-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('launchers')}}">Launchers For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 3])}}">Launchers For Sale</a>
 											</li>
 											<li><a href="{{route('launchers-news')}}">News</a>
 											</li>
@@ -206,11 +210,11 @@
 
 									</li>
 									<li class="dropdown">
-										<a href="{{route('firequick-accessories')}}">Fire Accessories</a>
+										<a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('fire-accessories-overview')}}">Overview</a>
 											</li>
-											<li><a href="https://firequick.com/page/products/category/4">Fire Accessories For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 4])}}">Fire Accessories For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>

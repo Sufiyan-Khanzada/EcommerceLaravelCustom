@@ -17,15 +17,14 @@
 <section class="custom-section">
     <div class="container">
         <div class="row">
-            <form action="{{route('register')}}" method="POST">
-            <div class="col-md-8 center no-padding">
+            <form action="{{route('register-user')}}" method="POST">
+                @csrf
+                <div class="col-md-8 center no-padding">
                         <div class="col-md-12">
                             <h3>Register New Account</h3>
                         <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p></div>
                         
-  <div id="error"><p style="color:red;font-size:15px;font-weight:bold;"></p></div>
-
-
+                        <div id="error"><p style="color:red;font-size:15px;font-weight:bold;"></p></div>
                         
                         <div class="col-md-6 form-group">
                             <label class="">First Name</label>
@@ -77,10 +76,8 @@
                         
                         <div class="col-md-6 form-group">
                             <label >State</label>
-                            <select name="state" id="state">
+                            <select name="state" id="state" style="width: 100% !important">
                                     <option value="">select</option>
-                                    
-                                
                             </select>
                         </div>
                         
@@ -131,17 +128,13 @@
 
     $(document).ready(function(){
         
-     
-        
-        
         var agree = true;
         if(agree == true){
             $.ajax({
-                url: 'https://www.firequick.com/get/country',
-                type: 'POST',
+                url: '{{route("getCountries")}}',
+                type: 'GET',
                 success: function (data, status, xhr) {
-                    var json = $.parseJSON(data);
-                    $(json).each(function(i,val){
+                    $(data).each(function(i,val){
                         $('#country').append('<option value="'+val.id+'">'+val.name+'</option>');
                     });
                 },
@@ -152,45 +145,41 @@
                 }
             }); 
         }
-        // $('.mycountry').change(function(){
         
-        //     $('#state').parent().show();
-        //     $('#city').parent().show();
-        //     $('#state').html('');
+        $('#state').parent().hide();
+        $('#city').parent().hide();
+        $('#state').html('');
 
-        //     var CountryID = $(this).val();
+        var CountryID = $(this).val();        
              
-        //      if(CountryID != 0 && CountryID != ''){
-        //         $.ajax({
-        //             url: 'https://www.firequick.com/get/state',
-        //             type: 'POST',
-        //             data: {country_id: CountryID}, 
-        //             success: function (data, status, xhr) {
+        if(CountryID != 0 && CountryID != ''){
+            $.ajax({
+                url: '{{route("getStates")}}/'.CountryID,
+                type: 'GET',
+                success: function (data, status, xhr) {
                         
-        //                 if(data != "false"){
-        //                     var json = $.parseJSON(data);
-        //                     $(json).each(function(i,val){
+                    if(data != "false"){
+                        var json = $.parseJSON(data);
+                        $(json).each(function(i,val){
                                 
-        //                         $('#state').append('<option value="'+val.id+'">'+val.name+'</option>');
-        //                         // console.log(val);
-        //                     });    
-        //                 }else{
-        //                     $('#state').parent().hide();
-        //                     $('#city').parent().hide();
-        //                 }
+                            $('#state').append('<option value="'+val.id+'">'+val.name+'</option>');
+                        });    
+                    }else{
+                        $('#state').parent().hide();
+                        $('#city').parent().hide();
+                    }
 
                         
-        //             },
-        //             error: function (jqXhr, textStatus, errorMessage) {
-        //                 alert(jqXhr);
-        //                 alert(textStatus);
-        //                 alert(errorMessage);
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    alert(jqXhr);
+                    alert(textStatus);
+                    alert(errorMessage);
                           
-        //             }
-        //         }); 
-        //      }
+                }
+            }); 
+        }
 
-        // }); 
         $('.submit').on('click',function(e){
             $('#error').html('');            
             var fname = $('#fname').val();
@@ -251,10 +240,10 @@ function validate(data){
     
  
     $(document).ready(function () {
-              $("#state").select2();
-               $(".mycountry").select2();
-               
-                $('.mycountry').change(function(){
+
+            $("#state").select2();
+            $("#country").select2();
+            $('#country').change(function(){
         
             $('#state').parent().show();
             $('#city').parent().show();
@@ -264,17 +253,13 @@ function validate(data){
              
              if(CountryID != 0 && CountryID != ''){
                 $.ajax({
-                    url: 'https://www.firequick.com/get/state',
-                    type: 'POST',
-                    data: {country_id: CountryID}, 
+                    url: '{{route("getStates")}}/'+CountryID,
+                    type: 'GET',
                     success: function (data, status, xhr) {
                         
                         if(data != "false"){
-                            var json = $.parseJSON(data);
-                            $(json).each(function(i,val){
-                                
+                            $(data).each(function(i,val){
                                 $('#state').append('<option value="'+val.id+'">'+val.name+'</option>');
-                                // console.log(val);
                             });    
                         }else{
                             $('#state').parent().hide();

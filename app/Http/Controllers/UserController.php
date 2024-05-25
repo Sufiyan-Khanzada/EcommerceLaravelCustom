@@ -17,13 +17,13 @@ class UserController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string',
             'company' => 'nullable|string|max:255',
             'address1' => 'required|string|max:255',
             'address2' => 'nullable|string|max:255',
             'country' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
+            'state' => 'string|max:255',
+            'city' => 'string|max:255',
             'postcode' => 'required|string|max:10',
             'phone' => 'required|string|max:20',
         ]);
@@ -48,11 +48,8 @@ class UserController extends Controller
             'status' => 2
         ]);
 
-        // Automatically log the user in
-        Auth::login($user);
-
         // Return a response or redirect to a specific page
-        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
+        return redirect()->route('login')->with('message', 'Well done! Thank you for registration. Your account is not approved yet but you can place orders.');
     }
 
     // Handle user login
@@ -69,11 +66,11 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // Return a response or redirect to a specific page
-            return response()->json(['message' => 'User logged in successfully'], 200);
+            return redirect()->route('home');
         }
 
         // If login fails, return an error response
-        return response()->json(['message' => 'Invalid credentials'], 401);
+        return redirect()->route('login')->with('error', 'Incorrect Email or Password');
     }
 
     // Handle user logout
@@ -85,6 +82,6 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         // Return a response or redirect to a specific page
-        return response()->json(['message' => 'User logged out successfully'], 200);
+        return redirect()->route('home');
     }
 }

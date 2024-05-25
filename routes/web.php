@@ -34,9 +34,6 @@ Route::get('/firequick-conducts-field-testing-of-new-large-format-launcher', [In
 Route::get('/firequick-products-Inc-approves-new-large-format-flare-for-production', [IndexController::class, 'firequickproductsIncapprovesnews'])->name('firequick-products-Inc-approves-new-large-format-flare-for-production');
 Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
 
-
-
-
 Route::get('/products/{categoryId?}', 
     [IndexController::class, 'productsList'])
     ->name('products');
@@ -44,7 +41,6 @@ Route::get('/products/{categoryId?}',
 Route::get('/single-product/{productId}', 
     [IndexController::class, 'singleProduct'])
     ->name('single.product');
-
 
 Route::get('/cart', function () {
     return view('cart');
@@ -78,21 +74,13 @@ Route::get('/wishlist', function () {
     return view('wishlist');
 })->name('wishlist');
 
-
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-
 Route::get('/registration', function () {
     return view('register');
 })->name('registration');
-
-
-Route::get('/flares', function () {
-    return view('flares');
-})->name('flares');
-
 
 Route::get('/flares-overview', function () {
     return view('flares-overview');
@@ -102,10 +90,6 @@ Route::get('/flares-news', function () {
     return view('flares-news');
 })->name('flares-news');
 
-Route::get('/launchers', function () {
-    return view('launchers');
-})->name('launchers');
-
 Route::get('/launchers-overview', function () {
     return view('launchers-overview');
 })->name('launchers-overview');
@@ -113,10 +97,6 @@ Route::get('/launchers-overview', function () {
 Route::get('/launchers-news', function () {
     return view('launchers-news');
 })->name('launchers-news');
-
-Route::get('/firequick-accessories', function () {
-    return view('firequick-accessories');
-})->name('firequick-accessories');
 
 Route::get('/fire-accessories-overview', function () {
     return view('fire-accessories-overview');
@@ -143,10 +123,13 @@ Route::get('/safety-training-videos', function () {
 })->name('safety-training-videos');
 
 // Route for user registration
-Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/register', [UserController::class, 'register'])->name('register-user');
 
 // Route for user login
-Route::post('/login', [UserController::class, 'login'])->name('register');
+Route::post('/login', [UserController::class, 'login'])->name('authenticate');
 
 // Route for user logout
-Route::post('/logout', [UserController::class, 'logout'])->name('register');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/countries', [IndexController::class, 'getCountries'])->name('getCountries');
+Route::get('/states/{countryId?}', [IndexController::class, 'getStates'])->name('getStates');

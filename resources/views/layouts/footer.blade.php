@@ -23,9 +23,9 @@
                             
                             <li><a href=""></a></li>
                             <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{route('flares')}}">Flares</a></li>
-                            <li><a href="{{route('launchers')}}">Launchers</a></li>
-                            <li><a href="{{route('firequick-accessories')}}">Firequick Accessories</a></li>
+                            <li><a href="{{route('products', ['categoryId' => 2])}}">Flares</a></li>
+                            <li><a href="{{route('products', ['categoryId' => 3])}}">Launchers</a></li>
+                            <li><a href="{{route('products', ['categoryId' => 4])}}">Firequick Accessories</a></li>
                             
                             
                             
