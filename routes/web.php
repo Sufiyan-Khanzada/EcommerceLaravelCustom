@@ -33,6 +33,7 @@ Route::get('/page/{pageId}/{pageTitle}', [IndexController::class, 'contentPage']
 Route::get('/firequick-conducts-field-testing-of-new-large-format-launcher', [IndexController::class, 'firequickconductsfieldtestingofnews'])->name('firequick-conducts-field-testing-of-new-large-format-launcher');
 Route::get('/firequick-products-Inc-approves-new-large-format-flare-for-production', [IndexController::class, 'firequickproductsIncapprovesnews'])->name('firequick-products-Inc-approves-new-large-format-flare-for-production');
 Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
+Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
 
 Route::get('/products/{categoryId?}', 
     [IndexController::class, 'productsList'])
@@ -54,13 +55,8 @@ Route::get('/contact-us', function () {
     return view('contact-us');
 })->name('contact-us');
 
-Route::get('/gallery', function () {
-    return view('gallery');
-})->name('gallery');
 
-Route::get('/my-account', function () {
-    return view('my-account');
-})->name('my-account');
+
 
 Route::get('/shop-detail', function () {
     return view('shop-detail');
@@ -118,9 +114,7 @@ Route::get('/fire-training-services', function () {
     return view('fire-training-services');
 })->name('fire-training-services');
 
-Route::get('/safety-training-videos', function () {
-    return view('safety-training-videos');
-})->name('safety-training-videos');
+Route::get('/safety-training-videos', [IndexController::class, 'safetyTrainingVideos'])->name('safety-training-videos');
 
 // Route for user registration
 Route::post('/register', [UserController::class, 'register'])->name('register-user');

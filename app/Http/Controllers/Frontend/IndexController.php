@@ -10,7 +10,10 @@ use App\Models\Product;
 use App\Models\Testimonials;
 use App\Models\Category;
 use App\Models\Country;
+use App\Models\Image;
 use App\Models\State;
+use App\Models\SafetyTrainingVideo;
+
 
 class IndexController extends Controller
 {
@@ -43,6 +46,12 @@ class IndexController extends Controller
 
     }
 
+    public function gallery(){
+        
+        $data = Image::where('status',1)->get();
+        return view('gallery')->with(compact('data'));
+    }
+
     public function documents(){
         
         return view('documents');
@@ -57,8 +66,40 @@ class IndexController extends Controller
 
         $user = Auth::user();
 
-        return view('news')->with(compact('data', 'user'));
-    }
+        }
+        
+        public function safetyTrainingVideos(){
+        
+
+            $stv_result=SafetyTrainingVideo::get();
+
+            $stv_result = $stv_result[0];
+            if (isset($stv_result['description']) && $stv_result['description'] != '')
+                $description = $stv_result['description'];
+            else
+                $description = '';
+            
+            if (isset($stv_result['youtube_title']) && $stv_result['youtube_title'] != '')
+                $youtube_title = unserialize($stv_result['youtube_title']);
+            else
+                $youtube_title = '';
+            
+            if (isset($stv_result['youtube_url']) && $stv_result['youtube_url'] != '')
+                $youtube_url = unserialize($stv_result['youtube_url']);
+            else
+                $youtube_url = '';
+
+                $data =[
+                    "description" => $description,
+                    "youtube_title" => $youtube_title,
+                   "youtube_url" => $youtube_url
+
+                ];
+    
+            return view('safety-training-videos')->with(compact('data'));
+        }
+
+  
 
     public function firequickconductsfieldtestingofnews(){
        

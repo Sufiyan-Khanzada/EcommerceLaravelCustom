@@ -80,22 +80,29 @@
 <div id="stv" class="container">
     <div class="row">
         <div class="col-md-12 stv-description">
-            <p>Firequick Products, Inc. is committed to user safety. The instructional videos below cover our 3 different flare systems: Hand Thrown Flares, Large Format Launcher, and Launcher III. They include a full explanation of each flare system with a field firing demonstration demonstrating correct firing techniques. If you are new to our products or have crew members who you want to familiarize our products with before using them in a live situation, these are the videos for you!  </p>
+            <p>{{ $data['description'] }}</p>
         </div>
-        <div class="col-md-12 stv-list">
-                                <div class="col-md-4">
-                        <iframe src="https://www.youtube.com/embed/OduA6ghsXMM"></iframe>
-                        <p>Large Format System Launcher</p>
+                <div class="col-md-12 stv-list">
+                                
+                <?php
+              
+            if (!empty($data['youtube_url'])) {
+                foreach ($data['youtube_url'] as $key => $value) {
+                    $url1 = explode('watch?v=', $value);
+                    $url2 = explode('&', $url1[1]);
+                    $videoID = $url2[0];
+                    $embedURL = "https://www.youtube.com/embed/" . $videoID;
+            ?>
+                    <div class="col-md-4">
+                        <iframe src="<?php echo isset($embedURL) ? $embedURL : ''; ?>"></iframe>
+                        <p><?php echo isset($youtube_title[$key]) ? $youtube_title[$key] : ''; ?></p>
                     </div>
-                                <div class="col-md-4">
-                        <iframe src="https://www.youtube.com/embed/qMfx4ajQu34"></iframe>
-                        <p>LIII System Launcher</p>
-                    </div>
-                                <div class="col-md-4">
-                        <iframe src="https://www.youtube.com/embed/H-U0a4AAZig"></iframe>
-                        <p>Hand Thrown Flares</p>
-                    </div>
-                    </div>
+            <?php
+                }
+            }
+            ?>               
+                                    
+             </div>
     </div>
 </div><!-- Start footer -->
 @endsection
