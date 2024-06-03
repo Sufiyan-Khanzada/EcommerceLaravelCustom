@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Product;
@@ -13,11 +13,16 @@ use App\Models\Country;
 use App\Models\Image;
 use App\Models\State;
 use App\Models\SafetyTrainingVideo;
+use App\Models\User;
 
 
 class IndexController extends Controller
 {
     public function index(){
+
+        print_r(session()->all());
+        $user = Auth::user();
+        print_r($user);
 
        $data = [ 
             "frontProducts" =>  Product::select('products.image_id', 'products.discripition', 'categories.title')

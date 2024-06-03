@@ -42,8 +42,10 @@
                                 <div class="product-price">
                                     Price :<ins> ${{$product->regular_price}}</ins>                                
                                 </div>
+                                @if ($product->restricted_status == 'yes')
                                 <div class="seperator m-b-10"></div>
                                 <p style="color: #555; font-weight: bold; font-family: 'PT Sans', sans-serif;"> NOTE: This is a restricted product. To order it to your ship to address you must be <span style="color: #ff4000;">pre-validated by Firequick.</span> If you are not a pre-validated customer, you will be notified at the checkout.</p>
+                                @endif
                                 </br>
                                 <div style="font-weight: bold;color: #ff4000;font-family: 'PT Sans', sans-serif;" >
                                     Status: In stock                                
