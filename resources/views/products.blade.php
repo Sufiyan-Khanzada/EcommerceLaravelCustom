@@ -73,9 +73,9 @@
                                     <div class="grid-item">
                                         <div class="product">
                                             <div class="product-image" style="width: 320px; height:250px;">
-                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
+                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
                                                 </a>
-                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset('admin/images/'.$product->image_id) }}">
+                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
                                                 </a>
                                                 
                                                 <div class="product-overlay">

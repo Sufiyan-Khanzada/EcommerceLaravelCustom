@@ -30,9 +30,9 @@
                             @forelse ($data as $key => $gallery)
                            
                             <div class="grid-item">
-                                <a class="image-hover-zoom" href="{{ asset('admin/gallery/' . $gallery->location) }}">
+                                <a class="image-hover-zoom" href="{{ asset(env('IMAGE_PATH').'gallery/' . $gallery->location) }}">
 
-                                <img style=" width: 350px; height: 250px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); "src="{{ asset('admin/gallery/' . $gallery->location) }}">
+                                <img style=" width: 350px; height: 250px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="{{asset(env('IMAGE_PATH').'gallery/' . $gallery->location) }}">
                                 </a>
                             </div>
             
