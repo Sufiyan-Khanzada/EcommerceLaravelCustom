@@ -21,8 +21,6 @@ class IndexController extends Controller
     public function index(){
 
         print_r(session()->all());
-        $user = Auth::user();
-        print_r($user);
 
        $data = [ 
             "frontProducts" =>  Product::select('products.image_id', 'products.discripition', 'categories.title')

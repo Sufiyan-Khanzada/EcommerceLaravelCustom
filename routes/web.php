@@ -117,6 +117,28 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/safety-training-videos', [IndexController::class, 'safetyTrainingVideos'])->name('safety-training-videos');
 
+    
+    Route::get('/myaccount', function () {
+        return view('myaccount/index');
+    })->name('myaccount');
+
+    Route::get('/myaccount/downloads', function () {
+        return view('myaccount/downloads');
+    })->name('myaccount.downloads');
+
+    Route::get('/myaccount/orders', function () {
+        return view('myaccount/orders');
+    })->name('myaccount.orders');
+
+    Route::get('/myaccount/mydetails', function () {
+        return view('myaccount/details');
+    })->name('myaccount.details');
+
+    Route::get('/myaccount/update', function () {
+        return view('myaccount/update');
+    })->name('myaccount.update');
+
+
     // Route for user registration
     Route::post('/register', [UserController::class, 'register'])->name('register-user');
 

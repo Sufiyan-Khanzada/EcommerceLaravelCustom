@@ -64,8 +64,11 @@ class UserController extends Controller
         // Attempt to log the user in
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            // dd(Auth::user());
+            dd(session()->all()); // Check session data
+            
+            echo(Auth::check());
+            echo(Auth::user());
+            dd();
             // Return a response or redirect to a specific page
             return redirect()->route('home');
         }
