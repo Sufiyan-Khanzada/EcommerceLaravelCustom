@@ -20,8 +20,6 @@ class IndexController extends Controller
 {
     public function index(){
 
-        print_r(session()->all());
-
        $data = [ 
             "frontProducts" =>  Product::select('products.image_id', 'products.discripition', 'categories.title')
             ->join('categories', 'products.category_id', '=', 'categories.category_id')
