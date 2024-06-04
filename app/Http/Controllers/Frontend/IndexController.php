@@ -212,8 +212,6 @@ class IndexController extends Controller
     }
     public function myDetails()
     {
-        $customer = Auth::guard('customer')->user();
-        
-        return view('myaccount.details')->with('customer');
+        return view('myaccount.details');
     }
 }
