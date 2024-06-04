@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    protected $primaryKey = 'user_id';
     
     public $timestamps = false;
 

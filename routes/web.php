@@ -130,9 +130,7 @@ Route::middleware(['web'])->group(function () {
         return view('myaccount/orders');
     })->name('myaccount.orders');
 
-    Route::get('/myaccount/mydetails', function () {
-        return view('myaccount/details');
-    })->name('myaccount.details');
+    Route::get('/myaccount/mydetails', [IndexController::class, 'myDetails'])->name('myaccount.details');
 
     Route::get('/myaccount/update', function () {
         return view('myaccount/update');

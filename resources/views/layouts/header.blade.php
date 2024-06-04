@@ -55,7 +55,7 @@
 							
 				<div class="top-header-second top-header-left">
 
-					{{-- @if(isset($user) && $user) --}}
+					@if(isset($customer) && $customer)
 						<div style="margin-bottom: 11px">
 							<a href="{{route('myaccount')}}">
 								<i class="fa fa-user"></i><span>My Account</span>
@@ -65,7 +65,7 @@
 								<i class="fa fa-sign-out"></i><span>Logout</span>
 							</a>
 						</div>
-					{{-- @else --}}
+					@else
 						<div>
 							<a href="{{route('login')}}">
 								<i class="fa fa-sign-in"></i><span>Login</span>
@@ -75,9 +75,7 @@
 								<i class="fa fa-user-plus"></i><span>Register</span>
 							</a>
 						</div>
-					{{-- @endif --}}
-
-					
+					@endif
 				</div>								
 							
 							</li>

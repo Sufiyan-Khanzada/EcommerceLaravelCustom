@@ -7,7 +7,7 @@
 <section id="page-title" class="background-overlay" data-parallax-image="{{asset('images/banner/banner.jpg')}}">
     <div class="container">
         <div class="page-title">
-            <h1 class="text-uppercase text-medium">registration</h1>
+            <h1 class="text-uppercase text-medium">Registration</h1>
        
         </div>
     </div>
@@ -105,8 +105,6 @@
                         
                     </div>
                 </form>
-
-
         </div>
     </div>
 

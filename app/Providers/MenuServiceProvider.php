@@ -31,13 +31,13 @@ class MenuServiceProvider extends ServiceProvider
             $view->with('getNews', $menuService->getNews());
         });
 
-
         View::composer('*', function ($view) use ($menuService) {
             $view->with('subMenuItems', $menuService->getSubMenuItems());
         });
 
-        
-
+        View::composer('*', function ($view) use ($menuService) {
+            $view->with('customer', $menuService->getUser());
+        });
 
     }
 }

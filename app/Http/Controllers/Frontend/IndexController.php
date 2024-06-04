@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Product;
@@ -14,13 +14,13 @@ use App\Models\Image;
 use App\Models\State;
 use App\Models\SafetyTrainingVideo;
 use App\Models\User;
-
+use App\Models\Customer;
 
 class IndexController extends Controller
 {
     public function index(){
 
-       $data = [ 
+        $data = [ 
             "frontProducts" =>  Product::select('products.image_id', 'products.discripition', 'categories.title')
             ->join('categories', 'products.category_id', '=', 'categories.category_id')
             ->where('products.status', 1)
@@ -29,9 +29,7 @@ class IndexController extends Controller
             "testimonials" => Testimonials::get(),
         ];
 
-        $user = Auth::user();
-
-        return view('welcome')->with(compact('data', 'user'));
+        return view('welcome')->with(compact('data'));
     }
 
     public function contentPage($pageId, $pageTitle) {
@@ -40,10 +38,8 @@ class IndexController extends Controller
             ['post_id', $pageId],
             ['type',1]
         ])->first();
-
-        $user = Auth::user();
         
-        return view('content-page')->with(compact('data', 'user'));
+        return view('content-page')->with(compact('data'));
 
     }
 
@@ -65,42 +61,39 @@ class IndexController extends Controller
             ['type',1]
         ])->first();
 
-        $user = Auth::user();
-
-        }
+        return view('news')->with(compact('data'));
+    }
         
-        public function safetyTrainingVideos(){
-        
-
-            $stv_result=SafetyTrainingVideo::get();
-
-            $stv_result = $stv_result[0];
-            if (isset($stv_result['description']) && $stv_result['description'] != '')
-                $description = $stv_result['description'];
-            else
-                $description = '';
-            
-            if (isset($stv_result['youtube_title']) && $stv_result['youtube_title'] != '')
-                $youtube_title = unserialize($stv_result['youtube_title']);
-            else
-                $youtube_title = '';
-            
-            if (isset($stv_result['youtube_url']) && $stv_result['youtube_url'] != '')
-                $youtube_url = unserialize($stv_result['youtube_url']);
-            else
-                $youtube_url = '';
-
-                $data =[
-                    "description" => $description,
-                    "youtube_title" => $youtube_title,
-                   "youtube_url" => $youtube_url
-
-                ];
+    public function safetyTrainingVideos(){
     
-            return view('safety-training-videos')->with(compact('data'));
-        }
 
-  
+        $stv_result=SafetyTrainingVideo::get();
+
+        $stv_result = $stv_result[0];
+        if (isset($stv_result['description']) && $stv_result['description'] != '')
+            $description = $stv_result['description'];
+        else
+            $description = '';
+        
+        if (isset($stv_result['youtube_title']) && $stv_result['youtube_title'] != '')
+            $youtube_title = unserialize($stv_result['youtube_title']);
+        else
+            $youtube_title = '';
+        
+        if (isset($stv_result['youtube_url']) && $stv_result['youtube_url'] != '')
+            $youtube_url = unserialize($stv_result['youtube_url']);
+        else
+            $youtube_url = '';
+
+            $data =[
+                "description" => $description,
+                "youtube_title" => $youtube_title,
+                "youtube_url" => $youtube_url
+
+            ];
+
+        return view('safety-training-videos')->with(compact('data'));
+    }
 
     public function firequickconductsfieldtestingofnews(){
        
@@ -126,9 +119,7 @@ class IndexController extends Controller
             ['type',1]
         ])->first();
 
-        $user = Auth::user();
-
-        return view('customer-service')->with(compact('data', 'user'));
+        return view('customer-service')->with(compact('data'));
     }
 
     public function privacyPolicy(){
@@ -136,10 +127,8 @@ class IndexController extends Controller
             ['post_id', 28],
             ['type',1]
         ])->first();
-
-        $user = Auth::user();
         
-        return view('privacy-policy')->with(compact('data', 'user'));
+        return view('privacy-policy')->with(compact('data'));
     }
 
 
@@ -149,9 +138,7 @@ class IndexController extends Controller
             ['type',1]
         ])->first();
 
-        $user = Auth::user();
-
-        return view('order-return')->with(compact('data', 'user'));
+        return view('order-return')->with(compact('data'));
     }
     
     public function shippingInformation(){
@@ -159,10 +146,8 @@ class IndexController extends Controller
             ['post_id', 33],
             ['type',1]
         ])->first();
-
-        $user = Auth::user();
         
-        return view('shipping-information')->with(compact('data', 'user'));
+        return view('shipping-information')->with(compact('data'));
     }
 
     public function termAndUse(){
@@ -170,10 +155,8 @@ class IndexController extends Controller
             ['post_id', 34],
             ['type',1]
         ])->first();
-
-        $user = Auth::user();
         
-        return view('term-use')->with(compact('data', 'user'));
+        return view('term-use')->with(compact('data'));
     }
 
     public function productsList($categoryId = null) {
@@ -192,8 +175,6 @@ class IndexController extends Controller
         else {
             $products = Product::all();
         }
-
-        $user = Auth::user();
         
             
         return view('products')->with(compact(['products', 'categories', 'currentCategory', 'user']));
@@ -208,8 +189,6 @@ class IndexController extends Controller
         {
             return redirect('products');
         }
-
-        $user = Auth::user();
 
         return view('product-detail')->with(compact(['product', 'categories', 'user']));
     }
@@ -230,5 +209,11 @@ class IndexController extends Controller
         else {
             return response()->json($states);
         }
+    }
+    public function myDetails()
+    {
+        $customer = Auth::guard('customer')->user();
+        
+        return view('myaccount.details')->with('customer');
     }
 }

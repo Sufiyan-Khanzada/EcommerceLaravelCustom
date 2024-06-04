@@ -17,43 +17,46 @@
     <table>
         <tr>
             <th>First Name</th>
-            <td>Sufiyan</td>
+            <td>{{ $customer->fname }}</td>
         </tr>
         <tr>
             <th>Last Name</th>
-            <td>Ahmed</td>
+            <td>{{ $customer->lname }}</td>
         </tr>
         <tr>
             <th>Email</th>
-            <td>sufiyankhanzada748@gmail.com</td>
+            <td>{{ $customer->email }}</td>
         </tr>
         <tr>
             <th>Company</th>
-            <td>ABC</td>
+            <td>{{ $customer->company }}</td>
         </tr>
         <tr>
             <th>Phone Number</th>
-            <td>03461351500</td>
+            <td>{{ $customer->phone }}</td>
         </tr>
         <tr>
             <th>Address</th>
-            <td>Hyderabad&nbsp;&nbsp;hyderabad </td>
+            <td>
+                {{ $customer->address1 }} <br/>
+                {{ $customer->address2 }} 
+            </td>
         </tr>
         <tr>
             <th>Country</th>
-            <td>Pakistan</td>
+            <td>{{ $customer->country->name }}</td>
         </tr>
         <tr>
             <th>State</th>
-            <td>Azad Kashmir</td>
+            <td>{{ $customer->state->name }}</td>
         </tr>
         <tr>
             <th>City</th>
-            <td>hyderabad</td>
+            <td>{{ $customer->city }}</td>
         </tr>
         <tr>
             <th>Postal code</th>
-            <td>710000</td>
+            <td>{{ $customer->postalcode }}</td>
         </tr>
         <tr>
             <th><a class="btn" href="{{route('myaccount.update')}}">Edit</a></th>

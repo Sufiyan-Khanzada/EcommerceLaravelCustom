@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 
@@ -28,24 +29,21 @@ class UserController extends Controller
             'phone' => 'required|string|max:20',
         ]);
 
-        // Merge first name and last name into a single name
-        $name = $validatedData['fname'] . ' ' . $validatedData['lname'];
-        $address = $validatedData['address1'] . ',\n' . 
-            $validatedData['address2'] . ',\n' .
-            $validatedData['postcode'] . ',\n' .
-            $validatedData['city'] . ',\n' .
-            $validatedData['state'] . ',\n' .
-            $validatedData['country'] . ',\n';
-
         // Create a new user
-        $user = User::create([
-            'username' => $name,
+        $customer = Customer::create([
+            'fname' => $validatedData['fname'],
+            'lname' => $validatedData['lname'],
+            'company' => $validatedData['company'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'company' => $validatedData['company'],
-            'address' => $address,
             'phone' => $validatedData['phone'],
-            'status' => 2
+            'address1' => $validatedData['address1'],
+            'address2' => $validatedData['address2'],
+            'country_id' => $validatedData['country'],
+            'state_id' => $validatedData['state'],
+            'city' => $validatedData['city'],
+            'postalcode' => $validatedData['postcode'],
+            'status' => 3
         ]);
 
         // Return a response or redirect to a specific page
@@ -62,9 +60,9 @@ class UserController extends Controller
         ]);
 
         // Attempt to log the user in
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('customer')->attempt($credentials)) {
             $request->session()->regenerate();
-            
+
             // Return a response or redirect to a specific page
             return redirect()->route('home');
         }

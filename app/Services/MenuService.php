@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use Auth;
 use App\Models\Post;
 use App\Models\Newsbars;
 use DB;
@@ -40,5 +41,10 @@ class MenuService
     public function getNews()
     {
         return Newsbars::where('status',1)->get();
+    }
+
+    public function getUser()
+    {
+        return Auth::guard('customer')->user();
     }
 }
