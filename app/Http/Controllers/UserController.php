@@ -46,6 +46,18 @@ class UserController extends Controller
             'status' => 3
         ]);
 
+        
+         // Send email
+    $name = $validatedData['fname'] . ' ' . $validatedData['lname'];
+    $email = $validatedData['email'];
+    $comment = $validatedData['comment'];
+
+    // Create an instance of SendMail and pass the necessary data
+    $sendMail = new SendMail($name, $email, $comment);
+    $sendMail->build();
+    
+
+
         // Return a response or redirect to a specific page
         return redirect()->route('login')->with('message', 'Well done! Thank you for registration. Your account is not approved yet but you can place orders.');
     }

@@ -58,6 +58,9 @@ Route::middleware(['web'])->group(function () {
 
 
 
+    
+
+
 
     Route::get('/shop-detail', function () {
         return view('shop-detail');
