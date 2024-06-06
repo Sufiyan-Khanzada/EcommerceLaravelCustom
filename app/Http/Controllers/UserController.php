@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use Mail;
 use App\Mail\SendMail;
 
 class UserController extends Controller
@@ -52,12 +53,7 @@ class UserController extends Controller
 
     $email = $validatedData['email'];
 
-
-    // Create an instance of SendMail and pass the necessary data
-    $sendMail = new SendMail($email);
-    $sendMail->build();
-    
-
+    Mail::to($email)->send(new SendMail($email));
 
         // Return a response or redirect to a specific page
         return redirect()->route('login')->with('message', 'Well done! Thank you for registration. Your account is not approved yet but you can place orders.');
