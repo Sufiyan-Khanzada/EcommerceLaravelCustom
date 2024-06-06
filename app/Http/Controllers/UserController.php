@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Mail\SendMail;
 
 class UserController extends Controller
 {
