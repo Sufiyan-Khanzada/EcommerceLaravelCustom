@@ -48,12 +48,12 @@ class UserController extends Controller
 
         
          // Send email
-    $name = $validatedData['fname'] . ' ' . $validatedData['lname'];
+
     $email = $validatedData['email'];
-    $comment = $validatedData['comment'];
+
 
     // Create an instance of SendMail and pass the necessary data
-    $sendMail = new SendMail($name, $email, $comment);
+    $sendMail = new SendMail($email);
     $sendMail->build();
     
 

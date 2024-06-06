@@ -13,18 +13,18 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $name;
+   
     protected $email;
-    protected $comment;
+   
 
     /**
      * Create a new message instance.
      */
-    public function __construct($name, $email, $comment)
+    public function __construct($email)
     {
-        $this->name = $name;
+        
         $this->email = $email;
-        $this->comment = $comment;
+
     }
 
     /**
@@ -47,15 +47,13 @@ class SendMail extends Mailable
 
             // Recipients
             $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $mail->addAddress($this->email, $this->name); // Add a recipient
+            $mail->addAddress($this->email); // Add a recipient
 
             // Content
             $mail->isHTML(true); // Set email format to HTML
             $mail->Subject = 'Registration Successful at Firequick';
             $mail->Body = View::make('mail.register_welcome_email', [
-                'name' => $this->name,
                 'email' => $this->email,
-                'comment' => $this->comment,
             ])->render();
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
