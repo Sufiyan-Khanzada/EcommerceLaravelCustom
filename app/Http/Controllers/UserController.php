@@ -19,7 +19,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:customers',
             'password' => 'required|string',
             'company' => 'nullable|string|max:255',
             'address1' => 'required|string|max:255',
@@ -37,7 +37,7 @@ class UserController extends Controller
             'lname' => $validatedData['lname'],
             'company' => $validatedData['company'],
             'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'password' => md5($validatedData['password']),
             'phone' => $validatedData['phone'],
             'address1' => $validatedData['address1'],
             'address2' => $validatedData['address2'],
@@ -68,8 +68,13 @@ class UserController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Attempt to log the user in
-        if (Auth::guard('customer')->attempt($credentials)) {
+        // Get the customer record by email
+        $customer = Customer::where('email', $credentials['email'])->first();
+
+        // Verify MD5 password
+        if ($customer && $customer->password === md5($credentials['password'])) {
+            // Log the user in manually
+            Auth::guard('customer')->login($customer);
             $request->session()->regenerate();
 
             // Return a response or redirect to a specific page
