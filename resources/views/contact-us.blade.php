@@ -14,47 +14,57 @@
 <section class="custom-section">
             <div class="container">
                 <div class="row">
+                @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
                     <div class="col-md-6"><!-- 
                         <h3 class="text-uppercase">Get In Touch</h3> -->
                         <div class="m-t-30">
-   
-                            <form class="" action="https://www.firequick.com/page/contact-us/submit" role="form" method="post">
-                        
-                            
-                                                                                 <div class="row">
-                                    <div class="form-group col-sm-6">
-                                        <label for="name">Name</label>
-                                        <input type="text" aria-required="true" name="name" class="form-control" placeholder="Enter your Name">
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="email">Email</label>
-                                        <input type="email" aria-required="true" name="email" class="form-control" placeholder="Enter your Email">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label for="subject">Your Subject</label>
-                                        <input type="text" name="subject" class="form-control" placeholder="Subject...">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea type="text" name="comment" rows="5" class="form-control" placeholder="Enter your Message"></textarea>
-                                </div>
+    <form class="" action="{{ route('contact-form') }}" role="form" method="post">
+        @csrf
+        <div class="row">
+            <div class="form-group col-sm-6">
+                <label for="name">Name</label>
+                <input type="text" aria-required="true" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter your Name" value="{{ old('name') }}">
+                @error('name')
+                   <div class="alert alert-danger">{{ $message }}</div>
 
-                                 <div class="form-group">
-                                    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+                @enderror
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="email">Email</label>
+                <input type="email" aria-required="true" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your Email" value="{{ old('email') }}">
+                @error('email')
+                   <div class="alert alert-danger">{{ $message }}</div>
 
-                                    <div class="g-recaptcha" data-sitekey="6LdxV-oZAAAAAK6JNQiqKOd7gOjOtC2Up8qKTofP"></div>
-                                    
+                @enderror
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <label for="subject">Your Subject</label>
+                <input type="text" name="subject" class="form-control" placeholder="Subject..." value="{{ old('subject') }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea name="message" rows="5" class="form-control @error('message') is-invalid @enderror" placeholder="Enter your Message">{{ old('message') }}</textarea>
+            @error('message')
+               <div class="alert alert-danger">{{ $message }}</div>
 
-                                </div>
-                                
-                                
-                                <button class="btn btn-default" type="submit" id="form-submit"><i class="fa fa-paper-plane"></i>&nbsp;Send message</button>
-                            </form>
-                            
-                        </div>
+            @enderror
+        </div>
+        <div class="form-group">
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <div class="g-recaptcha" data-sitekey="6LdxV-oZAAAAAK6JNQiqKOd7gOjOtC2Up8qKTofP"></div>
+        </div>
+        <button class="btn btn-default" type="submit" id="form-submit"><i class="fa fa-paper-plane"></i>&nbsp;Send message</button>
+    </form>
+</div>
+
                     </div>
                     <div class="col-md-6"><!-- 
                         <h3 class="text-uppercase">Address & Map</h3> -->

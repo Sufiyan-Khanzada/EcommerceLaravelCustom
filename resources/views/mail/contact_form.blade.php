@@ -75,9 +75,9 @@
                                     </tr>
                                     <tr>
                                         <td align="left" style="padding: 0 0 10px 0;">
-                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Name: {{ $name }}</p>
-                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Email: {{ $email }}</p>
-                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Message: {{ $message }}</p>
+                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Name: {{ $data['name'] }}</p>
+                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Email: {{ $data['email']}}</p>
+                                            <p style="font-family: Arial, Helvetica, sans-serif; color: #333333;">Message: {{ $data['comment']}}</p>
                                         </td>
                                     </tr>
                                 </table>

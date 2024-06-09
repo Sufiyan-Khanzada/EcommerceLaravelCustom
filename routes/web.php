@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -35,6 +36,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/firequick-products-Inc-approves-new-large-format-flare-for-production', [IndexController::class, 'firequickproductsIncapprovesnews'])->name('firequick-products-Inc-approves-new-large-format-flare-for-production');
     Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
     Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
+    Route::post('/contact-us-post', [ContactUsController::class, 'contactForm'])->name('contact-form');
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
