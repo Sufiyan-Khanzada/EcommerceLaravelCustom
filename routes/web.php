@@ -123,17 +123,15 @@ Route::middleware(['web'])->group(function () {
     Route::get('/safety-training-videos', [IndexController::class, 'safetyTrainingVideos'])->name('safety-training-videos');
 
     
-    Route::get('/myaccount', function () {
-        return view('myaccount/index');
-    })->name('myaccount');
+        Route::get('/myaccount', function () {
+            return view('myaccount/index');
+        })->name('myaccount');
 
-    Route::get('/myaccount/downloads', function () {
-        return view('myaccount/downloads');
-    })->name('myaccount.downloads');
+        Route::get('/myaccount/downloads', function () {
+            return view('myaccount/downloads');
+        })->name('myaccount.downloads');
 
-    Route::get('/myaccount/orders', function () {
-        return view('myaccount/orders');
-    })->name('myaccount.orders');
+        Route::get('/myaccount/orders',[IndexController::class, 'orderInfo'])->name('myaccount.orders');
 
     Route::get('/myaccount/mydetails', [IndexController::class, 'myDetails'])->name('myaccount.details');
 
