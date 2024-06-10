@@ -216,4 +216,23 @@ class IndexController extends Controller
         
         return view('myaccount.details')->with('customer');
     }
+
+
+
+    public function downloadWorkbook()
+    {
+        $customer = Auth::guard('customer')->user();
+
+        if ($customer->workbook_status == '1') {
+            $filePath = public_path('Workbook.pdf');
+            $fileName = 'workbook.pdf';
+
+            return response()->download($filePath, $fileName);
+        } else {
+            return redirect()->route('myaccount');
+        }
+    }
+
+
+
 }

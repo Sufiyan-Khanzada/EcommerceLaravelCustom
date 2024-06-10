@@ -142,6 +142,12 @@ Route::middleware(['web'])->group(function () {
     })->name('myaccount.update');
 
 
+    Route::middleware('auth:customer')->group(function () {
+   
+        Route::get('/download-workbook', [IndexController::class, 'downloadWorkbook'])->name('downloadWorkbook');
+    });
+
+
     // Route for user registration
     Route::post('/register', [UserController::class, 'register'])->name('register-user');
 
