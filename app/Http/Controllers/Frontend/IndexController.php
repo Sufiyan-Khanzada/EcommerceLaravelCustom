@@ -246,10 +246,8 @@ class IndexController extends Controller
     
         
         $order = Order::where('customer_email', $customer->email)->get();
-    
-        if (!$order) {
-            return redirect()->route('myaccount.orders');
-        }
+        
+     
     
         $validStatuses = ['1', '2', '3', '4', '5'];
     
@@ -261,9 +259,7 @@ class IndexController extends Controller
             ->whereIn('orders.order_status', $validStatuses)
             ->get();
     
-        if ($orderItems->isEmpty()) {
-            return redirect()->route('myaccount.orders');
-        }
+     
     
         $user = User::select('facebook', 'instagram', 'linkedin', 'address', 'phone', 'tollfree', 'fax')->first();
     
@@ -272,6 +268,8 @@ class IndexController extends Controller
             'user' => $user,
             'orderItems' => $orderItems,
         ];
+
+        // dd($data);
     
         return view('myaccount.orders')->with(compact('data'));
     }
