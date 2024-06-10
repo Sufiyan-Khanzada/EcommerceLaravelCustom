@@ -15,6 +15,9 @@ use App\Models\State;
 use App\Models\SafetyTrainingVideo;
 use App\Models\User;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderItem;
+
 
 class IndexController extends Controller
 {
@@ -177,7 +180,7 @@ class IndexController extends Controller
         }
         
             
-        return view('products')->with(compact(['products', 'categories', 'currentCategory', 'user']));
+        return view('products')->with(compact(['products', 'categories', 'currentCategory']));
     }
     
     public function singleProduct($productId) {
@@ -190,7 +193,7 @@ class IndexController extends Controller
             return redirect('products');
         }
 
-        return view('product-detail')->with(compact(['product', 'categories', 'user']));
+        return view('product-detail')->with(compact(['product', 'categories']));
     }
     public function getCountries()
     {
@@ -214,4 +217,64 @@ class IndexController extends Controller
     {
         return view('myaccount.details');
     }
+
+
+
+    public function downloadWorkbook()
+    {
+        $customer = Auth::guard('customer')->user();
+
+        if ($customer->workbook_status == '1') {
+            $filePath = public_path('Workbook.pdf');
+            $fileName = 'workbook.pdf';
+
+            return response()->download($filePath, $fileName);
+        } else {
+            return redirect()->route('myaccount');
+        }
+    }
+
+    public function orderInfo()
+    {
+        $customer = Auth::guard('customer')->user();
+
+        if (!$customer) {
+            return redirect()->route('home');
+        }
+    
+        
+        $order = Order::where('customer_email', $customer->email)->get();
+        
+     
+    
+        $validStatuses = ['1', '2', '3', '4', '5'];
+    
+        $orderItems = OrderItem::select('orderitems.*', 'products.title', 'orders.customer_email', 'orders.shipping_cost', 'orders.sub_total as order_subtotal', 'orders.handling_fee as total_handling_fee', 'orders.tax as total_tax')
+            ->join('products', 'orderitems.product_id', '=', 'products.product_id')
+            ->join('orders', 'orderitems.order_id', '=', 'orders.order_id')
+            // ->where('orderitems.order_id', $orderId)
+            ->where('orders.customer_email', $customer->email)
+            ->whereIn('orders.order_status', $validStatuses)
+            ->get();
+    
+     
+    
+        $user = User::select('facebook', 'instagram', 'linkedin', 'address', 'phone', 'tollfree', 'fax')->first();
+    
+        $data = [
+            'title' => 'Order Info',
+            'user' => $user,
+            'orderItems' => $orderItems,
+        ];
+
+        // dd($data);
+    
+        return view('myaccount.orders')->with(compact('data'));
+    }
+    
+
+    
+    
 }
+
+

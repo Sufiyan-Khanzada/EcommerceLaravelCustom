@@ -4,6 +4,7 @@ namespace App\Services;
 use Auth;
 use App\Models\Post;
 use App\Models\Newsbars;
+use App\Models\User;
 use DB;
 
 class MenuService
@@ -46,5 +47,11 @@ class MenuService
     public function getUser()
     {
         return Auth::guard('customer')->user();
+    }
+
+
+    public function getAdminUser()
+    {
+        return User::where('status',1)->where('type',1)->first();
     }
 }

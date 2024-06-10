@@ -33,7 +33,7 @@
 						<div class="col-xs-12 col-sm-7 col-md-7">
 							
 							<div class="top-header-right">
-								<a href="tel:760-377-5766">Call (760) 377-5766</a><span style="color: #fff;">,</span>&nbsp;<a href="tel:855-374-3473">855-FPI-FIRE (855-374-3473)</a>
+								<a href="tel:760-377-5766">Call {{ $admin->phone }}</a><span style="color: #fff;">,</span>&nbsp;<a href="tel:855-374-3473">{{ $admin->tollfree}}</a>
 							</div>
 							<div class="site_needguns_wrap">
 									<div class="top-header-left new-btn-div" style="display:none;">

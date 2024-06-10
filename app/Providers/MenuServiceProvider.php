@@ -39,5 +39,13 @@ class MenuServiceProvider extends ServiceProvider
             $view->with('customer', $menuService->getUser());
         });
 
+
+        View::composer('*', function ($view) use ($menuService) {
+            $view->with('admin', $menuService->getAdminUser());
+        });
+
+
+        
+
     }
 }

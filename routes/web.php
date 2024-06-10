@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -35,6 +36,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/firequick-products-Inc-approves-new-large-format-flare-for-production', [IndexController::class, 'firequickproductsIncapprovesnews'])->name('firequick-products-Inc-approves-new-large-format-flare-for-production');
     Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
     Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
+    Route::post('/contact-us-post', [ContactUsController::class, 'contactForm'])->name('contact-form');
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
@@ -56,6 +58,9 @@ Route::middleware(['web'])->group(function () {
         return view('contact-us');
     })->name('contact-us');
 
+
+
+    
 
 
 
@@ -118,23 +123,27 @@ Route::middleware(['web'])->group(function () {
     Route::get('/safety-training-videos', [IndexController::class, 'safetyTrainingVideos'])->name('safety-training-videos');
 
     
-    Route::get('/myaccount', function () {
-        return view('myaccount/index');
-    })->name('myaccount');
+        Route::get('/myaccount', function () {
+            return view('myaccount/index');
+        })->name('myaccount');
 
-    Route::get('/myaccount/downloads', function () {
-        return view('myaccount/downloads');
-    })->name('myaccount.downloads');
+        Route::get('/myaccount/downloads', function () {
+            return view('myaccount/downloads');
+        })->name('myaccount.downloads');
 
-    Route::get('/myaccount/orders', function () {
-        return view('myaccount/orders');
-    })->name('myaccount.orders');
+        Route::get('/myaccount/orders',[IndexController::class, 'orderInfo'])->name('myaccount.orders');
 
     Route::get('/myaccount/mydetails', [IndexController::class, 'myDetails'])->name('myaccount.details');
 
     Route::get('/myaccount/update', function () {
         return view('myaccount/update');
     })->name('myaccount.update');
+
+
+    Route::middleware('auth:customer')->group(function () {
+   
+        Route::get('/download-workbook', [IndexController::class, 'downloadWorkbook'])->name('downloadWorkbook');
+    });
 
 
     // Route for user registration

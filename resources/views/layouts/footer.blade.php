@@ -67,16 +67,16 @@
             <div class="col-md-4">
                 <div class="widget">
                     <h4>Contact Us</h4>
-                        <p><span>Address : </span>Firequick Products, Inc,  P.O. Box 910, Inyokern, CA 93527</p>
+                        <p><span>Address : </span>{{ $admin->address}}</p>
                         
                                                 
-                        <p><span>Phone:  </span> <a class="teltoll" href="tel:760-377-5766" target="_blank"  >(760) 377-5766</a> </p>
-                        <p><span>Toll Free: </span> <a class="teltoll" href="tel:855-374-3473" target="_blank" > 855-FPI-FIRE (855-374-3473)</a> </p>
+                        <p><span>Phone:  </span> <a class="teltoll" href="tel:{{ $admin->phone }}" target="_blank"  >{{ $admin->phone }}</a> </p>
+                        <p><span>Toll Free: </span> <a class="teltoll" href="tel:{{ $admin->tollfree}}" target="_blank" > {{ $admin->tollfree}}</a> </p>
                         
                                                     
                         
                         
-                        <p> <span>Fax: </span> (760) 377-5761 </p>
+                        <p> <span>Fax: </span> {{ $admin->fax}} </p>
                 </div>
             </div>
         </div>
