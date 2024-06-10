@@ -19,7 +19,7 @@
 <div>
 <div>
 <div>
-<p>Firequick Products offers a variety of services to assist our user community. If there is a service you need and do not see listed, please call our office at <u><strong><a href="tel:760-377-5766">760-377-5766</a></strong></u> and we will do our best to provide a solution. Current services include:</p>
+<p>Firequick Products offers a variety of services to assist our user community. If there is a service you need and do not see listed, please call our office at <u><strong><a href="tel:{{$admin->phone}}">{{$admin->phone}}</a></strong></u> and we will do our best to provide a solution. Current services include:</p>
 
 <p><a href="https://fortune5.pro/page/launcher-repair-services"><u><strong>Launcher Maintenance</strong></u></a></p>
 
@@ -39,7 +39,7 @@
 
 <p><u><strong>Emergency Fire Site Delivery</strong></u></p>
 
-<p>Often during a fire emergency, standard carriers are unable to get shipments to fire sites as quickly as may be required. In these instances, Firequick does its best to deliver product directly in the shortest timeframe possible. If you have an emergency delivery requirement, call our office at <u><strong><a href="tel:760-377-5766">760-377-5766</a></strong></u>. If off-hours, you will be directed to a 24/7 emergency response phone number for assistance.</p>
+<p>Often during a fire emergency, standard carriers are unable to get shipments to fire sites as quickly as may be required. In these instances, Firequick does its best to deliver product directly in the shortest timeframe possible. If you have an emergency delivery requirement, call our office at <u><strong><a href="tel:{{$admin->phone}}">{{$admin->phone}}</a></strong></u>. If off-hours, you will be directed to a 24/7 emergency response phone number for assistance.</p>
 </div>
 </div>
 </div>

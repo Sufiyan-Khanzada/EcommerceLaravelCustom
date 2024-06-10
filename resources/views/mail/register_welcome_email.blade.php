@@ -427,7 +427,7 @@
                                   <td class="es-infoblock es-m-txt-c" align="center" style="padding:0;Margin:0;line-height:14px;font-size:12px;color:#CCCCCC">
                                     <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:22px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:26px;color:#FF4000">
                                       <strong>
-                                        <span style="white-space:nowrap">Call 760-377-5766,&nbsp;1-855-FPI-FIRE (374-3473)</span>
+                                        <span style="white-space:nowrap">Call {{ $admin->phone}},&nbsp;1-855-FPI-FIRE (374-3473)</span>
                                       </strong>
                                     </p>
                                   </td>
@@ -605,9 +605,9 @@
                           </tr>
                           <tr style="border-collapse:collapse">
                             <td class="es-m-txt-c" align="left" style="padding:0;Margin:0">
-                              <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#FFFFFF">Firequick Products, Inc. <br>P.O. Box 910 <br>Inyokern, CA 93527 <br>Phone:&nbsp; <a href="tel:760-377-5766" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#FFFFFF">760-377-5766</a>
-                                <br> Toll Free&nbsp; <a href="tel:855-374-3473" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#FFFFFF">855-FPI-FIRE (855-374-3473)</a>
-                                <br>Fax: 760-377-5761
+                              <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#FFFFFF">{{$admin->address}} <br>Phone:&nbsp; <a href="tel:{{ $admin->phone}}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#FFFFFF">{{ $admin->phone}}</a>
+                                <br> Toll Free&nbsp; <a href="tel:{{$admin->tollfress}}" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:14px;text-decoration:underline;color:#FFFFFF">{{ $admin->tollfree}}</a>
+                                <br>Fax: {{$admin->fax}}
                               </p>
                               <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:14px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:21px;color:#FFFFFF">
                                 <br>

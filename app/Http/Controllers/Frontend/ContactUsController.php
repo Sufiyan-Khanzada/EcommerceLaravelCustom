@@ -6,9 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
+use App\Services\MenuService;
 use Mail;
 class ContactUsController extends Controller
 {
+    protected $menuService;
+
+    public function __construct(MenuService $menuService)
+    {
+        $this->menuService = $menuService;
+    }
+
     public function contactForm(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -22,13 +30,15 @@ class ContactUsController extends Controller
         $data = [
             "email" => $request->input('email'),
             "name" => $request->input('name'),
-            "comment" => $request->input('comment'),
+            "comment" => $request->input('message'),
             "captcha" => $request->input('g-recaptcha-response'),
             "subject" => isset($subject) ? $subject : "",
         ];
         
+        $admin = $this->menuService->getAdminUser();
+// dd($admin->email);
 
-        Mail::to("admin@admin.com")->send(new ContactMail($data));
+        Mail::to($admin->email)->send(new ContactMail($data));
 
 
         return redirect()->back()->with('success', 'Thanks for Contacting Us.');

@@ -14,14 +14,15 @@
 <section class="custom-section">
             <div class="container">
                 <div class="row">
-                @if (session('success'))
+      
+
+                    <div class="col-md-6"><!-- 
+                        <h3 class="text-uppercase">Get In Touch</h3> -->
+                        @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
 @endif
-
-                    <div class="col-md-6"><!-- 
-                        <h3 class="text-uppercase">Get In Touch</h3> -->
                         <div class="m-t-30">
     <form class="" action="{{ route('contact-form') }}" role="form" method="post">
         @csrf
