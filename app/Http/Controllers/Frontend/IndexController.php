@@ -177,7 +177,7 @@ class IndexController extends Controller
         }
         
             
-        return view('products')->with(compact(['products', 'categories', 'currentCategory', 'user']));
+        return view('products')->with(compact(['products', 'categories', 'currentCategory']));
     }
     
     public function singleProduct($productId) {
@@ -190,7 +190,7 @@ class IndexController extends Controller
             return redirect('products');
         }
 
-        return view('product-detail')->with(compact(['product', 'categories', 'user']));
+        return view('product-detail')->with(compact(['product', 'categories']));
     }
     public function getCountries()
     {
