@@ -76,8 +76,8 @@
 							</a>
 						</div>
 					@endif
-				</div>								
-							
+				</div>
+				
 							</li>
 							
 							<li class="hidden-xs">

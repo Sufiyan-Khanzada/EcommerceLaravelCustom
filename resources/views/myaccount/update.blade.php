@@ -79,21 +79,28 @@
 		</div>
 	</div>
 </section>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
-<!--<script src="https://www.firequick.com/assets/jquery-3.2.1.min.js"></script>-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
 	var agree = true;
+	var CountryId = {{$customer->country_id}};
+
 	if(agree == true) {
 		$.ajax({
 			url: '{{route("getCountries")}}',
 			type: 'GET',
 			success: function(data, status, xhr) {
 				$(data).each(function(i, val) {
-					$('#country').append('<option value="' + val.id + '">' + val.name + '</option>');
+					$('#country').append(
+						`<option value="` 
+						+ val.id 
+						+ `"`
+						+ ((CountryId == val.id) ? `selected >`: `>`)
+						+ val.name 
+						+ `</option>`
+					);
 				});
 			},
 			error: function(jqXhr, textStatus, errorMessage) {
@@ -106,6 +113,7 @@ $(document).ready(function() {
 	$('#state').parent().hide();
 	$('#city').parent().hide();
 	$('#state').html('');
+
 	var CountryID = $(this).val();
 	if(CountryID != 0 && CountryID != '') {
 		$.ajax({
