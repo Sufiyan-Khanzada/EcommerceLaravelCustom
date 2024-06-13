@@ -200,31 +200,59 @@
         });
         
         
-        $('#refer').on('click',function(){
-            var email = prompt('Enter friend Email here.');
-             var url =  $(this).val();
+        // $('#refer').on('click',function(){
+        //     var email = prompt('Enter friend Email here.');
+        //      var url =  $(this).val();
              
-            if(email != null ){
-                $.ajax({
-                    url: 'https://www.firequick.com/mail/sendtofriend',
-                    type: 'POST',
-                    data: { email:email,url:url}, 
-                   success: function (data, status, xhr) {
+        //     if(email != null ){
+        //         $.ajax({
+        //             url: '{{ route('send-to-friend') }}',
+        //             type: 'POST',
+        //             data: { email:email,url:url}, 
+        //            success: function (data, status, xhr) {
                         
-                        if(data == "true"){
-                            alert('Product link successfully sent.')
-                        }
+        //                 if(data == "true"){
+        //                     alert('Product link successfully sent.')
+        //                 }
                         
     
-                    },
-                    error: function (jqXhr, textStatus, errorMessage) {
-                          alert(textStatus);
-                          alert(errorMessage);
+        //             },
+        //             error: function (jqXhr, textStatus, errorMessage) {
+        //                   alert(textStatus);
+        //                   alert(errorMessage);
                           
-                    }
-                }); 
+        //             }
+        //         }); 
+        //     }
+        // })
+
+        $('#refer').on('click', function() {
+    var email = prompt('Enter friend Email here.');
+    var url = $(this).val();
+
+    if(email != null){
+        $.ajax({
+            url: '{{ route('sendToFriend') }}',
+            type: 'POST',
+            data: {
+                email: email,
+                url: url,
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(data) {
+                if (data.success) {
+                    alert('Product link successfully sent.');
+                } else {
+                    alert('Failed to send email: ' + data.error.join(', '));
+                }
+            },
+            error: function(jqXhr, textStatus, errorMessage) {
+                alert('Error: ' + textStatus + ' - ' + errorMessage);
             }
-        })
+        });
+    }
+});
+
         
         
     });

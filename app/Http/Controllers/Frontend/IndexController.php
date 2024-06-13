@@ -216,4 +216,41 @@ class IndexController extends Controller
         
         return view('myaccount.details')->with('customer');
     }
+
+
+    
+
+
+    public function sendToFriend(Request $request)
+    {
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'url' => 'required|url'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->all()]);
+            }
+
+            $email = $request->input('email');
+            $url = $request->input('url');
+
+            $message = '<!DOCTYPE html><html><body>';
+            $message .= '<p>Product Url: <a href="'. $url .'">'. $url .'</a></p>';
+            $message .= '</body></html>';
+
+            Mail::raw([], function ($msg) use ($email, $message) {
+                $msg->to($email)
+                    ->subject('Firequick product referral')
+                    ->setBody($message, 'text/html');
+            });
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['error' => 'Invalid request'], 400);
+    }
+    
+
 }
