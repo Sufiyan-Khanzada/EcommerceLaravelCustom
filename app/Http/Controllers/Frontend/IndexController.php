@@ -17,6 +17,9 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use App\Mail\SendProductReferral;
 
 
 class IndexController extends Controller
@@ -270,11 +273,7 @@ class IndexController extends Controller
         // dd($data);
     
         return view('myaccount.orders')->with(compact('data'));
-    }
-
-
-    
-
+    }    
 
     public function sendToFriend(Request $request)
     {
@@ -291,15 +290,7 @@ class IndexController extends Controller
             $email = $request->input('email');
             $url = $request->input('url');
 
-            $message = '<!DOCTYPE html><html><body>';
-            $message .= '<p>Product Url: <a href="'. $url .'">'. $url .'</a></p>';
-            $message .= '</body></html>';
-
-            Mail::raw([], function ($msg) use ($email, $message) {
-                $msg->to($email)
-                    ->subject('Firequick product referral')
-                    ->setBody($message, 'text/html');
-            });
+            Mail::to($email)->send(new SendProductReferral($url));
 
             return response()->json(['success' => true]);
         }

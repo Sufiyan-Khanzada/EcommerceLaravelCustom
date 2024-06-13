@@ -230,9 +230,9 @@
     var email = prompt('Enter friend Email here.');
     var url = $(this).val();
 
-    if(email != null){
+    if (email != null) {
         $.ajax({
-            url: '{{ route('sendToFriend') }}',
+            url: '{{ route('send-to-friend') }}',
             type: 'POST',
             data: {
                 email: email,
@@ -252,6 +252,7 @@
         });
     }
 });
+
 
         
         

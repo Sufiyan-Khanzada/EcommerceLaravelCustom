@@ -38,7 +38,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
     Route::post('/contact-us-post', [ContactUsController::class, 'contactForm'])->name('contact-form');
 
-    Route::get('/mail/sendtofriend', [IndexController::class, 'sendTOFriend'])->name('send-to-friend');
+    Route::post('/mail/sendtofriend', [IndexController::class, 'sendTOFriend'])->name('send-to-friend');
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
