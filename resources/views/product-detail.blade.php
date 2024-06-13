@@ -127,77 +127,137 @@
 <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 <script>
     $(document).ready(function(){
+      
         
-        $('#color').change(function(){
-            // alert($(this).val());
-        });
-        
-        $('#click').on('click',function(){
-            // alert($('#size').val());
-        });
-        
-        $('#addtocart').on('click',function(){
-            var size = $('#size').val();
-            var color = $('#color').val();
-            var product_id = $(this).val();
-            var qty = $('.qty').val();
-            var optional = $('#optional_info').val();
-            var currentURL = window.location.href;
-    
+
+        $('#addtocart').on('click', function () {
+        var size = $('#size').val();
+        var color = $('#color').val();
+        var product_id = $(this).val();
+        var qty = $('.qty').val();
+        var optional = $('#optional_info').val();
+        var currentURL = window.location.href;
+
         var agree = true;
-            if($("#size").length){
-               if(size == null || size == ''){
-                   $('#error-size').text('Please select size.');
-                   agree = false;
-               }
-            } 
-            if($("#color").length){
-               if(color == null || color == ''){
-                   $('#error-color').text('Please select colour.');
-                   agree = false;
-               }
-            } 
+        if ($("#size").length) {
+            if (size == null || size == '') {
+                $('#error-size').text('Please select size.');
+                agree = false;
+            }
+        }
+        if ($("#color").length) {
+            if (color == null || color == '') {
+                $('#error-color').text('Please select color.');
+                agree = false;
+            }
+        }
+
+        if (agree == true) {
+            $.ajax({
+                url: '{{ route("add-to-cart") }}',
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    myDataid: product_id,
+                    size: size,
+                    color: color,
+                    quantity: qty,
+                    optional_info: optional,
+                    currentURL: currentURL
+                },
+                success: function (data, status, xhr) {
+                    console.log('data', data);
+                    var obj = data;
+                    console.log(obj);
+                    $('.shopping-cart-items').html(obj.cart_total_item);
+                    if (obj.alert == true) {
+                        alert("“Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process.”");
+                    }
+                    if (obj.alert == "login") {
+                        window.location.href = obj.address;
+                    } else {
+                        $('#btnCart').show();
+                    }
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    alert(textStatus);
+                    alert(errorMessage);
+                }
+            });
+        }
+    });
+    
+
+        // $('#color').change(function(){
+        //     // alert($(this).val());
+        // });
+        
+        // $('#click').on('click',function(){
+        //     // alert($('#size').val());
+        // });
+        
+        // $('#addtocart').on('click',function(){
+        //     var size = $('#size').val();
+        //     var color = $('#color').val();
+        //     var product_id = $(this).val();
+        //     var qty = $('.qty').val();
+        //     var optional = $('#optional_info').val();
+        //     var currentURL = window.location.href;
+    
+        // var agree = true;
+        //     if($("#size").length){
+        //        if(size == null || size == ''){
+        //            $('#error-size').text('Please select size.');
+        //            agree = false;
+        //        }
+        //     } 
+        //     if($("#color").length){
+        //        if(color == null || color == ''){
+        //            $('#error-color').text('Please select colour.');
+        //            agree = false;
+        //        }
+        //     } 
     
     
             
-                if(agree == true){
+        //         if(agree == true){
     
-                    $.ajax({
-                        url: 'https://www.firequick.com/form/addtocart',
-                        type: 'POST',
-                        data: { myDataid: product_id,size:size,color:color,quantity:qty,optional_info:optional,currentURL:currentURL}, 
-                       success: function (data, status, xhr) {
+        //             $.ajax({
+        //                 url: 'https://www.firequick.com/form/addtocart',
+        //                 type: 'POST',
+        //                 data: { myDataid: product_id,size:size,color:color,quantity:qty,optional_info:optional,currentURL:currentURL}, 
+        //                success: function (data, status, xhr) {
                             
-                             console.log('data',data);
-                             var obj = JSON.parse(data);
-                             console.log(obj);
-                            $('.shopping-cart-items').html(obj.cart_total_item);
-                            if(obj.alert == true){
-                                alert("“Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process.”");                                        
-                             }
-                             if(obj.alert == "login"){
-                                //  alert("Please login to proceed to checkout");
-                                // alert(obj.address);
-                                // alert(window.location.href);
-                                window.location.href = obj.address;
-                             }else{
-                                $('#btnCart').show();    
-                             }
+        //                      console.log('data',data);
+        //                      var obj = JSON.parse(data);
+        //                      console.log(obj);
+        //                     $('.shopping-cart-items').html(obj.cart_total_item);
+        //                     if(obj.alert == true){
+        //                         alert("“Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process.”");                                        
+        //                      }
+        //                      if(obj.alert == "login"){
+        //                         //  alert("Please login to proceed to checkout");
+        //                         // alert(obj.address);
+        //                         // alert(window.location.href);
+        //                         window.location.href = obj.address;
+        //                      }else{
+        //                         $('#btnCart').show();    
+        //                      }
                              
     
-                        },
-                        error: function (jqXhr, textStatus, errorMessage) {
-                              alert(textStatus);
-                              alert(errorMessage);
+        //                 },
+        //                 error: function (jqXhr, textStatus, errorMessage) {
+        //                       alert(textStatus);
+        //                       alert(errorMessage);
                               
-                        }
-                    }); 
+        //                 }
+        //             }); 
     
     
     
-                }
+        //         }
     
-        });
+        // });
         
         
         // $('#refer').on('click',function(){
