@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,9 @@ Route::middleware(['web'])->group(function () {
     Route::get('/wiley-x-available-at-firequick-products', [IndexController::class, 'wileyxavailableatfirequickproducts'])->name('wiley-x-available-at-firequick-products');
     Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
     Route::post('/contact-us-post', [ContactUsController::class, 'contactForm'])->name('contact-form');
+
+    Route::post('/mail/sendtofriend', [IndexController::class, 'sendTOFriend'])->name('send-to-friend');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
