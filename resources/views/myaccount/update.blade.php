@@ -11,7 +11,8 @@
 <section class="custom-section">
 	<div class="container">
 		<div class="row">
-			<form action="{{route('register-user')}}" method="POST"> @csrf
+			{{isset($error) ?? $error}}
+			<form action="{{route('update-user', ['id' => $customer->customer_id])}}" method="POST"> @csrf
 				<div class="col-md-8 center no-padding">
 					<div class="col-md-12">
 						<h3>Register New Account</h3>
@@ -85,7 +86,7 @@
 <script>
 $(document).ready(function() {
 	var agree = true;
-	var CountryId = {{$customer->country_id}};
+	var CountryID = {{$customer->country_id}};
 
 	if(agree == true) {
 		$.ajax({
@@ -97,7 +98,7 @@ $(document).ready(function() {
 						`<option value="` 
 						+ val.id 
 						+ `"`
-						+ ((CountryId == val.id) ? `selected >`: `>`)
+						+ ((CountryID == val.id) ? `selected >`: `>`)
 						+ val.name 
 						+ `</option>`
 					);
@@ -110,20 +111,23 @@ $(document).ready(function() {
 			}
 		});
 	}
-	$('#state').parent().hide();
-	$('#city').parent().hide();
-	$('#state').html('');
 
-	var CountryID = $(this).val();
-	if(CountryID != 0 && CountryID != '') {
+	var StateID = {{$customer->state_id}};
+	if(CountryID && CountryID != 0 && CountryID != '') {
 		$.ajax({
-			url: '{{route("getStates")}}/'.CountryID,
+			url: `{{route("getStates")}}/${CountryID}`,
 			type: 'GET',
 			success: function(data, status, xhr) {
 				if(data != "false") {
-					var json = $.parseJSON(data);
-					$(json).each(function(i, val) {
-						$('#state').append('<option value="' + val.id + '">' + val.name + '</option>');
+					$(data).each(function(i, val) {
+						$('#state').append(
+							`<option value="` 
+							+ val.id 
+							+ `"`
+							+ ((StateID == val.id) ? `selected >`: `>`)
+							+ val.name 
+							+ `</option>`
+						);
 					});
 				} else {
 					$('#state').parent().hide();
@@ -137,6 +141,35 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+	$('#country').change(function() {
+		$('#state').parent().show();
+		$('#city').parent().show();
+		$('#state').html('');
+		var CountryID = $(this).val();
+		if(CountryID != 0 && CountryID != '') {
+			$.ajax({
+				url: `{{route("getStates")}}/${CountryID}`,
+				type: 'GET',
+				success: function(data, status, xhr) {
+					if(data != "false") {
+						$(data).each(function(i, val) {
+							$('#state').append('<option value="' + val.id + '">' + val.name + '</option>');
+						});
+					} else {
+						$('#state').parent().hide();
+						$('#city').parent().hide();
+					}
+				},
+				error: function(jqXhr, textStatus, errorMessage) {
+					alert(jqXhr);
+					alert(textStatus);
+					alert(errorMessage);
+				}
+			});
+		}
+	});
+
 	$('.submit').on('click', function(e) {
 		$('#error').html('');
 		var fname = $('#fname').val();
@@ -185,40 +218,4 @@ function validate(data) {
 	$('#error').append('<p style="color:red;font-size:15px;font-weight:bold;">*' + data + ' is required</p>');
 }
 </script>
-<script>
-$(document).ready(function() {
-	//change selectboxes to selectize mode to be searchable
-	var jq14 = jQuery.noConflict(true);
-	$(document).ready(function() {
-		$("#state").select2();
-		$("#country").select2();
-		$('#country').change(function() {
-			$('#state').parent().show();
-			$('#city').parent().show();
-			$('#state').html('');
-			var CountryID = $(this).val();
-			if(CountryID != 0 && CountryID != '') {
-				$.ajax({
-					url: '{{route("getStates")}}/' + CountryID,
-					type: 'GET',
-					success: function(data, status, xhr) {
-						if(data != "false") {
-							$(data).each(function(i, val) {
-								$('#state').append('<option value="' + val.id + '">' + val.name + '</option>');
-							});
-						} else {
-							$('#state').parent().hide();
-							$('#city').parent().hide();
-						}
-					},
-					error: function(jqXhr, textStatus, errorMessage) {
-						alert(jqXhr);
-						alert(textStatus);
-						alert(errorMessage);
-					}
-				});
-			}
-		});
-	});
-});
 @endsection

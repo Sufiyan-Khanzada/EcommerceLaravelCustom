@@ -40,11 +40,11 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
-        ->name('products');
+    ->name('products');
 
     Route::get('/single-product/{productId}', 
         [IndexController::class, 'singleProduct'])
-        ->name('single.product');
+    ->name('single.product');
 
     Route::get('/cart', function () {
         return view('cart');
@@ -57,12 +57,6 @@ Route::middleware(['web'])->group(function () {
     Route::get('/contact-us', function () {
         return view('contact-us');
     })->name('contact-us');
-
-
-
-    
-
-
 
     Route::get('/shop-detail', function () {
         return view('shop-detail');
@@ -148,6 +142,9 @@ Route::middleware(['web'])->group(function () {
 
     // Route for user registration
     Route::post('/register', [UserController::class, 'register'])->name('register-user');
+
+    // Route for user registration
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('update-user');
 
     // Route for user login
     Route::post('/login', [UserController::class, 'login'])->name('authenticate');

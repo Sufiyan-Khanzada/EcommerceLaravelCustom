@@ -71,6 +71,11 @@ class UserController extends Controller
         // Get the customer record by email
         $customer = Customer::where('email', $credentials['email'])->first();
 
+        if($customer->status == 2)
+        {
+            return redirect()->route('login')->with('error', 'Your Account is Suspended');
+        }
+
         // Verify MD5 password
         if ($customer && $customer->password === md5($credentials['password'])) {
             // Log the user in manually
@@ -95,5 +100,54 @@ class UserController extends Controller
 
         // Return a response or redirect to a specific page
         return redirect()->route('home');
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required|string',
+            'company' => 'nullable|string|max:255',
+            'address1' => 'required|string|max:255',
+            'address2' => 'nullable|string|max:255',
+            'country' => 'required|string|max:255',
+            'state' => 'string|max:255',
+            'city' => 'string|max:255',
+            'postcode' => 'required|string|max:10',
+            'phone' => 'required|string|max:20',
+        ]);
+
+        $customer = Customer::find($id);
+
+        $customer->fname = $validatedData['fname'];
+        $customer->lname = $validatedData['lname'];
+        $customer->company = $validatedData['company'];
+        $customer->email = $validatedData['email'];
+        $customer->password = md5($validatedData['password']);
+        $customer->phone = $validatedData['phone'];
+        $customer->address1 = $validatedData['address1'];
+        $customer->address2 = $validatedData['address2'];
+        $customer->country_id = $validatedData['country'];
+        $customer->state_id = $validatedData['state'];
+        $customer->city = $validatedData['city'];
+        $customer->postalcode = $validatedData['postcode'];
+        $customer->status = 3;
+
+        $customer->save();
+
+         // Send email
+        $email = User::first()->email;
+        
+        Mail::to($email)->send(new SendMail($email));
+
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        // Return a response or redirect to a specific page
+        
+        return redirect()->route('login')->with('message', 'You have made changes to your account information, our office will need to revalidate your account. This may take up to 2 business days. You will receive an email once you have been revalidated.');
     }
 }
