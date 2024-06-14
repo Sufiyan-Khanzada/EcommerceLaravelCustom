@@ -1,9 +1,9 @@
 @extends('layouts.main')
 @section('content')
-  
-   
-  
-		<!-- Menu Start Section -->
+
+
+
+<!-- Menu Start Section -->
 
 
 
@@ -11,135 +11,136 @@
     <div class="container">
         <div class="page-title">
             <h1 class="text-uppercase text-medium">cart</h1>
-       
+
         </div>
     </div>
 </section>
 
+@if(isset($cartItems) && count($cartItems) > 0)
 
 <section id="shop-cart">
-	<div class="container">
-		<div class="shop-cart">
+    <div class="container">
+        <div class="shop-cart">
 
-			<div class="table table-condensed table-striped table-responsive">
-				
-				
-				<table class="table">
-					<thead>
-						<tr>
-							<th class="cart-product-remove"></th>
-							<th class="cart-product-thumbnail">Product</th>
-							
-							<th class="cart-product-price">Unit Price</th>
-							<th class="cart-product-quantity">Quantity</th>
-							<th class="cart-product-subtotal">Sub-Total</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						
-						<tr>
-							<td class="cart-product-remove">
-								<a class="remove" id="d645920e395fedad7bbbed0eca3fe2e0" href="#"><i class="fa fa-close"></i></a>
-								
-
-							</td>
-
-							<td class="cart-product-discripition">
-								
-								<div class="cart-product-thumbnail-name">
-<a href='https://www.firequick.com/page/single-product/40/Hotshot-Flare-1-Mini-Case-20-boxes200-flares--NFES-000371/'>Hotshot Flare, 1 Mini Case (20 boxes/200 flares) / NFES 000371</a>
-								</div>
-							</td>
+            <div class="table table-condensed table-striped table-responsive">
 
 
-							<td class="cart-product-price">
-								<span class="amount">$1396.00</span>
-							</td>
-							<td class="cart-product-quantity">
-								<div class="quantity">
-									<input type="text" class="qty" value="1" name="quantity" disabled="">
-									
-								</div>
-							</td>
-							<td class="cart-product-subtotal">
-								<span class="amount">$1396</span>
-							</td>
-						</tr>
-						
-						
-					</tbody>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="cart-product-remove"></th>
+                            <th class="cart-product-thumbnail">Product</th>
 
-				</table>
+                            <th class="cart-product-price">Unit Price</th>
+                            <th class="cart-product-quantity">Quantity</th>
+                            <th class="cart-product-subtotal">Sub-Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-			</div>
+
+                        <tr>
+                            <td class="cart-product-remove">
+                                <a class="remove" id="d645920e395fedad7bbbed0eca3fe2e0" href="#"><i class="fa fa-close"></i></a>
+
+
+                            </td>
+
+                            <td class="cart-product-discripition">
+
+                                <div class="cart-product-thumbnail-name">
+                                    <a href='https://www.firequick.com/page/single-product/40/Hotshot-Flare-1-Mini-Case-20-boxes200-flares--NFES-000371/'>Hotshot Flare, 1 Mini Case (20 boxes/200 flares) / NFES 000371</a>
+                                </div>
+                            </td>
+
+
+                            <td class="cart-product-price">
+                                <span class="amount">$1396.00</span>
+                            </td>
+                            <td class="cart-product-quantity">
+                                <div class="quantity">
+                                    <input type="text" class="qty" value="1" name="quantity" disabled="">
+
+                                </div>
+                            </td>
+                            <td class="cart-product-subtotal">
+                                <span class="amount">$1396</span>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
             <div class="row">
-                
-               <div class="col-md-6 form-group">
-                            <!-- <label class="sr-only">State / County</label> -->
-                            <label>Additional Note:</label>
-                            <!-- <input type="text" class="form-control input-lg" placeholder="State / County" value=""> -->
-                            <textarea class="form-control input-lg" id="additional_note" style="border: 2px solid coral;" ></textarea>
 
-                            <!-- <input type="button" class="btn btn-default" id="addnote" value="Click to add">  -->
-                </div> 
-                
+                <div class="col-md-6 form-group">
+                    <!-- <label class="sr-only">State / County</label> -->
+                    <label>Additional Note:</label>
+                    <!-- <input type="text" class="form-control input-lg" placeholder="State / County" value=""> -->
+                    <textarea class="form-control input-lg" id="additional_note" style="border: 2px solid coral;"></textarea>
+
+                    <!-- <input type="button" class="btn btn-default" id="addnote" value="Click to add">  -->
+                </div>
+
             </div>
 
 
 
-			<div class="row">
-				<div class="col-md-4">
-					<!-- <button type="button" class="btn btn-default">Back to shopping</button> -->
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- <button type="button" class="btn btn-default">Back to shopping</button> -->
 
-					<a href="https://www.firequick.com/page/products" class="btn btn-default">Back to shopping</a>
-				</div>
-				
-			</div>
+                    <a href="https://www.firequick.com/page/products" class="btn btn-default">Back to shopping</a>
+                </div>
 
-			<div class="row">
-				<hr class="space">
-				<div class="col-md-6">
-					
-				</div>
-				<div class="col-md-6 p-r-10 ">
-					<div class="table-responsive">
-						
+            </div>
 
-						<table class="table">
-							<tbody>
-								<tr>
-									<td class="cart-product-name">
-										<strong>Cart Subtotal</strong>
-									</td>
+            <div class="row">
+                <hr class="space">
+                <div class="col-md-6">
 
-									<td class="cart-product-name text-right">
-										<span class="amount" id="subtotal">$1396</span>
-									</td>
-								</tr>
-								<tr>
-									<td class="cart-product-name">
-										<strong>Shipping</strong>
-									</td>
-<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+                </div>
+                <div class="col-md-6 p-r-10 ">
+                    <div class="table-responsive">
 
-<h4>A PHP Error was encountered</h4>
 
-<p>Severity: Notice</p>
-<p>Message:  Undefined offset: 0</p>
-<p>Filename: views/cart.php</p>
-<p>Line Number: 198</p>
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="cart-product-name">
+                                        <strong>Cart Subtotal</strong>
+                                    </td>
 
-</div>Destination country code missing or invalid 									<td class="cart-product-name  text-right">
-										<span class="amount">                                            
+                                    <td class="cart-product-name text-right">
+                                        <span class="amount" id="subtotal">$1396</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cart-product-name">
+                                        <strong>Shipping</strong>
+                                    </td>
+                                    <div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+                                        <h4>A PHP Error was encountered</h4>
+
+                                        <p>Severity: Notice</p>
+                                        <p>Message: Undefined offset: 0</p>
+                                        <p>Filename: views/cart.php</p>
+                                        <p>Line Number: 198</p>
+
+                                    </div>Destination country code missing or invalid <td class="cart-product-name  text-right">
+                                        <span class="amount">
 
 
                                         </span>
-                                        									</td>
-								</tr>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="cart-product-name">
-                                        <strong>Tax</strong> 
+                                        <strong>Tax</strong>
                                     </td>
 
                                     <td class="cart-product-name text-right">
@@ -155,42 +156,43 @@
                                         <span class="amount"></span>
                                     </td>
                                 </tr>
-								
-								<tr>
-									<td class="cart-product-name">
-										<strong>Total</strong>
-									</td>
 
-									<td class="cart-product-name text-right">
-										<span class="amount color lead"><strong>
+                                <tr>
+                                    <td class="cart-product-name">
+                                        <strong>Total</strong>
+                                    </td>
 
-
-                                            $1,396.00</strong></span>
-									</td>
-								</tr>
-							</tbody>
-
-						</table>
-
-					</div>
-
-                    <span style='text-align: left !important;float: left;'>Your Account is not verified and cannot proceed with Restricted Product.</span>				</div>
-			</div>
-			
+                                    <td class="cart-product-name text-right">
+                                        <span class="amount color lead"><strong>
 
 
+                                                $1,396.00</strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <span style='text-align: left !important;float: left;'>Your Account is not verified and cannot proceed with Restricted Product.</span>
+                </div>
+            </div>
 
 
-		</div>
-	</div>
+
+
+
+        </div>
+    </div>
 
 </section>
+@else
+<h1 class="text-uppercase text-medium">Cart Is Empty!</h1>
+@endif
 
 
-
-
-
-  <script src="https://www.firequick.com/assets/jquery-3.2.1.min.js"></script>
+<script src="https://www.firequick.com/assets/jquery-3.2.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
@@ -424,6 +426,8 @@
                     
     </script>
     
+
+
 @endsection
 @section('css')
 <style type="text/css">
@@ -433,8 +437,8 @@
 
 @section('js')
 <script type="text/javascript">
-(()=>{
-    
-})()
+    (() => {
+
+    })()
 </script>
 @endsection

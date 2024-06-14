@@ -52,9 +52,8 @@ Route::middleware(['web'])->group(function () {
         [IndexController::class, 'singleProduct'])
         ->name('single.product');
 
-    Route::get('/cart', function () {
-        return view('cart');
-    })->name('cart');
+    Route::get('/cart', 
+        [CartController::class, 'cart'])->name('cart');
 
     Route::get('/checkout', function () {
         return view('checkout');

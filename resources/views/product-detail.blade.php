@@ -105,7 +105,7 @@
                                             <div style=" display:none; width: 20px; height: 47px;" id="btnCart">
                                                 <a href="https://www.firequick.com/page/cart" class="btn">View Cart </a>
                                             </div>
-                                            <button class="btn" id="addtocart" value="39"><i class="fa fa-shopping-cart"></i>
+                                            <button class="btn" id="addtocart" value="{{$product->product_id}}"><i class="fa fa-shopping-cart"></i>
                                             Add to Cart 
                                             </button>
                                             <button class="btn" id="refer" value="https://www.firequick.com/page/single-product/39/Hotshot-Flare-1-box-10-flares--NFES-000371">
@@ -167,7 +167,7 @@
                 },
                 success: function (data, status, xhr) {
                     console.log('data', data);
-                    var obj = data;
+                    var obj = data.myDataid;
                     console.log(obj);
                     $('.shopping-cart-items').html(obj.cart_total_item);
                     if (obj.alert == true) {
@@ -180,8 +180,8 @@
                     }
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
-                    alert(textStatus);
-                    alert(errorMessage);
+                    // alert(textStatus);
+                    // alert(errorMessage);
                 }
             });
         }

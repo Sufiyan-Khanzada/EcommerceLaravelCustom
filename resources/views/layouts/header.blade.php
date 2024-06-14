@@ -6,8 +6,12 @@
 @endforeach
 
 @endif
-        
-                 	
+ 
+
+<?php
+// dd(\Session::get('cart_contents'));
+?>
+
         
          
 	<!-- Wrapper -->
@@ -90,7 +94,7 @@
 											right: -11px;
 											top: -12px;
 											width: 19px;
-										">0</span>
+										">{{$total_items ?? 0}}</span>
                                         <i class="fa fa-shopping-cart"></i></a>
 								</div>
 								<!--end: shopping cart-->
