@@ -1,4 +1,3 @@
-'
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="width:100%;font-family:arial, helvetica neue, helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
   <head>
@@ -8,20 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="telephone=no" name="format-detection">
     <title>Customer Made Changes to their Account</title>
-    <!--[if (mso 16)]>
-							<style type="text/css">     a {text-decoration: none;}     </style>
-							<![endif]-->
-    <!--[if gte mso 9]>
-							<style>sup { font-size: 100% !important; }</style>
-							<![endif]-->
-    <!--[if gte mso 9]>
-							<xml>
-								<o:OfficeDocumentSettings>
-									<o:AllowPNG></o:AllowPNG>
-									<o:PixelsPerInch>96</o:PixelsPerInch>
-								</o:OfficeDocumentSettings>
-							</xml>
-							<![endif]-->
     <style type="text/css">
       @media only screen and (max-width:600px) {
 
@@ -424,12 +409,6 @@
   </head>
   <body style="width:100%;font-family:arial, helvetica neue, helvetica, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0">
     <div class="es-wrapper-color" style="background-color:#F6F6F6">
-      <!--[if gte mso 9]>
-								<v:background
-									xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
-									<v:fill type="tile" color="#f6f6f6"></v:fill>
-								</v:background>
-								<![endif]-->
       <table class="es-wrapper" cellspacing="0" cellpadding="0" width="100%" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;padding:0;Margin:0;width:100%;height:100%;background-repeat:repeat;background-position:center top">
         <tr style="border-collapse:collapse">
           <td valign="top" style="padding:0;Margin:0">
@@ -545,7 +524,7 @@
                                 <tr style="border-collapse:collapse">
                                   <td class="es-m-p0" align="left" style="padding:0;Margin:0;padding-top:15px">
                                     <h3 style="Margin:0;line-height:30px;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">The following customer has made changes to their account. <strong>User Email: </strong>
-                                      <strong>'.$user_email['email'].'</strong>Please approve/validate the customers changes.
+                                      <strong>{{$customerEmail}}</strong>Please approve/validate the customers changes.
                                     </h3>
                                   </td>
                                 </tr>
@@ -631,4 +610,4 @@
                   </table>
     </div>
   </body>
-</html>'
+</html>

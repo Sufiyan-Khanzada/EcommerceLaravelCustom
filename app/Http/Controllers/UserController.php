@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Mail;
 use App\Mail\SendMail;
+use App\Mail\ProfileUpdateMail;
 
 class UserController extends Controller
 {
@@ -139,9 +140,12 @@ class UserController extends Controller
         $customer->save();
 
          // Send email
+        $customerName = $customer->fname . ' ' . $customer->lname;
+        $customerEmail = $customer->email;
         $email = User::first()->email;
-        
-        Mail::to($email)->send(new SendMail($email));
+
+        $mailTemplate = new ProfileUpdateMail($customerEmail);
+        Mail::to($email)->send($mailTemplate);
 
         Auth::logout();
         $request->session()->invalidate();
