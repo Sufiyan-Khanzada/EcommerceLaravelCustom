@@ -17,6 +17,9 @@ use App\Models\User;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+use App\Mail\SendProductReferral;
 
 
 class IndexController extends Controller
@@ -270,7 +273,32 @@ class IndexController extends Controller
         // dd($data);
     
         return view('myaccount.orders')->with(compact('data'));
+    }    
+
+    public function sendToFriend(Request $request)
+    {
+        if ($request->ajax()) {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'url' => 'required|url'
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->all()]);
+            }
+
+            $email = $request->input('email');
+            $url = $request->input('url');
+
+            Mail::to($email)->send(new SendProductReferral($url));
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['error' => 'Invalid request'], 400);
     }
+    
+
     
 
     

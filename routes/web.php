@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,9 @@ Route::middleware(['web'])->group(function () {
     Route::get('/gallery', [IndexController::class, 'gallery'])->name('gallery');
     Route::post('/contact-us-post', [ContactUsController::class, 'contactForm'])->name('contact-form');
 
+    Route::post('/mail/sendtofriend', [IndexController::class, 'sendTOFriend'])->name('send-to-friend');
+    Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
     ->name('products');
@@ -57,6 +63,18 @@ Route::middleware(['web'])->group(function () {
     Route::get('/contact-us', function () {
         return view('contact-us');
     })->name('contact-us');
+
+
+
+    
+
+    Route::get('/reset-password', function () {
+        return view('reset-password');
+    })->name('reset-password');
+
+    Route::get('/reset-password-form', function () {
+        return view('reset-password-form');
+    })->name('reset-password-form');
 
     Route::get('/shop-detail', function () {
         return view('shop-detail');
