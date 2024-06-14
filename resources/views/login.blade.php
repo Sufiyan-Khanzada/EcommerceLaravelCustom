@@ -73,7 +73,7 @@
                     <div class="form-group form-inline m-b-10 ">
                         
                         <div class="checkbox">
-                        </div><a class="right" href="https://www.firequick.com/page/reset-password"><small>Lost your Password?</small></a>
+                        </div><a class="right" href="{{route('reset-password')}}"><small>Lost your Password?</small></a>
                     </div><div class="form-group">
                         
                         <input type="submit" class="btn btn-default" value="Login">

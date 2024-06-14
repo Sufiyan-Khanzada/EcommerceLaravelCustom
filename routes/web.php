@@ -62,7 +62,13 @@ Route::middleware(['web'])->group(function () {
 
     
 
+    Route::get('/reset-password', function () {
+        return view('reset-password');
+    })->name('reset-password');
 
+    Route::get('/reset-password-form', function () {
+        return view('reset-password-form');
+    })->name('reset-password-form');
 
     Route::get('/shop-detail', function () {
         return view('shop-detail');
