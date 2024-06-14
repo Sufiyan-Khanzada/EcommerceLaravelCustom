@@ -46,11 +46,11 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])
-        ->name('products');
+    ->name('products');
 
     Route::get('/single-product/{productId}', 
         [IndexController::class, 'singleProduct'])
-        ->name('single.product');
+    ->name('single.product');
 
     Route::get('/cart', 
         [CartController::class, 'cart'])->name('cart');
@@ -67,7 +67,13 @@ Route::middleware(['web'])->group(function () {
 
     
 
+    Route::get('/reset-password', function () {
+        return view('reset-password');
+    })->name('reset-password');
 
+    Route::get('/reset-password-form', function () {
+        return view('reset-password-form');
+    })->name('reset-password-form');
 
     Route::get('/shop-detail', function () {
         return view('shop-detail');
@@ -153,6 +159,9 @@ Route::middleware(['web'])->group(function () {
 
     // Route for user registration
     Route::post('/register', [UserController::class, 'register'])->name('register-user');
+
+    // Route for user registration
+    Route::post('/update/{id}', [UserController::class, 'update'])->name('update-user');
 
     // Route for user login
     Route::post('/login', [UserController::class, 'login'])->name('authenticate');
