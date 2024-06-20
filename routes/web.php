@@ -43,6 +43,7 @@ Route::middleware(['web'])->group(function () {
 
     Route::post('/mail/sendtofriend', [IndexController::class, 'sendTOFriend'])->name('send-to-friend');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+    Route::post('/removeFromCart', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 
     Route::get('/products/{categoryId?}', 
         [IndexController::class, 'productsList'])

@@ -16,7 +16,14 @@
     </div>
 </section>
 
-@if(isset($cartItems) && count($cartItems) > 0)
+@if($cartItems)
+<?php
+$session = \Session::get('cart_contents');
+$handling_fee = $session['handling_fee'];
+$total_items = $session['total_items'];
+$cart_total = $session['cart_total'];
+?>
+
 
 <section id="shop-cart">
     <div class="container">
@@ -38,10 +45,11 @@
                     </thead>
                     <tbody>
 
-
+                    @foreach ($cartItems as $key => $val)
+                 
                         <tr>
                             <td class="cart-product-remove">
-                                <a class="remove" id="d645920e395fedad7bbbed0eca3fe2e0" href="#"><i class="fa fa-close"></i></a>
+                                <a class="remove" id="{{$key}}" href="#"><i class="fa fa-close"></i></a>
 
 
                             </td>
@@ -49,26 +57,26 @@
                             <td class="cart-product-discripition">
 
                                 <div class="cart-product-thumbnail-name">
-                                    <a href='https://www.firequick.com/page/single-product/40/Hotshot-Flare-1-Mini-Case-20-boxes200-flares--NFES-000371/'>Hotshot Flare, 1 Mini Case (20 boxes/200 flares) / NFES 000371</a>
+                                    <a href='javascript:void(0)'>{{ucfirst($val['title'])}}</a>
                                 </div>
                             </td>
 
 
                             <td class="cart-product-price">
-                                <span class="amount">$1396.00</span>
+                                <span class="amount">${{$val['price']}}</span>
                             </td>
                             <td class="cart-product-quantity">
                                 <div class="quantity">
-                                    <input type="text" class="qty" value="1" name="quantity" disabled="">
+                                    <input type="text" class="qty" value="{{$val['qty']}}" name="quantity" disabled="">
 
                                 </div>
                             </td>
                             <td class="cart-product-subtotal">
-                                <span class="amount">$1396</span>
+                                <span class="amount">${{$val['subtotal']}}</span>
                             </td>
                         </tr>
 
-
+                        @endforeach
                     </tbody>
 
                 </table>
@@ -93,7 +101,7 @@
                 <div class="col-md-4">
                     <!-- <button type="button" class="btn btn-default">Back to shopping</button> -->
 
-                    <a href="https://www.firequick.com/page/products" class="btn btn-default">Back to shopping</a>
+                    <a href="{{route('home')}}" class="btn btn-default">Back to shopping</a>
                 </div>
 
             </div>
@@ -115,26 +123,16 @@
                                     </td>
 
                                     <td class="cart-product-name text-right">
-                                        <span class="amount" id="subtotal">$1396</span>
+                                        <span class="amount" id="subtotal">${{$cart_total}}</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="cart-product-name">
                                         <strong>Shipping</strong>
                                     </td>
-                                    <div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
-
-                                        <h4>A PHP Error was encountered</h4>
-
-                                        <p>Severity: Notice</p>
-                                        <p>Message: Undefined offset: 0</p>
-                                        <p>Filename: views/cart.php</p>
-                                        <p>Line Number: 198</p>
-
-                                    </div>Destination country code missing or invalid <td class="cart-product-name  text-right">
-                                        <span class="amount">
-
-
+                               <!-- Destination country code missing or invalid  -->
+                               <td class="cart-product-name  text-right">
+                                        <span class="amount">$0
                                         </span>
                                     </td>
                                 </tr>
@@ -144,7 +142,7 @@
                                     </td>
 
                                     <td class="cart-product-name text-right">
-                                        <span class="amount"></span>
+                                        <span class="amount">$0</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -153,7 +151,7 @@
                                     </td>
 
                                     <td class="cart-product-name text-right">
-                                        <span class="amount"></span>
+                                        <span class="amount">${{$handling_fee}}</span>
                                     </td>
                                 </tr>
 
@@ -163,10 +161,7 @@
                                     </td>
 
                                     <td class="cart-product-name text-right">
-                                        <span class="amount color lead"><strong>
-
-
-                                                $1,396.00</strong></span>
+                                        <span class="amount color lead"><strong>${{$cart_total}}</strong></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -175,7 +170,7 @@
 
                     </div>
 
-                    <span style='text-align: left !important;float: left;'>Your Account is not verified and cannot proceed with Restricted Product.</span>
+                    <!-- <span style='text-align: left !important;float: left;'>Your Account is not verified and cannot proceed with Restricted Product.</span> -->
                 </div>
             </div>
 
@@ -187,8 +182,16 @@
     </div>
 
 </section>
+
+
 @else
-<h1 class="text-uppercase text-medium">Cart Is Empty!</h1>
+<section id="shop-cart">
+    <div class="container text-center">
+       
+<h1 class="text-dark">Cart Is Empty!</h1>
+
+</div>
+</section>
 @endif
 
 
@@ -249,7 +252,7 @@
                             $('.loading-img').hide();
                             $('.trans-errors').html(response.api_error);
                             if (response.cart == 'update') {
-                                redirect = "https://www.firequick.com/page/cart"; 
+                                redirect = "{{route('cart')}}"; 
                                 setTimeout(function() {
                                     window.location.replace(redirect)
                                 }, 500)
@@ -269,7 +272,7 @@
                             $('.payment-loader').hide();
                             $('.loading-img').hide();
                             $('.trans-success').html(response.status_message);
-                            redirect = "https://www.firequick.com/page/myaccount"; 
+                            redirect = "{{route('myaccount')}}"; 
                             setTimeout(function() {
                                 window.location.replace(redirect);
                             }, 500)
@@ -325,6 +328,7 @@
             $('.remove').on('click',function(e){
                 e.preventDefault();
                 var cart_id = $(this).attr('id');
+                // console.log(cart_id);
                 rm = $(this);
 
 
@@ -334,19 +338,21 @@
                     if(agree == true){
 
                         $.ajax({
-                            url: 'https://www.firequick.com/form/removetocart',
+                            url: "{{route('removeFromCart')}}",
                             type: 'POST',
-                            data: { myDataid: cart_id}, 
+                            data: {  _token: '{{ csrf_token() }}', myDataid: cart_id}, 
                            success: function (data, status, xhr) {
                                   
-                                  window.location.replace($(location).attr('href'));
+                            alert('cart updated');
+                            location.reload();
+                                //   window.location.replace($(location).attr('href'));
                                 
 
                                 
 
                             },
                             error: function (jqXhr, textStatus, errorMessage) {
-                                  alert(textStatus);
+                                //   alert(textStatus);
                                   alert(errorMessage);
                                   
                             }
