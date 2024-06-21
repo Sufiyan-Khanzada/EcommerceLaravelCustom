@@ -5,8 +5,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
-
-
+use App\Http\Controllers\PaytraceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,6 +174,6 @@ Route::middleware(['web'])->group(function () {
     Route::post('/get/country', [IndexController::class, 'getCountries'])->name('getCountries');
     Route::post('/get/state', [IndexController::class, 'getStates'])->name('getStates');
 
-    Route::post('/paytrace/send', [IndexController::class, 'getStates'])->name('getStates');
+    Route::post('/paytrace/send', [PaytraceController::class, 'sendPayment'])->name('sendPayment');
 
 });

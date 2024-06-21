@@ -4,50 +4,30 @@ namespace App\Http\Controllers;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Session;
 
-class PaytraceController extends CI_Controller
+class PaytraceController extends Controller
 {
     // private $intigratorID = "9730a74dje8d";
     
     private $intigratorID = "9247917g833V";
     
     private $auth_server = "https://api.paytrace.com";
-    
+    private $token;
+    private $restricted_place;
+    private $cart_contents;
+    private $cart_needToUpdate;
     public function __construct()
     {
-        parent::__construct();
-        $this->load->library('PayTrace');
-        $this->load->helper('url');
-        $this->load->helper('html');
-        
-        $this->load->library('phpmailer_lib');
-        
-        $this->load->helper('email');
-        $this->load->library('session');
-        $this->load->database();
-        $this->load->helper('form');
-        $this->load->library('form_validation');
-        $this->load->helper('cookie');
-        $this->load->library('cart');
-        $this->load->library('guzzle');
-        
-        // if(empty($this->session->userdata('firequick'))){
-        //     redirect(base_url('/'), 'refresh');
-        //     }
-
-        // if(empty($this->cart->contents())){
-        //         redirect(base_url('/'), 'refresh');
-        // }
-
-        // if($this->session->userdata('restricted_place')  == 'true'){
-        //         redirect(base_url('/'), 'refresh');
-        // }
-
+      $token = Session::get('token');
+      $restricted_place = Session::get('restricted_place');
+      $cart_contents = Session::get('cart_contents');
+      $cart_needToUpdate = Session::get('cart_needToUpdate');
     }
 
     private  function gClient()
     {
-        $client = new GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
         return $client;
     }
 
@@ -70,7 +50,7 @@ class PaytraceController extends CI_Controller
                 ]
             ]);
             
-            
+               return $res;
             if ($res->getStatusCode() == 200) {
                 $body = $res->getBody();
                 $json = json_decode($body->getContents());
@@ -86,16 +66,20 @@ class PaytraceController extends CI_Controller
     private  function validRequest($arr = false)
     {
         
+        
         $data = [];
-        if (empty($this->session->userdata('firequick')) || empty($this->cart->contents()) || $this->session->userdata('restricted_place')  == 'true' || $this->session->userdata('token') == null ) {
+        if (empty($this->cart_contents) || $this->restricted_place  == 'true' || $this->token == null ) {
             $data['error'] = true;
             $data['api_error'] = 'unable to process request';
         }
-        if ($this->session->userdata('cart_needToUpdate') == true) {
+        if ($this->cart_needToUpdate == true) {
             $data['cart_error'] = true;
             $data['cart'] = 'update';
             $data['api_error'] = 'Cart Need to Refresh.';
         }
+        $ass = $this->api_token();
+      //   dd($ass);
+      return $ass;
         if ($this->api_token() == false || $this->api_token() == '') {
             $data['error'] = true;
             $data['api_error'] = 'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.';
@@ -114,7 +98,7 @@ class PaytraceController extends CI_Controller
 
    public function sendPayment()
    {
-       
+       dd($this->validRequest());
       $this->validRequest();
       $token = $this->api_token();
       $client = $this->gClient();
@@ -833,12 +817,7 @@ $m1 = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://ww
                                 
                                 
 
-                                // $message = '<!DOCTYPE html><html><body>';
-                                // $message .='<p>Dear Customer: '.$orders_email['customer_email'].' </p>';
-                                // $message .='<p>Thank you for placing an Order.</p>';
-                                // $message .='<p>Your Order ID: #'.$orders_email['order_id'].'</p>';
-                                // $message .='<p>Team at firequick</p>';
-                                // $message .='</body></html>';
+                               
                                 
 $customerservices = $this->db->get_where('bottom_menus', array('status' => 1, 'place'=>'customerservices' ));
 $this->db->order_by("order", "asc");
@@ -918,234 +897,6 @@ $m.='</td></tr></table></td></tr></table></td></tr></table></td></tr></table><ta
        }
    }
 
-    // public function sendPayment()
-    // {
-    //     $this->validRequest();
-    //     $user_email = $this->session->userdata('firequick')['email'];
-    //     $this->db->where('email' , $user_email);
-    //     $customer_query = $this->db->get('customers');
-    //     $customer = $customer_query->result()[0];
-    //     $shipping_cost = $this->session->userdata('Shipping_rate')['cost'];
-    //     $cart  = $this->cart->contents();
-    //     // print_r($this->cart->contents());
-    //     // echo $this->session->userdata('Shipping_rate');
-    //     $total_price = 0;
-    //     $total_handling = 0;
-    //     $total_tax = 0;
-
-    //     foreach ($cart as $index => $item) {
-    //         $total_price += $item['price'];
-    //         $total_handling += $item['handling_fee'];
-    //         $total_tax += $item['tax'];
-    //     }
-    //     $grand_total = $total_price + $total_handling + $total_tax + $shipping_cost;
-    //     // echo $grand_total;
-    //     // exit;
-    //     extract($this->input->post());
-    //     $year = substr("$year" , 2);
-    //     // echo $year;
-    //     $paytrace = new PayTrace();
-    //     // echo $customer->postalcode;
-    //     // exit;
-    //     $paytrace->SetUN('Ammadkhan405@gmail.com');
-    //     $paytrace->SetPSWD('ASDasd123');
-    //     $paytrace->SetTERMS('Y');
-    //     $paytrace->SetMETHOD("ProcessTranx");
-    //     $paytrace->SetTRANXTYPE("Sale");
-    //     // $paytrace->SetTRANXID('319533372');
-    //     $paytrace->SetCC($cc);
-    //     $paytrace->SetEXPMNTH($month);
-    //     $paytrace->SetEXPYR($year);
-    //     $paytrace->SetAMOUNT($grand_total);
-    //     $paytrace->SetNAME($customer->fname ." ". $customer->lname);
-    //     // $paytrace->SetAMOUNT("1.00");
-    //     $paytrace->SetCSC($csc);
-    //     $paytrace->SetBADDRESS($customer->address1);
-    //     $paytrace->SetBZIP($customer->postalcode);
-    //     $paytrace->ProcessRequest();
         
-    //     // $res = $paytrace->responseReturn();
-    //     // var_dump($res);
-    //     // exit;
-
-    //     $error_data = [];
-    //     $success_data = [];
-    //     if ( $paytrace->WasTransactionApproved() == true ) {
-
-    //         //...handle the approved transaction, store the order, send a receipt, etc.
-    //         // echo "Transaction was approved!<br>";
-    //         // echo "Transaction ID = " . $paytrace->GetTRANSACTIONID() . "<br>";
-    //         // echo "Approval Code = " . $paytrace->GetAPPCODE() . "<br>";
-    //         // echo "Response = " . $paytrace->GetRESPONSE() . "<br>";
-    //         // echo "MSG = " . $paytrace->GetAPPMSG() . "<br>";
-
-    //         $transection_id = $paytrace->GetTRANSACTIONID();
-
-
-    //         $message = '';
-    //         $orderStatus = ($this->session->userdata('firequick')['status'] == 3 && $this->session->userdata('flag') == 1 ? 2 : 3);	
-
-    //         $query = $this->db->get_where('orders', array('transaction_id' => $transection_id));
-	// 		if($this->db->affected_rows() == 0){
-	// 			$data = array(
-	// 			   'customer_email' => $this->session->userdata('firequick')['email'],
-	// 			   'payment_id'=>$transection_id,
-	// 			   'transaction_id' =>$transection_id,
-	// 			   'sub_total' => $this->cart->total(),
-	// 			   'shipping_cost' => $shipping_cost,
-	// 			   'handling_fee' => $total_handling,
-	// 			   'tax' => $total_tax,
-	// 			   'timestamp' => date('Y-m-d H:i:s'),
-	// 			   'order_status' => $orderStatus,
-	// 			   'transaction_status' => 'complete',
-	// 			   'additional_note' => $this->session->userdata('additional_note'),
-	// 			   'transection_type' => 'paytrace'
-	// 			);
-				
-	// 			$this->db->insert('orders', $data);
-	// 			$insert_id = $this->db->insert_id();
-	// 			$data2 = array();
-				
-
-
-	// 			foreach ($this->cart->contents() as $key => $value) {
-	// 				$data2[] = array(
-	// 			      'product_id' => $value['id'] ,
-	// 			      'product_quantity' => $value['qty'],
-	// 			      'product_price' => $value['price'],
-	// 			      'handling_fee' => $value['handling_fee'],
-	// 			      'tax' => $value['tax'],
-	// 			      'order_id' => $insert_id,
-	// 			      'optional_info' => $value['options']['optional_info']
-	// 			   );
-	// 			}
-
-	// 			$insert_products = $this->db->insert_batch('orderitems', $data2);
-    //             // redirect(base_url('/'), 'refresh');
-                
-    //             // return true;
-                
-    //             if ($insert_products) {
-    //                 $orderStatus = ($this->session->userdata('firequick')['status'] == 1 && $this->session->userdata('flag') == 0 ? 3 : 2);
-	// 				$this->db->select('*');
-	// 				$this->db->from('orders');
-	// 				$this->db->where('customer_email',$this->session->userdata('firequick')['email']);
-	// 				$this->db->where('payment_id',$transection_id);
-	// 				$this->db->order_by("order_id", "desc");
-	// 				$this->db->limit(1);
-	// 				$orders_email = $this->db->get();
-	// 				$orders_email = $orders_email->result_array()[0];
-
-	// 				$this->db->select('email');
-	// 				$this->db->from('users'); 
-	// 				$client = $this->db->get();
-	// 				$client = $client->result_array()[0];
-	// 				$this->load->library('email');
-
-	// 				if($orderStatus == 2){
-
-						
-
-	// 					// echo "onhold also send email here";
-
-						
-	// 					$this->email->set_mailtype('html');
-	// 					$this->email->from('Firequick');
-	// 					$this->email->to($client['email']);
-	// 					$this->email->subject('New Order received and Placed on Awaiting List.');
-
-	// 					$message = '<!DOCTYPE html><html><body>';
-	// 					$message .='<p>New Customer Email: '.$orders_email['customer_email'].'</p>';
-	// 					$message .='<p>Order ID: #'.$orders_email['order_id'].'</p>';
-	// 			// 		$message .='<p>New Customer has attempted to place an order and needs to be qualified.</p>';
-	// 					$message .='<p>Team at firequick</p>';
-	// 					$message .='</body></html>';
-	// 					$this->email->message($message);
-	// 					$this->email->send();
-
-
-
-
-
-	// 				}
-	// 				if($orderStatus == 3){
-
-	// 					// echo "just send order email here";
-
-	// 					$this->email->set_mailtype('html');
-	// 					$this->email->from('Firequick');
-	// 					$this->email->to($client['email']);
-	// 					$this->email->subject('New Order received and Placed on Awaiting List.');
-
-	// 					$message = '<!DOCTYPE html><html><body>';
-	// 					$message .='<p>Customer Email:'.$orders_email['customer_email'].'</p>';
-	// 					$message .='<p>Order ID: #'.$orders_email['order_id'].'</p>';
-	// 			// 		$message .='<p>New Order has been received and needs to process.</p>';
-	// 					$message .='<p>Team at firequick</p>';
-	// 					$message .='</body></html>';
-	// 					$this->email->message($message);
-	// 					$this->email->send();
-	// 				}
-
-
-	// 				$this->email->set_mailtype('html');
-	// 				$this->email->from('Firequick');
-	// 				$this->email->to($orders_email['customer_email']);
-	// 				$this->email->subject('Order at Firequick.');
-
-	// 				$message = '<!DOCTYPE html><html><body>';
-	// 				$message .='<p>Dear Customer: '.$orders_email['customer_email'].' </p>';
-	// 				$message .='<p>Thank you for placing an Order.</p>';
-	// 				$message .='<p>Your Order ID: #'.$orders_email['order_id'].'</p>';
-	// 				$message .='<p>Team at firequick</p>';
-	// 				$message .='</body></html>';
-	// 				$this->email->message($message);
-	// 				$this->email->send();
-                    
-                    
-    //                 $this->cart->destroy();
-	// 				$str = 'Order Has been Successfully Placed.';
-	// 				$msg = base64_encode($str);
-					
-	// 			// 	echo "<pre>";
-	// 			// 	print_r($orders_email);
-	// 			// 	print_r($client);
-	// 			// 	die();
-	// 				// redirect(base_url('page/myaccount?success='.$msg));	
-	// 				   $success_url = base_url('page/myaccount?success='.$msg);	
-	// 				echo json_encode(['success' => true , 'redirect' => $success_url , 'message' => 'Transection Successfully Approved']);
-							
-    //             }
-
-	// 		}
-
-           
-    //       }
-    //       elseif ( $paytrace->DidErrorOccur() == true ) {
-    //         //an error was returned from the API, likely invalid data was provided
-    //         $error_data['die'] = "Transaction was not processed per this error: " . $paytrace->GetERROR();
-    //         $error_data['response'] = "Transaction was not processed per this error: " . $paytrace->GetRESPONSE();
-    //         // echo "Transaction was not processed per this error: " . $paytrace->GetERROR() . "<br>";
-    //       }
-    //       else {
-    //         //the transaction was not approved by the issuer. Depending on your product/industry, you may want to display the response or just prompt for another form of payment
-    //         $error_data['trans'] =  "Transaction was not approved per this response: " . $paytrace->GetAPPMSG();
-            
-    //         // echo "Transaction was not approved per this response: " . $paytrace->GetAPPMSG() . "<br>";
-    //       }
-
-    //       if (!empty($error_data) || $error_data != []) {
-    //             $error_data['error'] = true;  
-    //         $json = $error_data;
-    //           echo json_encode($json);
-    //       }
-    //       //
-
-    // }
-    
-  
-
-
-    
 
 }

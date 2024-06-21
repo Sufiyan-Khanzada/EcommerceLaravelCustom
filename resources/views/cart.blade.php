@@ -579,7 +579,7 @@ if ($total_items == 1) {
             var form_data = $(this).serialize();
             $.ajax({
                 method: 'POST',
-                url: "https://www.firequick.com/paytrace/send",
+                url: "{{route('sendPayment')}}",
                 data: {
                         _token: '{{ csrf_token() }}',
                         form_data
@@ -596,7 +596,7 @@ if ($total_items == 1) {
 
                 },
                 success: function(response) {
-                    //   console.log(response);
+                      console.log('response: '+response);
                     response = $.parseJSON(response);
                     // console.log(response);
                     $('.payment-loader').hide();
