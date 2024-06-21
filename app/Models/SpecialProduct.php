@@ -10,7 +10,7 @@ class SpecialProduct extends Model
     use HasFactory;
 
     protected $table = 'special_product';
-    protected $primaryKey = 'special_product_id ';
+    protected $primaryKey = 'special_product_id';
     protected $guarded = ['special_product_id'];
     
     public function product()

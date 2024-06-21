@@ -172,5 +172,9 @@ Route::middleware(['web'])->group(function () {
 
     Route::get('/countries', [IndexController::class, 'getCountries'])->name('getCountries');
     Route::get('/states/{countryId?}', [IndexController::class, 'getStates'])->name('getStates');
+    Route::post('/get/country', [IndexController::class, 'getCountries'])->name('getCountries');
+    Route::post('/get/state', [IndexController::class, 'getStates'])->name('getStates');
+
+    Route::post('/paytrace/send', [IndexController::class, 'getStates'])->name('getStates');
 
 });

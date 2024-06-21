@@ -200,13 +200,13 @@ class IndexController extends Controller
     }
     public function getCountries()
     {
-        $countries = Country::all();
-
+        $countries = Country::get()->toArray();
+        // dd($countries);
         return response()->json($countries);
     }
     public function getStates($countryId)
     {
-        $states = State::where('country_id', $countryId)->get();
+        $states = State::where('country_id', $countryId)->get()->toArray();
 
         if(count($states) <= 0)
         {
