@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Session;
 use App\Services\Cart;
+use Auth;
 class CartController extends Controller
 {
 
@@ -20,6 +21,7 @@ class CartController extends Controller
 
     public function cart()
     {
+        // dd(Auth::guard('customer')->user());
         $cartItems = null;
         // Session::forget('cart_contents');
         $cart = new Cart();

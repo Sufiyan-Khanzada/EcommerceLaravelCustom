@@ -18,10 +18,22 @@
 
 @if($cartItems)
 <?php
+$workbook = false;
 $session = \Session::get('cart_contents');
 $handling_fee = $session['handling_fee'];
 $total_items = $session['total_items'];
 $cart_total = $session['cart_total'];
+
+if($total_items == 1){
+    foreach( $cartItems as $n => $m){
+    
+        if($m['id'] == 1000){
+           $workbook = true;
+        }
+    
+    
+    }
+}
 ?>
 
 
@@ -105,7 +117,158 @@ $cart_total = $session['cart_total'];
                 </div>
 
             </div>
+            <?php
+if(\Auth::guard('customer')->user()){
+    $user = \Auth::guard('customer')->user();
+$final_user_data = \DB::table('customers AS u')
+->select('u.*', 'c.iso2 AS country_code', 's.iso2 AS state_code')
+->join('countries AS c', 'u.country_id', '=', 'c.id')
+->join('states AS s', 'u.state_id', '=', 's.id')
+->where('email', $user->email)
+->first();
 
+// dd($final_user_data);
+// Check if the user exists
+if ($final_user_data) {
+$Hawaii  = '1400';
+$Alaska = '1411';
+
+if ($Hawaii == $final_user_data->state_id || $Alaska == $final_user_data->state_id) {
+    \Session::put('restricted_place', "true");
+    // dd(\Session::get('restricted_place'));
+    // print_r("order cannot proceed because of alaska ,hawaii");
+}
+else{
+    $strPath = base_path('app/Services/Fedex');
+    \Session::put('restricted_place', "false");
+    $objRate = new App\Services\Fedex\fedexRates();
+    $objRate->requestType("rate");
+    $objRate->wsdl_root_path = $strPath."/wsdl-test/";
+    $client = new \SoapClient($objRate->wsdl_root_path.$objRate->wsdl_path, array('trace' => 1));
+    $aryRecipient = [
+        'Contact' => [
+            'PersonName' => $final_user_data->fname . ' ' . $final_user_data->lname,
+            'CompanyName' => 'Company Name',
+            'PhoneNumber' => $final_user_data->phone
+        ],
+        'Address' => [
+            'StreetLines' => [$final_user_data->address1, $final_user_data->address2],
+            'City' => $final_user_data->city,
+            'StateOrProvinceCode' => $final_user_data->state_code,
+            'PostalCode' => $final_user_data->postalcode,
+            'CountryCode' => $final_user_data->country_code,
+            'Residential' => true
+        ]
+    ];
+    
+    // dd($aryRecipient);   
+}
+$package = array();
+    $packages = array();
+    $aryPackage = array();
+    $counter = 0;
+
+    foreach ($cartItems as $key => $value) {
+        // Fetch product details
+        $product = App\Models\Product::where('product_id', $value['id'])->first();
+
+        if ($product) {
+            $pkg_item = ($counter + 1);
+            $package['contents']['product_' . $pkg_item] = [
+                'data' => [
+                    'length' => $product->length,
+                    'width' => $product->width,
+                    'height' => $product->height,
+                    'weight' => $product->weight_lbs,
+                    'price' => $value['price']
+                ],
+                'quantity' => $value['qty']
+            ];
+            $counter++;
+
+            // Fetch special product details
+            $specialProducts = App\Models\SpecialProduct::where('product_id', $product->product_id)->get();
+
+            foreach ($specialProducts as $specialProduct) {
+                $pkg_item = ($counter + 1);
+                $package['contents']['product_' . $pkg_item] = [
+                    'data' => [
+                        'length' => $specialProduct->special_product_length_inch,
+                        'width' => $specialProduct->special_product_width_inch,
+                        'height' => $specialProduct->special_product_height_inch,
+                        'weight' => $specialProduct->special_product_weight_lbs,
+                        'price' => $value['price']
+                    ],
+                    'quantity' => $value['qty']
+                ];
+                $counter++;
+            }
+        }
+    }
+
+
+
+        
+    try{
+         
+
+        $fedex = new App\Services\Fedex\WC_Shipping_Fedex;
+            
+        $response = $fedex->get_fedex_packages($package);
+
+        $total_packages = count($response);
+        if($response){
+            foreach($response as $k => $v){
+                $packages[$k] = new App\Services\Fedex\Package("FEDEX Package # ".($k+1)."",$total_packages, 1);
+                $packages[$k]->setPackageWeight($v['Weight']['Value']);     //Package Actual Weight
+                $packages[$k]->setPackageDimensions($v['Dimensions']['Length'],$v['Dimensions']['Width'],$v['Dimensions']['Height']);       //Package (Length x Width x Height)
+                $aryPackage[$k] = $packages[$k]->getObjectArray();
+
+            }
+        }
+
+        // print_r($response);
+    }catch(Exception $e) {
+        echo 'Message: ' .$e->getMessage();
+    
+        dd($e);
+
+    }
+
+    $aryOrder = array(
+        'TotalPackages' => $total_packages,
+        'PackageType' => 'YOUR_PACKAGING',        #FEDEX_10KG_BOX, FEDEX_25KG_BOX, FEDEX_BOX, FEDEX_ENVELOPE, FEDEX_PAK, FEDEX_TUBE, YOUR_PACKAGING
+        'ServiceType' => 'GROUND_HOME_DELIVERY',
+        'TermsOfSaleType' => "DDU",         #    DDU/DDP
+        'DropoffType' => 'REGULAR_PICKUP'         # BUSINESS_SERVICE_CENTER, DROP_BOX, REGULAR_PICKUP, REQUEST_COURIER, STATION
+);
+$request = $objRate->rateRequest($aryRecipient, $aryOrder, $aryPackage);
+if($workbook){
+    // $amount = 0;
+}else{    
+    // try 
+    // {
+        if($objRate->setEndpoint('changeEndpoint')){
+            $newLocation = $client->__setLocation(setEndpoint('endpoint'));
+        }
+        $response = $client->getRates($request);
+        if ($response -> HighestSeverity != 'FAILURE' && $response -> HighestSeverity != 'ERROR'){
+            $success = $objRate->showResponseMessage($response);
+            // dd("Fedex: ".$success);
+            $rateReply = $response -> RateReplyDetails;
+            $amount = number_format($rateReply->RatedShipmentDetails[0]->ShipmentRateDetail->TotalNetCharge->Amount,2,".",",");   
+        }else{
+            $error = $objRate->showResponseMessage($response);
+            // dd($error);
+        }
+    // }catch (\SoapFault $exception){  
+    //     dd($objRate->requestError($exception, $client));
+    // }
+
+}
+}
+}
+?>
             <div class="row">
                 <hr class="space">
                 <div class="col-md-6">
@@ -132,7 +295,7 @@ $cart_total = $session['cart_total'];
                                     </td>
                                <!-- Destination country code missing or invalid  -->
                                <td class="cart-product-name  text-right">
-                                        <span class="amount">$0
+                                        <span class="amount">${{$amount}}
                                         </span>
                                     </td>
                                 </tr>
