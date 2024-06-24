@@ -28,12 +28,14 @@ class PaytraceController extends Controller
     private  function gClient()
     {
         $client = new \GuzzleHttp\Client();
+      //   dd($client);
         return $client;
     }
 
     public function api_token()
     {
             $client = $this->gClient();
+            // dd($client);
             // // DRY
             $auth_server = 'https://api.paytrace.com';
 
@@ -45,7 +47,7 @@ class PaytraceController extends Controller
                 // 'password' => 'ASDasd123',
                 'username' => 'Joyce3965', 
                 // 'password' => 'Grouchy5766!',
-                'password' => 'Grouchy5766!',
+                'password' => 'Sterling@5766!!',
                 'grant_type' => 'password', 
                 ]
             ]);
@@ -79,7 +81,7 @@ class PaytraceController extends Controller
         }
         $ass = $this->api_token();
       //   dd($ass);
-      return $ass;
+      dd($ass);
         if ($this->api_token() == false || $this->api_token() == '') {
             $data['error'] = true;
             $data['api_error'] = 'The provided authorization grant is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.';

@@ -28,34 +28,7 @@
     <div class="container">
         <div class="row">
  
-            @if(session('message'))
-            <div style="
-                padding: 13px 21px;
-                border-radius: 3px;
-                background-color: #e8ffe8;
-                border: 1px solid #8fcb8f;
-                color: #0c540c;
-                max-width: 500px;
-                margin: auto;
-            ">
-                {{ session('message') }}
-            </div>
-            @endif
             
-            @if(session('error'))
-            <div style="
-                padding: 13px 21px;
-                border-radius: 3px;
-                background-color: #ffe8e8;
-                border: 1px solid #cb8f8f;
-                color: #540c0c;
-                max-width: 500px;
-                margin: auto;
-            ">
-                {{ session('error') }}
-            </div>
-            @endif
-
             <div class="col-md-4 col-md-offset-4">
                 <div class="panel ">
 
@@ -64,11 +37,17 @@
                         @csrf
                     <div class="form-group">
                         <label class="sr-only">Email</label>
-                        <input type="text" name="email" placeholder="Email" class="form-control">
+                        <input type="text" name="email" placeholder="Email" required class="form-control">
+                        @error('email')
+                <div style="color: red;">{{ $message }}</div>
+            @enderror
                     </div>
                     <div class="form-group m-b-5">
                         <label class="sr-only">Password</label>
-                        <input type="password" name="password" placeholder="Password" class="form-control">
+                        <input type="password" name="password" placeholder="Password" required class="form-control">
+                        @error('password')
+                <div style="color: red;">{{ $message }}</div>
+            @enderror
                     </div>
                     <div class="form-group form-inline m-b-10 ">
                         

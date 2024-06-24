@@ -701,13 +701,11 @@ if ($total_items == 1) {
                         myDataid: cart_id
                     },
                     success: function(data, status, xhr) {
-
-                        alert('cart updated');
-                        location.reload();
-                        //   window.location.replace($(location).attr('href'));
-
-
-
+                        toastr.options.timeOut = 1500;
+                        toastr.info("Successfully Removed From Cart");
+                        setInterval(() => {
+                            location.reload();
+                        }, 1500);
 
                     },
                     error: function(jqXhr, textStatus, errorMessage) {

@@ -74,7 +74,11 @@ class UserController extends Controller
 
         if($customer->status == 2)
         {
-            return redirect()->route('login')->with('error', 'Your Account is Suspended');
+            $notification = array(
+                'message' => 'Your Account is Suspended',
+                'alert-type' => 'warning'
+            );
+            return redirect()->back()->with($notification);
         }
 
         // Verify MD5 password
@@ -84,11 +88,19 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             // Return a response or redirect to a specific page
-            return redirect()->route('home');
+            $notification = array(
+                'message' => 'Login Successful',
+                'alert-type' => 'success'
+            );
+            return redirect()->route('home')->with($notification);
         }
 
         // If login fails, return an error response
-        return redirect()->route('login')->with('error', 'Incorrect Email or Password');
+        $notification = array(
+            'message' => 'Incorrect Email or Password',
+            'alert-type' => 'error'
+        );
+        return redirect()->back()->with($notification);
     }
 
     // Handle user logout
@@ -100,7 +112,11 @@ class UserController extends Controller
         $request->session()->regenerateToken();
 
         // Return a response or redirect to a specific page
-        return redirect()->route('home');
+        $notification = array(
+            'message' => 'Logged Out',
+            'alert-type' => 'info'
+        );
+        return redirect()->route('home')->with($notification);
     }
 
     public function update(Request $request, $id)

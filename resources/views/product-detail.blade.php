@@ -103,7 +103,7 @@
                                         <div>
                                             <h6>Add to Cart</h6>
                                             <div style=" display:none; width: 20px; height: 47px;" id="btnCart">
-                                                <a href="https://www.firequick.com/page/cart" class="btn">View Cart </a>
+                                                <a href="{{route('cart')}}" class="btn">View Cart </a>
                                             </div>
                                             <button class="btn" id="addtocart" value="{{$product->product_id}}"><i class="fa fa-shopping-cart"></i>
                                             Add to Cart 
@@ -123,7 +123,7 @@
         </div>
     </div>
 </section>
-<script src="https://www.firequick.com/assets/jquery-3.2.1.min.js"></script>
+<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 <!-- <script src="https://code.jquery.com/jquery-1.10.2.js"></script> -->
 <script>
     $(document).ready(function(){
@@ -166,22 +166,39 @@
                     currentURL: currentURL
                 },
                 success: function (data, status, xhr) {
-                    console.log('data', data);
+                    // console.log('data', data);
                     var obj = data.myDataid;
-                    console.log(obj);
-                    $('.shopping-cart-items').html(obj.cart_total_item);
-                    if (obj.alert == true) {
-                        alert("“Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process.”");
+                    // console.log(obj);
+                    // console.log(obj);
+                    // $('.shopping-cart-items').html(obj.cart_total_item);
+                    if (data.alert == true) {
+                        toastr.options.timeOut = 20000;
+                        toastr.warning("Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process");
                     }
-                    if (obj.alert == "login") {
+                    if (data.alert == "login") {
                         window.location.href = obj.address;
                     } else {
                         $('#btnCart').show();
+                        toastr.options.timeOut = 3000;
+                        toastr.success("Successfully Added To Cart");
+                        setInterval(() => {
+                            location = "{{route('cart')}}";
+                        }, 3000);
                     }
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
-                    // alert(textStatus);
-                    // alert(errorMessage);
+                    console.log(jqXhr.status);
+                    if(jqXhr.status == 401)
+                    {
+                        toastr.options.timeOut = 3000;
+                        toastr.error(errorMessage);
+                        setInterval(() => {
+                            location = "{{route('login')}}";
+                        }, 3000);
+                    }
+                    // toastr.options.timeOut = 3000;
+                    // toastr.error(errorMessage);
+                    
                 }
             });
         }
