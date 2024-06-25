@@ -253,8 +253,11 @@ class Cart
 
     public function destroy()
     {
-        $cart_contents = Session::get('cart_contents');
-        $cart_contents = ['cart_total' => 0, 'total_items' => 0];
         Session::forget('cart_contents');
+        Session::forget('cart_needToUpdate');
+        Session::forget('Shipping_rate');
+        Session::forget('california_tax');
+        Session::forget('restricted_place');
+        Session::forget('token');
     }
 }

@@ -179,22 +179,22 @@
                         window.location.href = obj.address;
                     } else {
                         $('#btnCart').show();
-                        toastr.options.timeOut = 3000;
+                        toastr.options.timeOut = 1500;
                         toastr.success("Successfully Added To Cart");
                         setInterval(() => {
                             location = "{{route('cart')}}";
-                        }, 3000);
+                        }, 1500);
                     }
                 },
                 error: function (jqXhr, textStatus, errorMessage) {
                     console.log(jqXhr.status);
                     if(jqXhr.status == 401)
                     {
-                        toastr.options.timeOut = 3000;
+                        toastr.options.timeOut = 1500;
                         toastr.error(errorMessage);
                         setInterval(() => {
                             location = "{{route('login')}}";
-                        }, 3000);
+                        }, 1500);
                     }
                     // toastr.options.timeOut = 3000;
                     // toastr.error(errorMessage);

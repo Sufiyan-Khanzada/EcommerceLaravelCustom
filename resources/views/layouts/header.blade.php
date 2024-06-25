@@ -10,6 +10,11 @@
 
 <?php
 // dd(\Session::get('cart_contents'));
+	if(\Session::has('cart_contents')){
+$myContents = \Session::get('cart_contents');
+$contentTotal = $myContents['total_items'];
+}
+
 ?>
 
         
@@ -94,7 +99,7 @@
 											right: -11px;
 											top: -12px;
 											width: 19px;
-										">{{$total_items ?? 0}}</span>
+										">{{$contentTotal ?? 0}}</span>
                                         <i class="fa fa-shopping-cart"></i></a>
 								</div>
 								<!--end: shopping cart-->
