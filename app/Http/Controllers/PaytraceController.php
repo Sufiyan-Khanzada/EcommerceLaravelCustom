@@ -198,8 +198,8 @@ class PaytraceController extends Controller
          //  dd($year);
          // dd($california_Tax);
          $sale_data = [
-            'amount' => floatval(0),//$grand_total,
-            'tax_amount' => floatval(0),//floatval($california_Tax),
+            'amount' => floatval($grand_total),
+            'tax_amount' => floatval($california_Tax),
             'credit_card' => [
                'number' => $formDataArray['cc'],
                'expiration_month' => $formDataArray['month'],
