@@ -239,15 +239,16 @@ class IndexController extends Controller
 
     public function orderInfo()
     {
+        // dd('s');
         $customer = Auth::guard('customer')->user();
-
+        // dd($customer->email);
         if (!$customer) {
             return redirect()->route('home');
         }
     
         
         $order = Order::where('customer_email', $customer->email)->get();
-        
+        // dd($order);
      
     
         $validStatuses = ['1', '2', '3', '4', '5'];
@@ -256,12 +257,12 @@ class IndexController extends Controller
             ->join('products', 'orderitems.product_id', '=', 'products.product_id')
             ->join('orders', 'orderitems.order_id', '=', 'orders.order_id')
             // ->where('orderitems.order_id', $orderId)
-            ->where('orders.customer_email', $customer->email)
+            ->where('orders.customer_email','=', $customer->email)
             ->whereIn('orders.order_status', $validStatuses)
             ->get();
     
      
-    
+        // dd($orderItems);
         $user = User::select('facebook', 'instagram', 'linkedin', 'address', 'phone', 'tollfree', 'fax')->first();
     
         $data = [
@@ -271,7 +272,7 @@ class IndexController extends Controller
         ];
 
         // dd($data);
-    
+        // dd($data);
         return view('myaccount.orders')->with(compact('data'));
     }    
 

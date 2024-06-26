@@ -85,6 +85,7 @@ class CartController extends Controller
         'id' => $product_id,
         'qty' => $quantity,
         'price' => $price,
+        'tax' => $product->tax,
         'name' => $product->sku . "-",
         'title' => $product->title,
         'restricted_status' => $product->restricted_status,

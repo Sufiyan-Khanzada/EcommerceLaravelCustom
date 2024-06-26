@@ -181,9 +181,9 @@
                         $('#btnCart').show();
                         toastr.options.timeOut = 1500;
                         toastr.success("Successfully Added To Cart");
-                        setInterval(() => {
-                            location = "{{route('cart')}}";
-                        }, 1500);
+                        // setInterval(() => {
+                        //     location = "{{route('cart')}}";
+                        // }, 1500);
                     }
                 },
                 error: function (jqXhr, textStatus, errorMessage) {

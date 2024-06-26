@@ -626,10 +626,12 @@ if ($total_items == 1) {
                         $('.payment-loader').hide();
                         $('.loading-img').hide();
                         $('.trans-success').html(response.status_message);
-                        redirect = "{{route('myaccount')}}";
+                        redirect = "{{route('myaccount.orders')}}";
+                        toastr.options.timeOut = 1500;
+                        toastr.success("Order & Payment Successful");
                         setTimeout(function() {
                             window.location.replace(redirect);
-                        }, 500)
+                        }, 1500)
                     }
                     if (typeof response.cart_error == 'undefined') {
                         if (response.success == false) {

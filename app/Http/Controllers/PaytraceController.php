@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Services\Cart;
+use Exception;
+
 class PaytraceController extends Controller
 {
    // private $intigratorID = "9730a74dje8d";
@@ -20,6 +22,7 @@ class PaytraceController extends Controller
    private $intigratorID = "9247917g833V";
 
    private $auth_server = "https://api.paytrace.com";
+   // private $auth_server = "https://api.sandbox.paytrace.com";
    protected $token;
    protected $restricted_place;
    protected $cart_contents;
@@ -60,11 +63,12 @@ class PaytraceController extends Controller
       $client = $this->gClient();
       // dd($client);
       // // DRY
-      $auth_server = 'https://api.paytrace.com';
+      // $auth_server = 'https://api.paytrace.com';
+      // $auth_server =
 
       // // send a request to the authentication server
       // // note: normally, you'd store the username/password in a more secure fashion!
-      $res = $client->post("$auth_server/oauth/token", [
+      $res = $client->post($this->auth_server."/oauth/token", [
          'form_params' => [
             // 'username' => 'Ammadkhan405@gmail.com', 
             // 'password' => 'ASDasd123',
@@ -76,6 +80,7 @@ class PaytraceController extends Controller
       ]);
 
       // return $res->getStatusCode();
+      // dd($res);
       if ($res->getStatusCode() == 200) {
          $body = $res->getBody();
          $json = json_decode($body->getContents());
@@ -143,7 +148,7 @@ class PaytraceController extends Controller
 
          $user_email = $this->user->email;
          $customer = $this->user;
-         $shipping_cost = $this->Shipping_rate;
+         $shipping_cost = $this->Shipping_rate['cost'];
          $california_Tax = $this->california_tax['cost'];
          $cart  = $this->cart_contents;
 
@@ -187,14 +192,14 @@ class PaytraceController extends Controller
             $ctax = $california_Tax;
          }
          //  dd($ctax);
-         $grand_total = $this->others_contents['cart_total'] + $total_handling + $shipping_cost['cost'] + $ctax;
+         $grand_total = $this->others_contents['cart_total'] + $total_handling + $shipping_cost + $ctax;
          //  dd($formDataArray);
          $year = substr($formDataArray['year'], 2);
          //  dd($year);
          // dd($california_Tax);
          $sale_data = [
-            'amount' => $grand_total,
-            'tax_amount' => $california_Tax,
+            'amount' => floatval(0),//$grand_total,
+            'tax_amount' => floatval(0),//floatval($california_Tax),
             'credit_card' => [
                'number' => $formDataArray['cc'],
                'expiration_month' => $formDataArray['month'],
@@ -213,23 +218,28 @@ class PaytraceController extends Controller
             ]
          ];
 
-
-
-         try {
-            // dd($sale_data);
-         $res = $client->request('POST', $this->auth_server."/v1/transactions/sale/keyed", [
-            'headers' => ['Authorization' => "Bearer $token"],
-            'json' => json_encode($sale_data)
-         ]);
-         dd($res);
+         // dd($this->user->status);
+         // dd($sale_data);
+         // try {
+            // dd($this->intigratorID);
+            try {
+               $res = $client->request('POST', $this->auth_server."/v1/transactions/sale/keyed", [
+                   'headers' => ['Authorization' => "Bearer $token"],
+                   'json' => $sale_data // Use 'json' instead of 'data' if the data needs to be sent as JSON
+               ]);
+           } catch (ClientException $e) {
+               $responseBody = $e->getResponse()->getBody()->getContents();
+               dd($responseBody); // Or use another method to log/display the full response
+           }
+         // dd($res);
          if ($res->getStatusCode() == 200) {
            
             $responseData = $res->getBody()->getContents();
             $json = json_decode($responseData);
 
             $message = '';
-            $orderStatus = ($this->user->status == 3);
-
+            $orderStatus = $this->user->status == 3 ? 2 : 3;
+            // dd($orderStatus);
             $query = DB::table('orders')->where('transaction_id', $json->transaction_id)->get();
             if ($query->isEmpty()) {
                $data = array(
@@ -248,18 +258,19 @@ class PaytraceController extends Controller
                );
 
                $order = Order::create($data);
-               $insert_id = $order->id;
+               // dd($order);
+               $insert_id = $order->order_id;
                $data2 = array();
 
 
-
+// dd($this->cart_contents);
                foreach ($this->cart_contents as $key => $value) {
                   $data2[] = array(
                      'product_id' => $value['id'],
                      'product_quantity' => $value['qty'],
                      'product_price' => $value['price'],
                      'handling_fee' => $value['handling_fee'],
-                     // 'tax' => $value['tax'],
+                     'tax' => $value['tax'],
                      'order_id' => $insert_id,
                      'optional_info' => $value['options']['optional_info']
                   );
@@ -273,7 +284,7 @@ class PaytraceController extends Controller
                if ($insert_products) {
                   $orderStatus = ($this->user->status == 1);
                   $orders_email = DB::table('orders')
-                     ->where('customer_email', $this->user()->email)
+                     ->where('customer_email', $this->user->email)
                      ->where('payment_id', $json->transaction_id)
                      ->orderBy('order_id', 'desc')
                      ->first();
@@ -902,23 +913,24 @@ class PaytraceController extends Controller
                   //                      $mail->Body  = $m;
                   //                      $mail->send();
 
-
-                  $this->destroy();
+                  $cartService = new Cart;
+                  $cartService->destroy();
                   $str = 'Order Has been Successfully Placed.';
                   $msg = base64_encode($str);
                }
             }
             print_r($responseData);
          }
-         } catch (ClientException  $e) {
-
-         $response = $e->getResponse();
-         var_dump($response);
-         die();
-         $responseBodyAsString = $response->getBody()->getContents();
-         print_r($responseBodyAsString);
+         // } catch (ClientException  $e) {
+         
+         //    dd($e);
+         // $response = $e->getResponse();
+         // var_dump($response);
+         // die();
+         // $responseBodyAsString = $response->getBody()->getContents();
+         // print_r($responseBodyAsString);
          // }
-      }
+      // }
    }
 }
 }

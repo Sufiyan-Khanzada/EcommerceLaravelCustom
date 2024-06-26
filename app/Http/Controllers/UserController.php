@@ -10,6 +10,7 @@ use Auth;
 use Mail;
 use App\Mail\SendMail;
 use App\Mail\ProfileUpdateMail;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -116,6 +117,12 @@ class UserController extends Controller
             'message' => 'Logged Out',
             'alert-type' => 'info'
         );
+        Session::forget('cart_contents');
+        Session::forget('cart_needToUpdate');
+        Session::forget('Shipping_rate');
+        Session::forget('california_tax');
+        Session::forget('restricted_place');
+        Session::forget('token');
         return redirect()->route('home')->with($notification);
     }
 
