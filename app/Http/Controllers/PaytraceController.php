@@ -220,17 +220,17 @@ class PaytraceController extends Controller
 
          // dd($this->user->status);
          // dd($sale_data);
-         // try {
+         try {
             // dd($this->intigratorID);
-            try {
+            // try {
                $res = $client->request('POST', $this->auth_server."/v1/transactions/sale/keyed", [
                    'headers' => ['Authorization' => "Bearer $token"],
                    'json' => $sale_data // Use 'json' instead of 'data' if the data needs to be sent as JSON
                ]);
-           } catch (ClientException $e) {
-               $responseBody = $e->getResponse()->getBody()->getContents();
-               dd($responseBody); // Or use another method to log/display the full response
-           }
+         //   } catch (ClientException $e) {
+         //       $responseBody = $e->getResponse()->getBody()->getContents();
+         //       // dd($responseBody); // Or use another method to log/display the full response
+         //   }
          // dd($res);
          if ($res->getStatusCode() == 200) {
            
@@ -921,15 +921,15 @@ class PaytraceController extends Controller
             }
             print_r($responseData);
          }
-         // } catch (ClientException  $e) {
+         } catch (ClientException  $e) {
          
-         //    dd($e);
-         // $response = $e->getResponse();
-         // var_dump($response);
-         // die();
-         // $responseBodyAsString = $response->getBody()->getContents();
-         // print_r($responseBodyAsString);
-         // }
+            // dd($e);
+         $response = $e->getResponse();
+         var_dump($response);
+         die();
+         $responseBodyAsString = $response->getBody()->getContents();
+         print_r($responseBodyAsString);
+         }
       // }
    }
 }
