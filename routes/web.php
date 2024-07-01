@@ -56,7 +56,7 @@ Route::middleware(['web'])->group(function () {
         [IndexController::class, 'productsList'])
     ->name('products');
 
-    Route::get('/single-product/{productId}', 
+    Route::get('/single-product/{productId}/{productTitle}', 
         [IndexController::class, 'singleProduct'])
     ->name('single.product');
 

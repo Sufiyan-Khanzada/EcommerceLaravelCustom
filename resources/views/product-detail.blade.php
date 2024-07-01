@@ -108,7 +108,7 @@
                                             <button class="btn" id="addtocart" value="{{$product->product_id}}"><i class="fa fa-shopping-cart"></i>
                                             Add to Cart 
                                             </button>
-                                            <button class="btn" id="refer" value="https://www.firequick.com/page/single-product/39/Hotshot-Flare-1-box-10-flares--NFES-000371">
+                                            <button class="btn" id="refer" value="{{ route('single.product', ['productId' => $product->product_id, 'productTitle' => Str::slug($product->title)]) }}">
                                             Refer a friend 
                                             </button>
                                         </div>

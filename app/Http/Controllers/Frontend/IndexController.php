@@ -186,7 +186,7 @@ class IndexController extends Controller
         return view('products')->with(compact(['products', 'categories', 'currentCategory']));
     }
     
-    public function singleProduct($productId) {
+    public function singleProduct($productId,$productTitle) {
 
         $product = Product::where('product_id', $productId)->first();
         $categories = Category::all();

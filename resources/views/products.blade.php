@@ -73,9 +73,9 @@
                                     <div class="grid-item">
                                         <div class="product">
                                             <div class="product-image" style="width: 320px; height:250px;">
-                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
+                                                <a href="{{ route('single.product', ['productId' => $product->product_id, 'productTitle' => \Str::slug($product->title)]) }}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
                                                 </a>
-                                                <a href="{{route('single.product', ['productId' => $product->product_id])}}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
+                                                <a href="{{ route('single.product', ['productId' => $product->product_id, 'productTitle' => \Str::slug($product->title)]) }}"><img alt="Shop product image!" src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}">
                                                 </a>
                                                 
                                                 <div class="product-overlay">
@@ -86,7 +86,7 @@
                                             <div class="product-description">
                                                 <div class="product-category">{{$currentCategory?->title}}</div>
                                                 <div class="product-title">
-                                                    <h3><a href="{{route('single.product', ['productId' => $product->product_id])}}">{{$product->title}}</a></h3>
+                                                    <h3><a href="{{ route('single.product', ['productId' => $product->product_id, 'productTitle' => \Str::slug($product->title)]) }}">{{$product->title}}</a></h3>
                                                 </div>
 
                                                 <div class="product-price"> <br>
