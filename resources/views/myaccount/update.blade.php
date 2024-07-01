@@ -90,7 +90,7 @@ $(document).ready(function() {
 
 	if(agree == true) {
 		$.ajax({
-			url: '{{route("getCountries")}}',
+			url: '{{route("allCountries")}}',
 			type: 'GET',
 			success: function(data, status, xhr) {
 				$(data).each(function(i, val) {
@@ -115,7 +115,7 @@ $(document).ready(function() {
 	var StateID = {{$customer->state_id}};
 	if(CountryID && CountryID != 0 && CountryID != '') {
 		$.ajax({
-			url: `{{route("getStates")}}/${CountryID}`,
+			url: `{{route("allStates")}}/${CountryID}`,
 			type: 'GET',
 			success: function(data, status, xhr) {
 				if(data != "false") {
@@ -149,7 +149,7 @@ $(document).ready(function() {
 		var CountryID = $(this).val();
 		if(CountryID != 0 && CountryID != '') {
 			$.ajax({
-				url: `{{route("getStates")}}/${CountryID}`,
+				url: `{{route("allStates")}}/${CountryID}`,
 				type: 'GET',
 				success: function(data, status, xhr) {
 					if(data != "false") {
