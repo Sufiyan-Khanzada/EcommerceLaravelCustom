@@ -17,7 +17,7 @@
 <section id="page-content">
 
             <div class="container">
-<a href="https://www.firequick.com/page/add-image" id="add-image" class="btn">
+<a href="{{ route('add-image') }}" id="add-image" class="btn">
  Add Image to gallery
 
 </a>
