@@ -174,8 +174,9 @@ Route::middleware(['web'])->group(function () {
     // Route for user logout
     Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    Route::get('/countries', [IndexController::class, 'getCountries'])->name('getCountries');
-    Route::get('/states/{countryId?}', [IndexController::class, 'getStates'])->name('getStates');
+    Route::get('/countries', [IndexController::class, 'getCountries'])->name('allCountries');
+    Route::get('/states/{countryId?}', [IndexController::class, 'getStates'])->name('allStates');
+
     Route::post('/get/country', [IndexController::class, 'getCountries'])->name('getCountries');
     Route::post('/get/state', [IndexController::class, 'getStates'])->name('getStates');
 
