@@ -5,7 +5,7 @@
 <section id="page-title" class="background-overlay" data-parallax-image="{{asset('images/banner/banner.jpg')}}">
     <div class="container">
         <div class="page-title">
-            <h1 class="text-uppercase text-medium">{{$currentCategory->title}}</h1>
+            <h1 class="text-uppercase text-medium">{{$currentCategory->title ?? 'All Products'}}</h1>
        
         </div>
     </div>
