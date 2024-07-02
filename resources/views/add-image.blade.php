@@ -16,10 +16,7 @@
 <section class="custom-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="panel">
-                    <div class="panel-body">
-                        @if ($errors->any())
+        @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -28,6 +25,11 @@
                                 </ul>
                             </div>
                         @endif
+            <div class="col-md-4 col-md-offset-4">
+           
+                <div class="panel">
+                    <div class="panel-body">
+                      
 
                         @if (session('success'))
                             <div class="alert alert-success">

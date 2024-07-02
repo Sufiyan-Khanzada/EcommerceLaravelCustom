@@ -310,25 +310,36 @@ class IndexController extends Controller
 
     public function addImagePost(Request $request)
     {
-        dd("S");
-        
+        // if (!Auth::check()) {
+        //     return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
+        // }
+  
+
         // Validate the form data
         $request->validate([
             'title' => 'required|string|max:55',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
-
+    
         // Get authenticated user
-        $email = Auth::user()->email;
+        // $email = Auth::user()->email;
+        $email = "ammadkhan405@gmail.com";
         $customer = Customer::where('email', $email)->first();
         $customer_id = $customer->id;
 
+
+
+        
+    
         // Handle file upload
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/gallery', $filename);
-
+            
+           // Define the new storage path
+        $destinationPath = 'D:\laragon\www\CompleteFirequick\admin\assets\gallery';
+        $image->move($destinationPath, $filename);
+    
             // Save image data to the database
             $data = [
                 'title' => $request->title,
@@ -338,27 +349,22 @@ class IndexController extends Controller
                 'user_id' => $customer_id,
                 'status' => 2,
             ];
-
+    
             Image::create($data);
+    
+          // Get admin email from environment variable
+        $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
 
-            // Get admin email
-            $admin_email = User::where('role', 'admin')->pluck('email');
+        // Send email to admin using the Mailable class
+        Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
 
-            // Send email to admin
-            $message = '<p>Firequick customer email ' . $email . ' has submitted an image. The image will need to be approved before posting.</p>';
-            $message .= '<img src="' . asset('storage/gallery/' . $filename) . '" alt="User submitted image" />';
-
-            Mail::raw($message, function ($mail) use ($admin_email) {
-                $mail->from(env('MAIL_FROM_ADDRESS'),env('APP_NAME'));
-                $mail->to($admin_email)->subject('Customer Submitted an Image');
-            });
-
+    
             return redirect()->back()->with('success', 'Image uploaded successfully.');
         } else {
             return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
         }
     }
-
+    
     
     
 

@@ -65,7 +65,7 @@ Route::middleware(['web'])->group(function () {
 // Add Image 
 
 Route::get('/add-image', [IndexController::class, 'addImage'])->name('add-image');
-Route::post('/add-image-post', [ImageController::class, 'addImagePost'])->name('add-image-post');
+Route::post('/add-image-post', [IndexController::class, 'addImagePost'])->name('add-image-post');
 
 
 
