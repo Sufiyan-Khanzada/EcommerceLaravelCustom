@@ -144,16 +144,11 @@ Route::post('/add-image-post', [IndexController::class, 'addImagePost'])->name('
 
     Route::get('/safety-training-videos', [IndexController::class, 'safetyTrainingVideos'])->name('safety-training-videos');
 
-    
-        Route::get('/myaccount', function () {
-            return view('myaccount/index');
-        })->name('myaccount');
-
         Route::get('/myaccount/downloads', function () {
             return view('myaccount/downloads');
         })->name('myaccount.downloads');
 
-        Route::get('/myaccount/orders',[IndexController::class, 'orderInfo'])->name('myaccount.orders');
+    Route::get('/myaccount/orders',[IndexController::class, 'orderInfo'])->name('myaccount.orders');
 
     Route::get('/myaccount/mydetails', [IndexController::class, 'myDetails'])->name('myaccount.details');
 

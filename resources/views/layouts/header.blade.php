@@ -66,7 +66,7 @@ $contentTotal = $myContents['total_items'];
 
 					@if(isset($customer) && $customer)
 						<div style="margin-bottom: 11px">
-							<a href="{{route('myaccount')}}">
+							<a href="{{route('myaccount.orders')}}">
 								<i class="fa fa-user"></i><span>My Account</span>
 							</a>
 
