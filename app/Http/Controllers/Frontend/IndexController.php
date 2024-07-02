@@ -20,6 +20,7 @@ use App\Models\OrderItem;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\SendProductReferral;
+use App\Mail\ImageUploaded;
 
 
 class IndexController extends Controller
