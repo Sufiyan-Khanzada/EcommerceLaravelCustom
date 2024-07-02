@@ -101,29 +101,29 @@
 
             <div class="col-md-3">
                 <div class="Products-box">
-                    <a href="https://www.firequick.com/page/products/category/3" title=""><img style="width:320px; height: 200px; " src="{{asset('images/flare/FlaresGroup_1.jpg')}}" alt="" class="img-responsive"></a>
-                    <h4><a href="https://www.firequick.com/page/products/category/3" title="">FLARES</a></h4>
+                    <a href="{{route('products',3)}}" title=""><img style="width:320px; height: 200px; " src="{{asset('images/flare/FlaresGroup_1.jpg')}}" alt="" class="img-responsive"></a>
+                    <h4><a href="{{route('products',3)}}" title="">FLARES</a></h4>
                     <p>Full line of remote-ignition incendiary flares excellent for control burn and prescribed burn operations. Mechanically and hand-launched configurations available!</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="Products-box">
-                    <a href="https://www.firequick.com/page/products/category/2" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/LauncherIII_1.jpg')}}" alt="" class="img-responsive"></a>
-                    <h4><a href="https://www.firequick.com/page/products/category/2" title="">LAUNCHERS</a></h4>
+                    <a href="{{route('products',2)}}" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/LauncherIII_1.jpg')}}" alt="" class="img-responsive"></a>
+                    <h4><a href="{{route('products',2)}}" title="">LAUNCHERS</a></h4>
                     <p>Pistol-style Firequick launcher for use with mechanically launched flares. And now available: our new AR-style Large Format Launcher to propel Large Format Flares!</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="Products-box">
-                    <a href="https://www.firequick.com/page/products/category/4" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/CleaningKitContents_1.jpg')}}" alt="" class="img-responsive"></a>
-                    <h4><a href="https://www.firequick.com/page/products/category/4" title="">FIREQUICK ACCESSORIES</a></h4>
+                    <a href="{{route('products',4)}}" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/CleaningKitContents_1.jpg')}}" alt="" class="img-responsive"></a>
+                    <h4><a href="{{route('products',4)}}" title="">FIREQUICK ACCESSORIES</a></h4>
                     <p>Firing cartridges, cleaning kits, holsters, and a wide variety of other items to complement your Firequick flare systems.</p>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="Products-box">
-                    <a href="https://www.firequick.com/page/products/category/6" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/prod3.jpg')}}" alt="" class="img-responsive"></a>
-                    <h4><a href="https://www.firequick.com/page/products/category/6" title="">WILEY-X TACTICAL EYEWEAR AND GLOVES</a></h4>
+                    <a href="{{route('products',6)}}" title=""><img style="width:250px; height: 200px; " src="{{asset('images/flare/prod3.jpg')}}" alt="" class="img-responsive"></a>
+                    <h4><a href="{{route('products',6)}}" title="">WILEY-X TACTICAL EYEWEAR AND GLOVES</a></h4>
                     <p>ANSI Z87 rated premium safety / sunglasses exceeding OSHA standards. Gloves offer the ultimate in flame resistant hand protection while allowing for maximum dexterity.</p>
                 </div>
             </div>
@@ -139,17 +139,17 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="Service">
-                    <a href="https://www.firequick.com/page/news"><img src="{{asset('images/services-training/news-box.jpg')}}" alt="" class="img-responsive"></a>
+                    <a href="{{route('news')}}"><img src="{{asset('images/services-training/news-box.jpg')}}" alt="" class="img-responsive"></a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="Service">
-                    <a href="https://www.firequick.com/page/products"><img src="{{asset('images/services-training/ship-box.jpg')}}" alt="" class="img-responsive"></a>
+                    <a href="{{route('products')}}"><img src="{{asset('images/services-training/ship-box.jpg')}}" alt="" class="img-responsive"></a>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="Service">
-                    <a href="https://www.firequick.com/page/gallery"><img src="{{asset('images/services-training/gallery-box.jpg')}}" alt="" class="img-responsive"></a>
+                    <a href="{{route('gallery')}}"><img src="{{asset('images/services-training/gallery-box.jpg')}}" alt="" class="img-responsive"></a>
                 </div>
             </div>
         </div>
