@@ -167,7 +167,7 @@ class UserController extends Controller
         $customerEmail = $customer->email;
         $email = User::first()->email;
 
-        $mailTemplate = new ProfileUpdateMail($customerEmail);
+        $mailTemplate = new ProfileUpdateMail($customerName,$customerEmail);
         Mail::to($email)->send($mailTemplate);
 
         Auth::logout();

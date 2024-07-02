@@ -13,7 +13,7 @@
                     <div class="col-md-9">
              
 
-             <p>You can Download from Here</p><p><a href="https://www.firequick.com/page/myaccount/download-workbook"><img src="https://www.firequick.com/assets/images/pdf-icon.png" width="10%" height="15%"></a>
+             <p>You can Download from Here</p><p><a href="{{asset('download-workbook') }}"><img src="{{asset('images/pdf-icon.png') }}" width="10%" height="15%"></a>
 
      </p></div></a></p>
             @else
