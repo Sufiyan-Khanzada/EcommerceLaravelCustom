@@ -8,9 +8,16 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Auth;
 use Mail;
+use Carbon\Carbon;
+use DB;
 use App\Mail\SendMail;
+use App\Mail\ResetPasswordMail;
 use App\Mail\ProfileUpdateMail;
+use Illuminate\Support\Str;
+
+
 use Illuminate\Support\Facades\Session;
+
 
 class UserController extends Controller
 {
@@ -181,4 +188,26 @@ class UserController extends Controller
         
         return redirect()->route('login')->with('message', 'You have made changes to your account information, our office will need to revalidate your account. This may take up to 2 business days. You will receive an email once you have been revalidated.');
     }
+
+
+
+    public function submitForgetPasswordForm(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users',
+        ]);
+
+        $token = Str::random(64);
+
+        // DB::table('password_resets')->insert([
+        //     'email' => $request->email, 
+        //     'token' => $token, 
+        //     'created_at' => Carbon::now()
+        //   ]);
+
+          Mail::to($request->email)->send(new ResetPasswordMail($token, $request->email));
+
+        return back()->with('message', 'We have e-mailed your password reset link!');
+    }
+
 }
