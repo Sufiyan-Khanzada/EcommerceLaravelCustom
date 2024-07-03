@@ -362,7 +362,7 @@
 
     if (email != null) {
         $.ajax({
-            url: '{{ route('send-to-friend') }}',
+            url: "{{ route('send-to-friend') }}",
             type: 'POST',
             data: {
                 email: email,

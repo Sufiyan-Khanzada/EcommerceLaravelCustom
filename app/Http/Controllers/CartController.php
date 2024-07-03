@@ -55,6 +55,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
 {
     // Validate the request
+    // dd($request->all());
     $validatedData = $request->validate([
         'myDataid' => 'required|integer',
         'size' => 'nullable|string',
