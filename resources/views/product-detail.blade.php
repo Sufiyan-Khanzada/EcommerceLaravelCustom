@@ -174,9 +174,6 @@
                     if (data.alert == true) {
                         toastr.options.timeOut = 20000;
                         toastr.warning("Your order contains a shipment of restricted items to a Customer and Ship to address that has not been validated by Firequick. Please call the Firequick office at 760-377-5766 to confirm your address and for details on our customer verification process");
-                    }
-                    if (data.alert == "login") {
-                        window.location.href = obj.address;
                     } else {
                         $('#btnCart').show();
                         toastr.options.timeOut = 1500;

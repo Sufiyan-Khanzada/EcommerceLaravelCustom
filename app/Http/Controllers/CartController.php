@@ -78,6 +78,11 @@ class CartController extends Controller
     if (!$product) {
         return response()->json(false);
     }
+    // dd(auth()->guard('customer')->user()->status);
+    if($product->restricted_status === "yes" && auth()->guard('customer')->user()->status == 3)
+    {
+        return response()->json(['alert' => true]);
+    }
 
     $price = $product->sale_price < 1 ? $product->regular_price : $product->sale_price;
 
@@ -103,19 +108,21 @@ class CartController extends Controller
 
     $this->cart->insert($data);
     $request->session()->put('cart_needToUpdate', true);
-    $user_status = $request->session()->get('firequick.status', 3);
+    $user_status = auth()->guard('customer')->user()->status;
 
     if ($product->restricted_status === "yes" && $user_status == 3) {
         $res = [
             'alert' => true,
-            'cart_total_item' => $this->cart->total()
+            // 'cart_total_item' => $this->cart->total()
         ];
+       
     } else {
         $res = [
             'alert' => false,
             'cart_total_item' => $this->cart->total(),
             'cart_data' => $this->cart->contents()
         ];
+        
     }
 
 
