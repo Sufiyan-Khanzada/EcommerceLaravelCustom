@@ -192,11 +192,11 @@ $contentTotal = $myContents['total_items'];
 								
 									?>
 
-									<li class="dropdown"><a href="{{route('products', ['categoryId' => 2])}}">Flares</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 3])}}">Flares</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('flares-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('products', ['categoryId' => 2])}}">Flares For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 3])}}">Flares For Sale</a>
 											</li>
 											<li><a href="{{route('news')}}">News</a>
 											</li>
@@ -204,11 +204,11 @@ $contentTotal = $myContents['total_items'];
 
 
 									</li>
-									<li class="dropdown"><a href="{{route('products', ['categoryId' => 3])}}">Launchers</a>
+									<li class="dropdown"><a href="{{route('products', ['categoryId' => 2])}}">Launchers</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{route('launchers-overview')}}">Overview</a>
 											</li>
-											<li><a href="{{route('products', ['categoryId' => 3])}}">Launchers For Sale</a>
+											<li><a href="{{route('products', ['categoryId' => 2])}}">Launchers For Sale</a>
 											</li>
 											<li><a href="{{route('launchers-news')}}">News</a>
 											</li>
