@@ -401,14 +401,14 @@ class IndexController extends Controller
             'title' => 'required|string|max:55',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
-    
+        //dd(Auth::guard('customer')->user());
         // Get authenticated user
-        $email = Auth::user()->email;
+    
         
-        $customer = Customer::where('email', $email)->first();
+        $customer = Auth::guard('customer')->user();
         $customer_id = $customer->id;
 
-
+     
 
       
   
@@ -433,10 +433,10 @@ class IndexController extends Controller
           Image::create($data);
   
         // Get admin email from environment variable
-      $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
+      $admin_email = User::first()->email; // Assuming you set the admin email in the .env file
 
         // Send email to admin using the Mailable class
-        Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
+        Mail::to($admin_email)->send(new ImageUploaded($customer->email, $filename));
 
   
           return redirect()->back()->with('success', 'Image uploaded successfully.');
