@@ -396,17 +396,17 @@ class IndexController extends Controller
 
 
 
-      // Validate the form data
-      $request->validate([
-          'title' => 'required|string|max:55',
-          'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
-      ]);
-  
-      // Get authenticated user
-      // $email = Auth::user()->email;
-      $email = "ammadkhan405@gmail.com";
-      $customer = Customer::where('email', $email)->first();
-      $customer_id = $customer->id;
+        // Validate the form data
+        $request->validate([
+            'title' => 'required|string|max:55',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ]);
+    
+        // Get authenticated user
+        $email = Auth::user()->email;
+        
+        $customer = Customer::where('email', $email)->first();
+        $customer_id = $customer->id;
 
 
 
