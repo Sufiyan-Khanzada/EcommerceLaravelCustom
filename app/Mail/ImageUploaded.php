@@ -6,6 +6,8 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
+
 
 class ImageUploaded extends Mailable
 {
@@ -33,7 +35,7 @@ class ImageUploaded extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'))
+        return $this->from(User::first()->email, env('APP_NAME'))
                     ->subject('Customer Submitted an Image')
                     ->view('mail.image_uploaded')
                     ->with([
