@@ -48,7 +48,19 @@
                                 @endif
                                 </br>
                                 <div style="font-weight: bold;color: #ff4000;font-family: 'PT Sans', sans-serif;" >
-                                    Status: In stock                                
+                                <?php
+                                    if($product->item_marked == 1){
+                                        echo "Status: In stock";
+                                    }elseif ($product->item_marked == 2) {
+                                        echo "Status: Backordered";
+                                    }elseif ($product->item_marked == 3) {
+                                        echo "Status: Out of stock";
+                                    }elseif ($product->item_marked == 4) {
+                                        echo "Status: Please Call Office";
+                                    }
+
+
+                                    ?>                           
                                 </div>
                                 <div style="background-color: #f1f1f1; padding: 30px; padding-top: 10px;">
                                     <p> <b style="color: #ff4000;font-family: 'PT Sans', sans-serif;" >DESCRIPTION: </b></p>
@@ -60,16 +72,59 @@
                                 <div class="col-md-6">
                                 </div>
                             </div>
+                            @if($product->item_marked == 1)
                             <div class="row">
                                 <div class="col-md-12">
+                                <?php   if($product->product_id == 32){ ?> 
                                     <div class="">
                                         <label for="case">Choose Your Flare Package Size:</label>
-                                        <select id="case">
-                                            <option style="color:#222222; font-weight: bold;" value="39">Box $68.50 (10 Flares)</option>
-                                            <option style="color:#222222; font-weight: bold;" value="40">Mini Case $1350(20 Boxes/200 Flares)</option>
-                                            <option style="color:#222222; font-weight: bold;" value="41">Case $2600(40 Boxes/400 Flares)</option>
+
+                                       <select id="case">
+                                          
+                                          <option style="color:#222222;  font-weight: bold;" value="32">Mini Case(20 flares)- $285</option>
+                                          <option style="color:#222222; font-weight: bold;" value="33">Case (50 flares)- $700</option>
+                                          <option style="color:#222222; font-weight: bold;" value="37">Big Shot + Chubbie Combo Mini Case (12 Big Shots + 15 Chubbies)- $288.75</option>
                                         </select>
                                     </div>
+                                    <?php } ?> 
+                                    
+                                     <?php   if($product->product_id == 39){ ?> 
+                                    <div class="">
+                                        <label for="case">Choose Your Flare Package Size:</label>
+
+                                       <select id="case">
+                                          
+                                          <option style="color:#222222; font-weight: bold;" value="39">Box $68.50 (10 Flares)</option>
+                                          <option style="color:#222222; font-weight: bold;" value="40">Mini Case $1350(20 Boxes/200 Flares)</option>
+                                          <option style="color:#222222; font-weight: bold;" value="41">Case $2600(40 Boxes/400 Flares)</option>
+                                        </select>
+                                    </div>
+                                    <?php } ?> 
+                                    <?php   if($product->product_id == 42){ ?> 
+                                    <div class="">
+                                        <label for="case">Choose Your Flare Package Size:</label>
+
+                                       <select id="case">
+                                          
+                                          <option style="color:#222222; font-weight: bold;" value="42">Box $86.20 (12 Flares)</option>
+                                          <option style="color:#222222; font-weight: bold;" value="43">Mini Case (7 Boxes/84 Flares) $595</option>
+                                          <option style="color:#222222; font-weight: bold;" value="44">Case (25 Boxes/300 Flares) $2050</option>
+                                        </select>
+                                    </div>
+                                    <?php } ?> 
+                                    <?php   if($product->product_id == 35){ ?> 
+                                    <div class="">
+                                        <label for="case">Choose Your Flare Package Size:</label>
+
+                                       <select id="case">
+                                          
+                                          
+                                          <option value="35">Mini Case $350 (36 Flares)</option>
+                                          <option value="36">Case $700 (75 Flares)</option>
+                                          <option value="37">Flare Combo-Big Shot and Chubbie $288.75 (12 Big Shot + 15 Chubbies )</option>
+                                        </select>
+                                    </div>
+                                    <?php } ?> 
                                     <h6>
                                         <p>Select quantity</p>
                                     </h6>
@@ -115,6 +170,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
