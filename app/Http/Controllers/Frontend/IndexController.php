@@ -185,7 +185,7 @@ class IndexController extends Controller
         $categories = Category::all();
         $currentCategory = null;
         if ($categoryId) {
-            $products = Product::where('status', 1)
+            $products = Product::where('status', 1)->where('deleted', 0)
                 ->where(function ($query) use ($categoryId) {
                     $query->where('category_id', 'LIKE', $categoryId)
                         ->orWhere('category_id', 'LIKE', $categoryId . ',%')
@@ -196,7 +196,7 @@ class IndexController extends Controller
 
             $currentCategory = Category::where('category_id', $categoryId)->first();
         } else {
-            $products = Product::where('status', 1)->get();
+            $products = Product::where('status', 1)->where('deleted', 0)->get();
         }
 
 
@@ -206,7 +206,7 @@ class IndexController extends Controller
     public function singleProduct($productId, $productTitle)
     {
 
-        $product = Product::where('product_id', $productId)->first();
+        $product = Product::where('product_id', $productId)->where('status', 1)->where('deleted', 0)->first();
         $categories = Category::all();
 
         if (!$product) {
