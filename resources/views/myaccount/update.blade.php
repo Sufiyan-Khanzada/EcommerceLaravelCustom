@@ -15,8 +15,8 @@
 			<form action="{{route('update-user', ['id' => $customer->customer_id])}}" method="POST"> @csrf
 				<div class="col-md-8 center no-padding">
 					<div class="col-md-12">
-						<h3>Register New Account</h3>
-						<p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
+						<h3>Update Details</h3>
+						<!-- <p>Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p> -->
 					</div>
 					<div id="error">
 						<p style="color:red;font-size:15px;font-weight:bold;"></p>
@@ -73,7 +73,7 @@
 						<input type="text" name="phone" class="form-control input-lg" placeholder="Phone" 
 							value="{{$customer->phone}}" id="phone"> </div>
 					<div class="col-md-12 form-group">
-						<button type="submit" class="btn btn-default submit">Register New Account </button>
+						<button type="submit" class="btn btn-default submit">Update Details </button>
 					</div>
 				</div>
 			</form>
