@@ -54,8 +54,12 @@ class UserController extends Controller
          // Send email
 
     $email = $validatedData['email'];
+    $fname = $validatedData['fname'];
+    $lname = $validatedData['lname'];
+   
 
     Mail::to($email)->send(new SendMail($email));
+    Mail::to(User::first()->email)->send(new NewCustomerNotificationAdmin($email,$fname,$lname));
 
         // Return a response or redirect to a specific page
         return redirect()->route('login')->with('message', 'Well done! Thank you for registration. Your account is not approved yet but you can place orders.');

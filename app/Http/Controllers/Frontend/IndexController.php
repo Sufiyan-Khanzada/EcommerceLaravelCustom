@@ -354,10 +354,10 @@ class IndexController extends Controller
             Image::create($data);
     
           // Get admin email from environment variable
-        $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
+  
 
         // Send email to admin using the Mailable class
-        Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
+        Mail::to(User::first()->email)->send(new ImageUploaded($email, $filename));
 
     
             return redirect()->back()->with('success', 'Image uploaded successfully.');
