@@ -76,7 +76,8 @@ Route::post('/add-image-post', [IndexController::class, 'addImagePost'])->name('
 
 
 
-    
+   
+    Route::post('form/recover-password', [UserController::class, 'submitForgetPasswordForm'])->name('recover-password-form');
 
     Route::get('/reset-password', function () {
         return view('reset-password');

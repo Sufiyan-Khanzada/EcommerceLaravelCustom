@@ -18,7 +18,8 @@
                 <div class="panel ">
 
   <div class="panel-body"><h3>Login</h3>
-                    <form method="POST" action="https://www.firequick.com/form/recover-password">
+                    <form method="POST" action="{{route('recover-password-form')}}">
+                        @csrf
                     <div class="form-group">
                          
                     

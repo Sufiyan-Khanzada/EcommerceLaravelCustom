@@ -303,70 +303,134 @@ class IndexController extends Controller
     
 
 
-    public function addImage()
-    {
+    // public function addImage()
+    // {
     
-        return view('add-image');
-    }
+    //     return view('add-image');
+    // }
 
-    public function addImagePost(Request $request)
-    {
-        // if (!Auth::check()) {
-        //     return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
-        // }
+    // public function addImagePost(Request $request)
+    // {
+    //     // if (!Auth::check()) {
+    //     //     return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
+    //     // }
   
 
-        // Validate the form data
-        $request->validate([
-            'title' => 'required|string|max:55',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
-        ]);
+    //     // Validate the form data
+    //     $request->validate([
+    //         'title' => 'required|string|max:55',
+    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+    //     ]);
     
-        // Get authenticated user
-        // $email = Auth::user()->email;
-        $email = "ammadkhan405@gmail.com";
-        $customer = Customer::where('email', $email)->first();
-        $customer_id = $customer->id;
+    //     // Get authenticated user
+    //     // $email = Auth::user()->email;
+    //     $email = "ammadkhan405@gmail.com";
+    //     $customer = Customer::where('email', $email)->first();
+    //     $customer_id = $customer->id;
 
 
 
         
     
-        // Handle file upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
+    //     // Handle file upload
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $filename = time() . '_' . $image->getClientOriginalName();
             
-           // Define the new storage path
-        $destinationPath = 'D:\laragon\www\CompleteFirequick\admin\assets\gallery';
-        $image->move($destinationPath, $filename);
+    //        // Define the new storage path
+    //     $destinationPath = 'D:\laragon\www\CompleteFirequick\admin\assets\gallery';
+    //     $image->move($destinationPath, $filename);
     
-            // Save image data to the database
-            $data = [
-                'title' => $request->title,
-                'location' => $filename,
-                'type' => $image->getClientMimeType(),
-                'uploadedby' => 'user',
-                'user_id' => $customer_id,
-                'status' => 2,
-            ];
+    //         // Save image data to the database
+    //         $data = [
+    //             'title' => $request->title,
+    //             'location' => $filename,
+    //             'type' => $image->getClientMimeType(),
+    //             'uploadedby' => 'user',
+    //             'user_id' => $customer_id,
+    //             'status' => 2,
+    //         ];
     
-            Image::create($data);
+    //         Image::create($data);
     
-          // Get admin email from environment variable
+    //       // Get admin email from environment variable
+    //     $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
+
+    //     // Send email to admin using the Mailable class
+    //     Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
+
+    
+    //         return redirect()->back()->with('success', 'Image uploaded successfully.');
+    //     } else {
+    //         return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
+    //     }
+    // }
+    
+    
+  public function addImage()
+  {
   
+      return view('add-image');
+  }
+
+  public function addImagePost(Request $request)
+  {
+      if (!Auth::guard('customer')->check()) {
+          return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
+      }
+
+
+
+
+      // Validate the form data
+      $request->validate([
+          'title' => 'required|string|max:55',
+          'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+      ]);
+  
+      // Get authenticated user
+      // $email = Auth::user()->email;
+      $email = "ammadkhan405@gmail.com";
+      $customer = Customer::where('email', $email)->first();
+      $customer_id = $customer->id;
+
+
+
+      
+  
+      // Handle file upload
+      if ($request->hasFile('image')) {
+          $image = $request->file('image');
+          $filename = time() . '_' . $image->getClientOriginalName();
+          
+         // Define the new storage path
+    $destinationPath = '/home/u772624489/domains/firequick.com/public_html/adminPanelFireqiuck/assets/gallery';
+      $image->move($destinationPath, $filename);
+  
+          // Save image data to the database
+          $data = [
+              'title' => $request->title,
+              'location' => $filename,
+              'type' => $image->getClientMimeType(),
+              'uploadedby' => 'user',
+              'user_id' => $customer_id,
+              'status' => 2,
+          ];
+          Image::create($data);
+  
+        // Get admin email from environment variable
+      $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
 
         // Send email to admin using the Mailable class
-        Mail::to(User::first()->email)->send(new ImageUploaded($email, $filename));
+        Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
 
-    
-            return redirect()->back()->with('success', 'Image uploaded successfully.');
-        } else {
-            return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
-        }
-    }
-    
-    
+  
+          return redirect()->back()->with('success', 'Image uploaded successfully.');
+      } else {
+          return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
+      }
+  }
+
     
 
     
