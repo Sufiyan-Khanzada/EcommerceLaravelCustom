@@ -19,7 +19,7 @@
                         <div class="col-md-5">
                             <div class="product-image">
                                 <div class="preview-pic tab-content">
-                                    <div class="tab-pane active" id="pic-1"><img src="{{ asset('admin/images/'.$product->image_id) }}" /></div>
+                                    <div class="tab-pane active" id="pic-1"><img src="{{ asset(env('IMAGE_PATH').'images/'.$product->image_id) }}" /></div>
                                 </div>
                             </div>
                         </div>

@@ -531,7 +531,7 @@
 						                                    <table cellspacing="0" cellpadding="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 						                                      <tr style="border-collapse:collapse">
 						                                        <td align="left" style="padding:0;Margin:0;padding-top:10px;padding-bottom:10px">
-						                                          <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:17px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:26px;color:#333333">Firequick&nbsp; <strong> customer email '.$email.' </strong>&nbsp;has submitted an image.&nbsp; The image will need to be approved before posting. </p>
+						                                          <p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:17px;font-family:arial, helvetica neue, helvetica, sans-serif;line-height:26px;color:#333333">Firequick&nbsp; <strong> customer email {{$email}} </strong>&nbsp;has submitted an image.&nbsp; The image will need to be approved before posting. </p>
 						                                        </td>
 						                                      </tr>
 						                                    </table>
@@ -549,7 +549,7 @@
 						                                    <table cellspacing="0" cellpadding="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
 						                                      <tr style="border-collapse:collapse">
 						                                        <td align="center" style="padding:0;Margin:0;font-size:0px">
-						                                          <img class="adapt-img" src="{{ asset('admin/images/'.$filename) }}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="270" height="203">
+						                                          <img class="adapt-img" src="{{ asset(env('IMAGE_PATH').'gallery/'.$filename) }}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="270" height="203">
 						                                        </td>
 						                                      </tr>
 						                                    </table>

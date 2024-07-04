@@ -436,7 +436,9 @@ class IndexController extends Controller
       $admin_email = User::first()->email; // Assuming you set the admin email in the .env file
 
         // Send email to admin using the Mailable class
+        // Mail::to($admin_email)->send(new ImageUploaded($admin_email, $filename));
         Mail::to($admin_email)->send(new ImageUploaded($customer->email, $filename));
+
 
   
           return redirect()->back()->with('success', 'Image uploaded successfully.');
