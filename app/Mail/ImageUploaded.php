@@ -35,9 +35,9 @@ class ImageUploaded extends Mailable
      */
     public function build()
     {
-        return $this->from($this->email, env('APP_NAME'))
+        return $this->from(User::first()->email, env('APP_NAME')) // customer
                     ->subject('Customer Submitted an Image')
-                    ->to(User::first()->email)  // Ensure the "To" address is correctly set
+                    ->to(User::first()->email)  // Admin
                     ->view('mail.image_upload_email')
                     ->with([
                         'email' => $this->email,

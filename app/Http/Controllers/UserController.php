@@ -14,6 +14,7 @@ use App\Mail\SendMail;
 use App\Mail\ResetPasswordMail;
 use App\Mail\ProfileUpdateMail;
 use Illuminate\Support\Str;
+use App\Mail\NewCustomerNotificationAdmin;
 
 
 use Illuminate\Support\Facades\Session;
