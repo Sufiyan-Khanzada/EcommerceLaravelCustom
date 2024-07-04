@@ -758,8 +758,8 @@ if ($total_items == 1) {
 
             if (CountryID != 0 && CountryID != '') {
                 $.ajax({
-                    url: "{{route('getStates')}}",
-                    type: 'POST',
+                    url: "{{ route('allStates')}}"+'/'+CountryID,
+                    type: 'GET',
                     data: {
                         _token: '{{ csrf_token() }}',
                         country_id: CountryID

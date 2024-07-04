@@ -223,7 +223,11 @@ class IndexController extends Controller
     }
     public function getStates($countryId)
     {
-        $states = State::where('country_id', $countryId)->get()->toArray();
+        $states = State::where('country_id', $countryId)
+        ->orderBy('name', 'asc')
+        ->get()
+        ->toArray();
+
 
         if (count($states) <= 0) {
             return 'false';

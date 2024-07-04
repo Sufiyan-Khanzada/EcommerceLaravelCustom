@@ -180,7 +180,7 @@ Route::post('/add-image-post', [IndexController::class, 'addImagePost'])->name('
     Route::get('/states/{countryId?}', [IndexController::class, 'getStates'])->name('allStates');
 
     Route::post('/get/country', [IndexController::class, 'getCountries'])->name('getCountries');
-    Route::post('/get/state', [IndexController::class, 'getStates'])->name('getStates');
+    // Route::post('/get/state', [IndexController::class, 'getStates'])->name('getStates');
 
     Route::post('/paytrace/send', [PaytraceController::class, 'sendPayment'])->name('sendPayment');
 
