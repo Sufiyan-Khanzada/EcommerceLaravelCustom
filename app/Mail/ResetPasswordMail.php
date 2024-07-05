@@ -28,15 +28,14 @@ class ResetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Registration Successful at Firequick')
-                    ->view('mail.register_welcome_email');
+        
 
-                    return $this->view('mail.reset_password.blade')
-                    ->subject('Reset Password')
-                    ->with([
-                        'token' => $this->token,
-                        'email' => $this->email,
-                    ]);
+                return $this->view('mail.reset_password')
+                ->subject('Password Reset Firequick')
+                ->with([
+                    'token' => $this->token,
+                    'email' => $this->email,
+                ]);
     }
 
 }

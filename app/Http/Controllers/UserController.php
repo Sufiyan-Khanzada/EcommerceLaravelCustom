@@ -9,12 +9,14 @@ use Illuminate\Support\Facades\Hash;
 use Auth;
 use Mail;
 use Carbon\Carbon;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Mail\SendMail;
 use App\Mail\ResetPasswordMail;
 use App\Mail\ProfileUpdateMail;
 use Illuminate\Support\Str;
 use App\Mail\NewCustomerNotificationAdmin;
+
+
 
 
 use Illuminate\Support\Facades\Session;
@@ -35,40 +37,41 @@ class UserController extends Controller
             'address1' => 'required|string|max:255',
             'address2' => 'nullable|string|max:255',
             'country' => 'required|string|max:255',
-            'state' => 'string|max:255',
-            'city' => 'string|max:255',
+            'state' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
             'postcode' => 'required|string|max:10',
             'phone' => 'required|string|max:20',
         ]);
-
+    
         // Create a new user
         $customer = Customer::create([
             'fname' => $validatedData['fname'],
             'lname' => $validatedData['lname'],
-            'company' => $validatedData['company'],
+            'company' => $validatedData['company'] ?? null,
             'email' => $validatedData['email'],
-            'password' => md5($validatedData['password']),
+            'password' =>  md5($validatedData['password']),
             'phone' => $validatedData['phone'],
             'address1' => $validatedData['address1'],
-            'address2' => $validatedData['address2'],
+            'address2' => $validatedData['address2'] ?? null,
             'country_id' => $validatedData['country'],
-            'state_id' => $validatedData['state'],
-            'city' => $validatedData['city'],
+            'state_id' => $validatedData['state'] ?? null,
+            'city' => $validatedData['city'] ?? null,
             'postalcode' => $validatedData['postcode'],
             'status' => 3
         ]);
-
-        
-         // Send email
-
-    $email = $validatedData['email'];
-    $fname = $validatedData['fname'];
-    $lname = $validatedData['lname'];
-   
-
-    Mail::to($email)->send(new SendMail($email));
-    Mail::to(User::first()->email)->send(new NewCustomerNotificationAdmin($email,$fname,$lname));
-
+    
+        // Send email
+        $email = $validatedData['email'];
+        $fname = $validatedData['fname'];
+        $lname = $validatedData['lname'];
+    
+        // Sending email to the specified email
+        Mail::to($email)->send(new SendMail($email, $fname, $lname));
+    
+        // Sending notification to the admin
+        $adminEmail = User::first()->email;
+        Mail::to($adminEmail)->send(new NewCustomerNotificationAdmin($email, $fname, $lname));
+    
         // Return a response or redirect to a specific page
         return redirect()->route('login')->with('message', 'Well done! Thank you for registration. Your account is not approved yet but you can place orders.');
     }
@@ -190,25 +193,135 @@ class UserController extends Controller
         return redirect()->route('login')->with('message', 'You have made changes to your account information, our office will need to revalidate your account. This may take up to 2 business days. You will receive an email once you have been revalidated.');
     }
 
-
-
-    public function submitForgetPasswordForm(Request $request)
+    public function recoverPassword(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users',
+            'email' => 'required|email',
         ]);
+              
+            $customer = Customer::where('email', $request->input('email'))->first();
+            if (!$customer) {
+                return view('reset-password')->with('error','Invalid Email Address.');
+            } else {
+                $name = $customer->fname . ' ' . $customer->lname;
+                $email = trim($request->input('email'));
 
-        $token = Str::random(64);
+                $result = $this->sendResetPasswordEmail($email, $name);
+                if ($result) {
+                    return view('reset-password')->with('success','Reset password link has been sent to your Email.');
+                } else {
+                    return view('reset-password')->with('error','Error, unable to send Email');
+                }
+            }
+        
 
-        // DB::table('password_resets')->insert([
-        //     'email' => $request->email, 
-        //     'token' => $token, 
-        //     'created_at' => Carbon::now()
-        //   ]);
-
-          Mail::to($request->email)->send(new ResetPasswordMail($token, $request->email));
-
-        return back()->with('message', 'We have e-mailed your password reset link!');
+        return view('reset-password', ['data' => $data, 'data2' => $user]);
     }
+
+    private function randomPassword()
+    {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = [];
+        $alphaLength = strlen($alphabet) - 1;
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass);
+    }
+
+    private function sendResetPasswordEmail($email, $username)
+    {
+        $pp = $this->randomPassword();
+        $token = md5($pp);
+
+        try {
+
+        DB::table('reset_users')->insert([
+                'email' => $email,
+                'hash' => $token,
+                'time' => now(),
+        ]);    
+            Mail::to($email)->send(new ResetPasswordMail($email, $token));
+
+            return true;
+        } catch (\Exception $e) {
+        
+            return false;
+        }
+    }
+    
+
+    public function resetPasswordForm($email, $hash)
+    {
+        $resetUser = DB::table('reset_users')
+            ->select('*')
+            ->where('email', $email)
+            ->where('hash', $hash)
+            ->first();
+    
+        if ($resetUser) {
+            $currentTime = now();
+    
+            // Assuming $resetUser->time is a datetime field from your database
+            $resetTime = Carbon::parse($resetUser->time);
+    
+            if ($resetTime <= $currentTime) { // Check if resetTime is equal to or greater than current time
+                return view('reset-password-form')->with(compact('email','hash'));
+            } else {
+                $notification = [
+                    'message' => 'URL has expired.',
+                    'alert-type' => 'error'
+                ];
+                return redirect()->route('login')->with($notification);
+            }
+        } else {
+            $notification = [
+                'message' => 'Invalid URL.',
+                'alert-type' => 'error'
+            ];
+            return redirect()->route('login')->with($notification);
+        }
+    }
+
+    
+
+    public function resetPasswordPost(Request $request)
+    {
+    
+   
+        $request->validate([
+            'password' => 'required|min:8|max:20',
+            'cpassword' => 'required|same:password', // Ensure cpassword matches password
+        ], [
+            'cpassword.same' => 'The password confirmation does not match.',
+            'cpassword.required' => 'The confirm password field is required.',
+        ]
+    );
+
+// Retrieve the customer by email
+$customer = Customer::where('email', $request->input('email'))->first();
+
+
+if ($customer) {
+    // Update the password
+    $customer->password =  md5($request->password);
+    $customer->save();
+
+    DB::table('reset_users')
+    ->where('email', $request->input('email'))
+    ->where('hash', $request->input('token'))
+    ->delete();
+
+    return redirect()->route('login')->with('success','Password updated successfully.');
+
+} else {
+    // Handle case where customer with the given email does not exist
+    return view('reset-password-form')->with('error','something went wrong.');
+}
+
+    
+    }
+
 
 }

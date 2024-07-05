@@ -620,7 +620,7 @@
                             </td>
                           </tr>
                           <tr style="border-collapse:collapse">
-                            <td class="es-m-txt-c" align="center" style="padding:0;Margin:0">'; </td>
+                            <td class="es-m-txt-c" align="center" style="padding:0;Margin:0"></td>
                           </tr>
                         </table>
                       </td>

@@ -527,7 +527,7 @@
                                 <tr style="border-collapse:collapse">
                                   <td align="center" style="padding:10px;Margin:0">
                                     <span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#FF4000;border-width:0px 0px 2px 0px;display:inline-block;border-radius:5px;width:auto">
-                                      <a href="{{ route('reset.password.get', $token) }}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:18px;color:#FFFFFF;border-style:solid;border-color:#FF4000;border-width:10px 20px 10px 20px;display:inline-block;background:#FF4000;border-radius:5px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Reset My Password</a>
+                                      <a href="{{ url('/reset-password/' . $email . '/' . $token) }}" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:18px;color:#FFFFFF;border-style:solid;border-color:#FF4000;border-width:10px 20px 10px 20px;display:inline-block;background:#FF4000;border-radius:5px;font-weight:normal;font-style:normal;line-height:22px;width:auto;text-align:center">Reset My Password</a>
                                     </span>
                                   </td>
                                 </tr>
