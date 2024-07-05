@@ -3,6 +3,7 @@
 @section('myaccount-content')
 <div class="container">
     @if(count($data['orderItems']) > 0)
+  
     <div class="col-md-12">
         <style type="text/css">
             .abc > th {
@@ -43,6 +44,12 @@
                 <th>Handling Fee</th>
                 <th>Tax</th>
             </tr>
+            <?php $product_price = 0;
+                $handling_fee = 0;
+                $tax = 0;
+                $shipping_cost = 0;
+                $total_handling_fee = 0
+                ?>
             @foreach ($data['orderItems'] as $item)
             <tr class="abcd">
                 <td><a href="{{ url('page/single-product/'.$item->product_id) }}">{{ $item->title }}</a></td>
@@ -50,6 +57,13 @@
                 <td>${{ $item->product_price }}</td>
                 <td>${{ $item->handling_fee }}</td>
                 <td>${{ $item->tax }}</td>
+                <?php 
+                $product_price += ($item->product_price * $item->product_quantity);
+                $handling_fee += $item->handling_fee;
+                $tax += $item->tax;
+                $shipping_cost += $item->shipping_cost;
+                $handling_fee += $item->handling_fee;
+                ?>
             </tr>
             @endforeach
         </table>
@@ -59,23 +73,23 @@
         <table class="mytable2">
             <tr>
                 <td>Sub Total</td>
-                <td>${{ $data['orderItems'][0]->order_subtotal }}</td>
+                <td>${{ $product_price }}</td>
             </tr>
             <tr>
                 <td>Shipping Cost</td>
-                <td>${{ $data['orderItems'][0]->shipping_cost }}</td>
+                <td>${{  $shipping_cost }}</td>
             </tr>
             <tr>
                 <td>Total Tax</td>
-                <td>${{ $data['orderItems'][0]->total_tax }}</td>
+                <td>${{ $tax }}</td>
             </tr>
             <tr>
                 <td>Total Handling Fee</td>
-                <td>${{ $data['orderItems'][0]->total_handling_fee }}</td>
+                <td>${{ $handling_fee }}</td>
             </tr>
             <tr>
                 <td>Grand-Total</td>
-                <td>${{ number_format($data['orderItems'][0]->total_handling_fee + $data['orderItems'][0]->total_tax + $data['orderItems'][0]->order_subtotal + $data['orderItems'][0]->shipping_cost, 2, ".", ",") }}</td>
+                <td>${{ number_format($handling_fee + $tax + $product_price + $shipping_cost, 2, ".", ",") }}</td>
             </tr>
         </table>
     </div>
