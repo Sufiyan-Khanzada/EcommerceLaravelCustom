@@ -185,7 +185,8 @@ class IndexController extends Controller
         $categories = Category::all();
         $currentCategory = null;
         if ($categoryId) {
-            $query2 = DB::table('products as p')
+            
+            $products = DB::table('products as p')
             ->select(
                 'p.product_id',
                 'p.title',
@@ -202,50 +203,16 @@ class IndexController extends Controller
                 'p.sale_price',
                 'p.restricted_status',
                 'p.status',
-                'c.title as category_title'
+                'co.category_custom_order'
             )
-            ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
+            ->join('category_orders as co', 'p.product_id', '=', 'co.product_id')
+            ->where('co.category_id', $categoryId)
             ->where('p.status', 1)
-            ->where('deleted', 0)
-            ->where('p.category_id', 'LIKE', $categoryId)
-                    ->orWhere('p.category_id', 'LIKE', $categoryId . ',%')
-                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId)
-                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId . ',%')
-            ->where('p.sale_price', '>', 0)
-            ->orderBy('p.product_custom_order', 'asc')
+            ->where('p.deleted', 0)
+            ->orderBy('co.category_custom_order', 'ASC')
             ->get();
-
-        $query = DB::table('products as p')
-            ->select(
-                'p.product_id',
-                'p.title',
-                'p.discripition as product_discription',
-                'p.category_id',
-                'p.image_id',
-                'p.weight_lbs',
-                'p.height',
-                'p.width',
-                'p.length',
-                'p.size',
-                'p.color',
-                'p.regular_price',
-                'p.sale_price',
-                'p.restricted_status',
-                'p.status',
-                'c.title as category_title'
-            )
-            ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
-            ->where('p.status', 1)
-            ->where('p.category_id', 'LIKE', $categoryId)
-                    ->orWhere('p.category_id', 'LIKE', $categoryId . ',%')
-                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId)
-                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId . ',%')
-            ->where('deleted', 0)
-            ->where('p.sale_price', '<', 1)
-            ->orderBy('p.product_custom_order', 'asc')
-            ->get();
-
-            $products = array_merge($query2->toArray(), $query->toArray());
+            // dd('das');
+            // $products = array_merge($query2->toArray(), $query->toArray());
 
             $currentCategory = Category::where('category_id', $categoryId)->first();
         } else {
