@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Mail\SendProductReferral;
 use App\Mail\ImageUploaded;
-
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -181,22 +181,130 @@ class IndexController extends Controller
 
     public function productsList($categoryId = null)
     {
-
+        // dd($categoryId);
         $categories = Category::all();
         $currentCategory = null;
         if ($categoryId) {
-            $products = Product::where('status', 1)->where('deleted', 0)
-                ->where(function ($query) use ($categoryId) {
-                    $query->where('category_id', 'LIKE', $categoryId)
-                        ->orWhere('category_id', 'LIKE', $categoryId . ',%')
-                        ->orWhere('category_id', 'LIKE', '%,' . $categoryId)
-                        ->orWhere('category_id', 'LIKE', '%,' . $categoryId . ',%');
-                })
-                ->get();
+            $query2 = DB::table('products as p')
+            ->select(
+                'p.product_id',
+                'p.title',
+                'p.discripition as product_discription',
+                'p.category_id',
+                'p.image_id',
+                'p.weight_lbs',
+                'p.height',
+                'p.width',
+                'p.length',
+                'p.size',
+                'p.color',
+                'p.regular_price',
+                'p.sale_price',
+                'p.restricted_status',
+                'p.status',
+                'c.title as category_title'
+            )
+            ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
+            ->where('p.status', 1)
+            ->where('deleted', 0)
+            ->where('p.category_id', 'LIKE', $categoryId)
+                    ->orWhere('p.category_id', 'LIKE', $categoryId . ',%')
+                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId)
+                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId . ',%')
+            ->where('p.sale_price', '>', 0)
+            ->orderBy('p.product_custom_order', 'asc')
+            ->get();
+
+        $query = DB::table('products as p')
+            ->select(
+                'p.product_id',
+                'p.title',
+                'p.discripition as product_discription',
+                'p.category_id',
+                'p.image_id',
+                'p.weight_lbs',
+                'p.height',
+                'p.width',
+                'p.length',
+                'p.size',
+                'p.color',
+                'p.regular_price',
+                'p.sale_price',
+                'p.restricted_status',
+                'p.status',
+                'c.title as category_title'
+            )
+            ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
+            ->where('p.status', 1)
+            ->where('p.category_id', 'LIKE', $categoryId)
+                    ->orWhere('p.category_id', 'LIKE', $categoryId . ',%')
+                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId)
+                    ->orWhere('p.category_id', 'LIKE', '%,' . $categoryId . ',%')
+            ->where('deleted', 0)
+            ->where('p.sale_price', '<', 1)
+            ->orderBy('p.product_custom_order', 'asc')
+            ->get();
+
+            $products = array_merge($query2->toArray(), $query->toArray());
 
             $currentCategory = Category::where('category_id', $categoryId)->first();
         } else {
-            $products = Product::where('status', 1)->where('deleted', 0)->get();
+
+            $query2 = DB::table('products as p')
+                ->select(
+                    'p.product_id',
+                    'p.title',
+                    'p.discripition as product_discription',
+                    'p.category_id',
+                    'p.image_id',
+                    'p.weight_lbs',
+                    'p.height',
+                    'p.width',
+                    'p.length',
+                    'p.size',
+                    'p.color',
+                    'p.regular_price',
+                    'p.sale_price',
+                    'p.restricted_status',
+                    'p.status',
+                    'c.title as category_title'
+                )
+                ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
+                ->where('p.status', 1)
+                ->where('deleted', 0)
+                ->where('p.sale_price', '>', 0)
+                ->orderBy('p.product_custom_order', 'asc')
+                ->get();
+
+            $query = DB::table('products as p')
+                ->select(
+                    'p.product_id',
+                    'p.title',
+                    'p.discripition as product_discription',
+                    'p.category_id',
+                    'p.image_id',
+                    'p.weight_lbs',
+                    'p.height',
+                    'p.width',
+                    'p.length',
+                    'p.size',
+                    'p.color',
+                    'p.regular_price',
+                    'p.sale_price',
+                    'p.restricted_status',
+                    'p.status',
+                    'c.title as category_title'
+                )
+                ->leftJoin('categories as c', 'p.category_id', '=', 'c.category_id')
+                ->where('p.status', 1)
+                ->where('deleted', 0)
+                ->where('p.sale_price', '<', 1)
+                ->orderBy('p.product_custom_order', 'asc')
+                ->get();
+
+                $products = array_merge($query2->toArray(), $query->toArray());
+            //   dd($products);      
+            // $products = Product::where('status', 1)->where('deleted', 0)->get();
         }
 
 
@@ -224,9 +332,9 @@ class IndexController extends Controller
     public function getStates($countryId)
     {
         $states = State::where('country_id', $countryId)
-        ->orderBy('name', 'asc')
-        ->get()
-        ->toArray();
+            ->orderBy('name', 'asc')
+            ->get()
+            ->toArray();
 
 
         if (count($states) <= 0) {
@@ -323,7 +431,7 @@ class IndexController extends Controller
 
     // public function addImage()
     // {
-    
+
     //     return view('add-image');
     // }
 
@@ -332,14 +440,14 @@ class IndexController extends Controller
     //     // if (!Auth::check()) {
     //     //     return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
     //     // }
-  
+
 
     //     // Validate the form data
     //     $request->validate([
     //         'title' => 'required|string|max:55',
     //         'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
     //     ]);
-    
+
     //     // Get authenticated user
     //     // $email = Auth::user()->email;
     //     $email = "ammadkhan405@gmail.com";
@@ -348,17 +456,17 @@ class IndexController extends Controller
 
 
 
-        
-    
+
+
     //     // Handle file upload
     //     if ($request->hasFile('image')) {
     //         $image = $request->file('image');
     //         $filename = time() . '_' . $image->getClientOriginalName();
-            
+
     //        // Define the new storage path
     //     $destinationPath = 'D:\laragon\www\CompleteFirequick\admin\assets\gallery';
     //     $image->move($destinationPath, $filename);
-    
+
     //         // Save image data to the database
     //         $data = [
     //             'title' => $request->title,
@@ -368,34 +476,34 @@ class IndexController extends Controller
     //             'user_id' => $customer_id,
     //             'status' => 2,
     //         ];
-    
+
     //         Image::create($data);
-    
+
     //       // Get admin email from environment variable
     //     $admin_email = env('ADMIN_EMAIL'); // Assuming you set the admin email in the .env file
 
     //     // Send email to admin using the Mailable class
     //     Mail::to($admin_email)->send(new ImageUploaded($email, $filename));
 
-    
+
     //         return redirect()->back()->with('success', 'Image uploaded successfully.');
     //     } else {
     //         return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
     //     }
     // }
-    
-    
-  public function addImage()
-  {
-  
-      return view('add-image');
-  }
 
-  public function addImagePost(Request $request)
-  {
-      if (!Auth::guard('customer')->check()) {
-          return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
-      }
+
+    public function addImage()
+    {
+
+        return view('add-image');
+    }
+
+    public function addImagePost(Request $request)
+    {
+        if (!Auth::guard('customer')->check()) {
+            return redirect()->back()->withErrors(['error' => 'You must be logged in to upload an image.']);
+        }
 
 
 
@@ -407,54 +515,47 @@ class IndexController extends Controller
         ]);
         //dd(Auth::guard('customer')->user());
         // Get authenticated user
-    
-        
+
+
         $customer = Auth::guard('customer')->user();
         $customer_id = $customer->id;
 
-     
-
-      
-  
-      // Handle file upload
-      if ($request->hasFile('image')) {
-          $image = $request->file('image');
-          $filename = time() . '_' . $image->getClientOriginalName();
-          
-         // Define the new storage path
-    $destinationPath = '/home/u772624489/domains/firequick.com/public_html/adminPanelFireqiuck/assets/gallery';
-      $image->move($destinationPath, $filename);
-  
-          // Save image data to the database
-          $data = [
-              'title' => $request->title,
-              'location' => $filename,
-              'type' => $image->getClientMimeType(),
-              'uploadedby' => 'user',
-              'user_id' => $customer_id,
-              'status' => 2,
-          ];
-          Image::create($data);
-  
-        // Get admin email from environment variable
-      $admin_email = User::first()->email; // Assuming you set the admin email in the .env file
-
-        // Send email to admin using the Mailable class
-        // Mail::to($admin_email)->send(new ImageUploaded($admin_email, $filename));
-        Mail::to($admin_email)->send(new ImageUploaded($customer->email, $filename));
 
 
-  
-          return redirect()->back()->with('success', 'Image uploaded successfully.');
-      } else {
-          return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
-      }
-  }
 
-    
 
-    
-    
+        // Handle file upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+
+            // Define the new storage path
+            $destinationPath = '/home/u772624489/domains/firequick.com/public_html/adminPanelFireqiuck/assets/gallery';
+            $image->move($destinationPath, $filename);
+
+            // Save image data to the database
+            $data = [
+                'title' => $request->title,
+                'location' => $filename,
+                'type' => $image->getClientMimeType(),
+                'uploadedby' => 'user',
+                'user_id' => $customer_id,
+                'status' => 2,
+            ];
+            Image::create($data);
+
+            // Get admin email from environment variable
+            $admin_email = User::first()->email; // Assuming you set the admin email in the .env file
+
+            // Send email to admin using the Mailable class
+            // Mail::to($admin_email)->send(new ImageUploaded($admin_email, $filename));
+            Mail::to($admin_email)->send(new ImageUploaded($customer->email, $filename));
+
+
+
+            return redirect()->back()->with('success', 'Image uploaded successfully.');
+        } else {
+            return redirect()->back()->withErrors(['image' => 'Image upload failed.']);
+        }
+    }
 }
-
-
