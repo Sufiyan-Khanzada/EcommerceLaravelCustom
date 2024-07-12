@@ -59,6 +59,7 @@ class Cart
 
     protected function _insert($items = [])
     {
+        // dd($items);
         $cart_contents = Session::get('cart_contents');
         if (!is_array($items) || count($items) == 0) {
             return false;
@@ -87,10 +88,12 @@ class Cart
         }
     
         $rowid = md5($items['id'] . serialize($items['options'] ?? []));
-        // dd($cart_contents);
+        // dd($items);
         if (isset($cart_contents[$rowid])) {
+            // dd($cart_contents[$rowid]);
             // If item already exists in cart, update the quantity
-            $cart_contents[$rowid]['qty'] += $items['qty'];
+            // $cart_contents[$rowid]['qty'] += $items['qty'];
+            // dd($cart_contents);
             Session::forget('cart_contents');
             Session::put('cart_contents',$cart_contents);
         } else {
@@ -173,6 +176,7 @@ class Cart
     {
         // dd($this->cart_contents);
         $cart_contents = Session::get('cart_contents');
+        // dd($cart_contents);
         unset($cart_contents['total_items']);
         unset($cart_contents['cart_total']);
        
@@ -180,6 +184,8 @@ class Cart
         $items = 0;
         $handling = 0;
         foreach ($cart_contents as $key => $val) {
+            // dd($val);
+            // dd($val['handling_fee']);
             if (!is_array($val) || !isset($val['price']) || !isset($val['qty'])) {
                 continue;
             }
@@ -194,14 +200,16 @@ class Cart
         $cart_contents['total_items'] = $items;
         $cart_contents['cart_total'] = $total;
         $cart_contents['handling_fee'] = $handling;
-      
+        // dd($cart_contents);
         if (count($cart_contents) <= 2) {
+            // dd('false');
             Session::forget('cart_contents');
             // dd($cart_contents);
             Session::put('cart_contents', $cart_contents);
             // dd($this->cart_contents);
             return false;
         }
+        // dd('true');
         // dd($cart_contents);
         Session::put('cart_contents', $cart_contents);
     

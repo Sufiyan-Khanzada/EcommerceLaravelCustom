@@ -98,6 +98,7 @@ class CartController extends Controller
         'handling_fee' => $product->handling_fee,
         'options' => ['optional_info' => $optional_info]
     ];
+    // dd($data);
 
     if (!empty($size)) {
         $data['size'] = $size;
@@ -126,7 +127,7 @@ class CartController extends Controller
         
     }
 
-
+    // dd($res);
     // Session::put('cart_contents', $this->cart->cart_contents);
     
     // Debug session after saving

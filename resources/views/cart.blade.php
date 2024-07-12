@@ -20,6 +20,7 @@
 <?php
 $workbook = false;
 $session = \Session::get('cart_contents');
+// dd($session);
 $handling_fee = $session['handling_fee'];
 $total_items = $session['total_items'];
 $cart_total = $session['cart_total'];
@@ -119,7 +120,7 @@ if ($total_items == 1) {
             if ($val['restricted_status'] == "yes") {
                 $flag = 1;
             }
-            $handling_fee += $val['handling_fee'];
+            // $handling_fee += $val['handling_fee'];
             //  $tax += $value['tax'];   
             if (\Auth::guard('customer')->user()) {
                 $user = \Auth::guard('customer')->user();
@@ -472,7 +473,7 @@ if ($total_items == 1) {
                                                 <input type="text" name="address2" class="form-control input-lg" placeholder="Apartment, Unit, etc" id="address2">
                                             </div>
 
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-lg-12 form-group">
                                                 <label class="">Country</label>
 
                                                 <select name="country" id="country" class="mycountry form-control">
@@ -481,7 +482,7 @@ if ($total_items == 1) {
                                             </div>
 
 
-                                            <div class="col-md-6 form-group">
+                                            <div class="col-lg-12 form-group">
                                                 <label>State</label>
                                                 <select name="state" id="state" class='form-control'>
                                                     
@@ -723,8 +724,12 @@ if ($total_items == 1) {
 
 
         var jq14 = jQuery.noConflict(true);
-        $("#state").select2();
-        $(".mycountry").select2();
+        $("#state").select2({
+            width: '100%'
+        });
+        $(".mycountry").select2({
+            width: '100%'
+        });
 
         var agree = true;
         if (agree == true) {
@@ -803,7 +808,9 @@ if ($total_items == 1) {
 @endsection
 @section('css')
 <style type="text/css">
-
+    .select2-container {
+        width: 100% !important;
+    }
 </style>
 @endsection
 
