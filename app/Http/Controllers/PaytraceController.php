@@ -152,7 +152,7 @@ class PaytraceController extends Controller
          $shipping_cost = $this->Shipping_rate['cost'];
          $california_Tax = $this->california_tax['cost'];
          $cart  = $this->cart_contents;
-
+         $city = null;
          $cname = $customer->fname . " " . $customer->lname;
          if ($formDataArray['addrchk'] == 0) {
 
