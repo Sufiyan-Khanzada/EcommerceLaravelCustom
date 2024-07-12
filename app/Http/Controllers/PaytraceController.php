@@ -133,7 +133,7 @@ class PaytraceController extends Controller
       // dd($formData);
       // Parse the query string into an associative array
       parse_str($formData, $formDataArray);
-      dd($formDataArray);
+      // dd($formDataArray);
       // Dump the array to see the result
       // dd($formDataArray);
       //  dd($this->validRequest());
