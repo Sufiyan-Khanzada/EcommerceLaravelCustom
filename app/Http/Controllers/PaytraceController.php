@@ -133,7 +133,7 @@ class PaytraceController extends Controller
       // dd($formData);
       // Parse the query string into an associative array
       parse_str($formData, $formDataArray);
-      // dd($formDataArray);
+      // dd($formDataArray['addrchk'] == 1);
       // Dump the array to see the result
       // dd($formDataArray);
       //  dd($this->validRequest());
@@ -144,8 +144,9 @@ class PaytraceController extends Controller
       //   print_r($token);
       //     print_r("1");
       //   die();
+      
       if (!empty($token)) {
-
+         // dd($formDataArray);
          $user_email = $this->user->email;
          $customer = $this->user;
          $shipping_cost = $this->Shipping_rate['cost'];
@@ -154,6 +155,7 @@ class PaytraceController extends Controller
 
          $cname = $customer->fname . " " . $customer->lname;
          if ($formDataArray['addrchk'] == 0) {
+
             $addr1 = $customer->address1;
             $addr2 = $customer->address2;
             $zip = $customer->postalcode;
@@ -166,6 +168,7 @@ class PaytraceController extends Controller
          }
 
          if ($formDataArray['addrchk'] == 1) {
+            // dd('1');
             $addr1 = $formDataArray['address1'];
             $addr2 = $formDataArray['address2'];
             $zip = $formDataArray['postcode'];
