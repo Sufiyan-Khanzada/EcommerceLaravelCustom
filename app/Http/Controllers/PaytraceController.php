@@ -130,10 +130,10 @@ class PaytraceController extends Controller
    {
       // dd($this->cart_contents);
       $formData = $request->form_data;
-
+      // dd($formData);
       // Parse the query string into an associative array
       parse_str($formData, $formDataArray);
-
+      dd($formDataArray);
       // Dump the array to see the result
       // dd($formDataArray);
       //  dd($this->validRequest());
@@ -169,8 +169,8 @@ class PaytraceController extends Controller
             $addr1 = $formDataArray['address1'];
             $addr2 = $formDataArray['address2'];
             $zip = $formDataArray['postcode'];
-            $state = State::where('id', $formDataArray['state_id'])->pluck('iso2')->first() ?? '';
-            $country = Country::where('id', $formDataArray['country_id'])->pluck('iso2')->first() ?? '';
+            $state = State::where('id', $formDataArray['state'])->pluck('iso2')->first() ?? '';
+            $country = Country::where('id', $formDataArray['country'])->pluck('iso2')->first() ?? '';
          }
 
          // print_r($this->cart->contents());
@@ -198,8 +198,8 @@ class PaytraceController extends Controller
          //  dd($year);
          // dd($california_Tax);
          $sale_data = [
-            'amount' => floatval(0),//floatval($grand_total),
-            'tax_amount' => floatval(0),//floatval($california_Tax),
+            'amount' => floatval($grand_total),
+            'tax_amount' => floatval($california_Tax),
             'credit_card' => [
                'number' => $formDataArray['cc'],
                'expiration_month' => $formDataArray['month'],
