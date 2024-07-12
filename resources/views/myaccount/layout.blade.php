@@ -37,7 +37,7 @@
 	<!-- </div> -->
 	<section class="custom-section">
 		<div class="container">
-			<div class="col-md-3 no-padding">
+			<div class="col-md-3 no-padding" style="width: 8%;">
 				<ul type="none">
 					<li> </li>
 					<li><a href="{{route('myaccount.downloads')}}">Downloads</a></li>
