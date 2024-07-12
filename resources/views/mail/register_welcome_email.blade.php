@@ -628,7 +628,34 @@
                             </td>
                           </tr>
                           <tr style="border-collapse:collapse">
-                            <td class="es-m-txt-c" align="center" style="padding:0;Margin:0"></td>
+                            <td class="es-m-txt-c" align="center" style="padding:0;Margin:0">
+
+                            @php
+                            // Fetch customer services with Eloquent
+                            $customerServices = App\Models\BottomMenu::where('status', 1)
+                                ->where('place', 'customerservices')
+                                ->orderBy('order', 'asc')
+                                ->get();
+
+                            $links = '';
+
+                            foreach ($customerServices as $value) {
+                                $string = str_replace(' ', '-', $value->title); // Replaces all spaces with hyphens.
+                                $tit = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+
+                                $links .= '<p style="margin: 0;-webkit-text-size-adjust: none; -ms-text-size-adjust: none; mso-line-height-rule: exactly;font-size: 14px;font-family: arial, helvetica neue, helvetica, sans-serif;line-height: 21px;color: #ffffff;">';
+                                $links .= '<a href="' . url('page/' . $value->page_id . '/' . $tit) . '" style="-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: arial, helvetica neue, helvetica, sans-serif;font-size: 14px;text-decoration: none;color: #ffffff;">' . $value->title . '</a>';
+                                $links .= '</p>';
+                            }
+
+                            $links .= '<p style="margin: 0;-webkit-text-size-adjust: none; -ms-text-size-adjust: none; mso-line-height-rule: exactly;font-size: 14px;font-family: arial, helvetica neue, helvetica, sans-serif;line-height: 21px;color: #ffffff;">';
+                            $links .= '<a href="' . url('/Contact-us') . '" style="-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: arial, helvetica neue, helvetica, sans-serif;font-size: 14px;text-decoration: none;color: #ffffff;">Contact Us</a>';
+                            $links .= '</p>';
+                        @endphp
+
+                        {!! $links !!}
+
+                            </td>
                           </tr>
                         </table>
                       </td>

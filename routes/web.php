@@ -70,7 +70,7 @@ Route::post('/add-image-post', [IndexController::class, 'addImagePost'])->name('
 
 
 
-    Route::get('/contact-us', function () {
+    Route::get('/Contact-us', function () {
         return view('contact-us');
     })->name('contact-us');
 
