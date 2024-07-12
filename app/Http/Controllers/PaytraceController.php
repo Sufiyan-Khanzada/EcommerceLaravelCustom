@@ -169,6 +169,7 @@ class PaytraceController extends Controller
             $addr1 = $formDataArray['address1'];
             $addr2 = $formDataArray['address2'];
             $zip = $formDataArray['postcode'];
+            $city = $formDataArray['city'];
             $state = State::where('id', $formDataArray['state'])->pluck('iso2')->first() ?? '';
             $country = Country::where('id', $formDataArray['country'])->pluck('iso2')->first() ?? '';
          }
