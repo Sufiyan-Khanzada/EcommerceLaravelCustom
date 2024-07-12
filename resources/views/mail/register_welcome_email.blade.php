@@ -525,7 +525,7 @@
                                 <tr style="border-collapse:collapse">
                                   <td class="es-m-p0" align="left" style="padding:0;Margin:0;padding-top:15px"><h3 style="Margin:0;line-height:30px;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">Thanks for creating an account on Firequick Products, Inc. Your <strong>username </strong>is <u>
                                         <strong>{{ $email }}</strong>
-                                      </u>. Please note that your account will need to be fully approved before any orders can be placed. Firequick Products Inc. will email you with full details on how to approve your account. You can access your account area to view your orders and change your password here:&nbsp; </h3>
+                                      </u>.  Please note that your account will need to be fully approved before any orders can be placed. Firequick Products Inc. will email you with full details on how to approve your account. You can access your account area to view your orders and change your password here:&nbsp; </h3>
                                   </td>
                                 </tr>
                                 <tr style="border-collapse:collapse">

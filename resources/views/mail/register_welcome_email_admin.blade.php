@@ -523,7 +523,7 @@
                               <table cellspacing="0" cellpadding="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                 <tr style="border-collapse:collapse">
                                   <td class="es-m-p0" align="left" style="padding:0;Margin:0;padding-top:15px"><h3 style="Margin:0;line-height:30px;mso-line-height-rule:exactly;font-family:arial, helvetica neue, helvetica, sans-serif;font-size:20px;font-style:normal;font-weight:normal;color:#333333">A new customer registration has been set up with the <strong>username </strong>is <u>
-                                        <strong>{{ $fname.' '.$lname }}</strong>
+                                        <strong>{{ $email}}</strong>
                                       </u>. Contact the user to fully approve the account. </h3>
                                   </td>
                                 </tr>
