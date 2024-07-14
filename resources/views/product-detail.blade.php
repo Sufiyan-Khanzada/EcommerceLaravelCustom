@@ -68,6 +68,79 @@
                                 </div>
                                 <div class="seperator m-t-20 m-b-10"></div>
                             </div>
+
+
+                         
+
+                            <?php if($product->optional_info_status == 1 && !empty($product->optional_info_discripition) ){?>           
+                        <div class="row">               
+                            <div class="col-md-6 form-group">
+                                 <label>Write a Optional Info</label>
+                                <label><?php echo $product->optional_info_discripition; ?></label>
+                                <input type="text" class="form-control input-lg"  value="" id="optional_info">
+                            </div>
+                        </div> 
+
+                <?php }?>
+
+                            <div class="row">
+                                 <div class="col-md-6">
+                                <?php 
+                                
+                                    if(!empty($product->size) || $product->size != null){
+                                       $pieces = explode(",", rtrim($product->size, ','));
+                                    
+                                    //  print_r($pieces);
+                                
+                                ?>     
+                                    <div class="">
+                                        <label for="size">Size:</label>
+                                        <span style="color:red;" id="error-size"></span>
+                                        <select name="size" id="size" class="getSize" required>
+                                            <option style="color:#222222;  font-weight: bold;" selected disabled>Select</option>
+                                            <?php
+                                                foreach($pieces as $k => $v){
+                                            ?>  
+                                          <option style="color:#222222;  font-weight: bold;" value="<?php echo $v; ?>"><?php echo strtoupper($v); ?></option>
+                                            <?php  } ?>
+                                        </select>
+                                    </div>
+                                    
+                                   
+                                     
+                                    
+                                    
+                                <?php }  ?>    
+                                    
+                                <?php 
+                                
+                                    if(!empty($product->color) || $product->color != null){
+                                       $pieces = explode(",", rtrim($product->color, ','));
+                                    
+                                    //  print_r($pieces);
+                                
+                                ?>   
+                                    <div class="">
+                                        <label for="color">Colour:</label>
+                                        <span style="color:red;" id="error-color"></span>
+                                        <select id="color" required>
+                                          <option style="color:#222222;  font-weight: bold;" selected disabled>Select</option>
+                                          <?php
+                                                foreach($pieces as $k => $v){
+                                            ?>  
+                                          <option style="color:#222222;  font-weight: bold;" value="<?php echo $v; ?>"><?php echo strtoupper($v); ?></option>
+                                            <?php  } ?>
+                                        </select>
+                                    </div>
+                                    
+                                <?php }  ?>  
+                                </div>
+                            </div>
+                
+               
+
+
+
                             <div class="row">
                                 <div class="col-md-6">
                                 </div>

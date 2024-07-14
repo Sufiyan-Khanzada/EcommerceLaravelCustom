@@ -193,4 +193,7 @@ Route::post('reset-password/{email}/{hash}', [UserController::class, 'resetPassw
 
     Route::post('/paytrace/send', [PaytraceController::class, 'sendPayment'])->name('sendPayment');
 
+
+    Route::get('/check-suspension', [UserController::class, 'checkSuspension'])->name('check-suspension');
+
 });

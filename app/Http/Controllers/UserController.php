@@ -15,15 +15,17 @@ use App\Mail\ResetPasswordMail;
 use App\Mail\ProfileUpdateMail;
 use Illuminate\Support\Str;
 use App\Mail\NewCustomerNotificationAdmin;
-
-
-
-
 use Illuminate\Support\Facades\Session;
+
+
+
+
 
 
 class UserController extends Controller
 {
+ public $check;
+
     // Handle user registration
     public function register(Request $request)
     {
@@ -96,6 +98,17 @@ class UserController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+
+        // Check if account is suspended
+        
+        // if ($customer->status == 2) {
+        //     $notification = array(
+        //         'message' => 'Your Account is Suspended',
+        //         'alert-type' => 'warning'
+        //     );
+        //     return redirect()->route('login')->with($notification);
+        // }
+
 
         // Verify MD5 password
         if ($customer && $customer->password === md5($credentials['password'])) {
@@ -323,5 +336,44 @@ if ($customer) {
     
     }
 
+    public function checkSuspension()
+    {
+            // Check if the suspension has already been checked
+          // dd(Session::get('is_suspended'));
+          \Log::info('Session Data: ', Session::all());
+            if (Session::has('suspension_checked')) {
+                return response()->json(['is_suspended' => Session::get('is_suspended')]);
+            }
+    
+            // Check if the user is not logged in and if this has already been checked
+            if (Session::has('unauthenticated_checked')) {
+                return response()->json(['is_suspended' => true]);
+            }
+    
+            if (Auth::guard('customer')->check()) {
+                $customer = Auth::guard('customer')->user();
+    
+                if ($customer->status == '1') {
+                    // Customer is not suspended
+                    Session::put('suspension_checked', true);
+                    Session::put('is_suspended', false);
+                    return response()->json(['is_suspended' => false]);
+                } elseif ($customer->status == '2') {
+                    // Customer is suspended
+                    Auth::logout();
+                    Session::put('suspension_checked', true);
+                    Session::put('is_suspended', true);
+                    return response()->json(['is_suspended' => true]);
+                }
+            } else {
+                // Customer is not authenticated
+                Session::put('unauthenticated_checked', true);
+                return response()->json(['is_suspended' => true]);
+            }
+        }
 
-}
+        // $user = Auth::user();
+        // return response()->json(['is_suspended' => $user ? $user->is_suspended : false]);
+    }
+
+

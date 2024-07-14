@@ -1,3 +1,24 @@
+<script>
+    // Check if suspension status has already been checked
+    if (!sessionStorage.getItem('suspensionChecked')) {
+        setInterval(function() {
+            $.ajax({
+                url: '{{ route('check-suspension') }}',
+                method: 'GET',
+                success: function(response) {
+                    if (response.is_suspended) {
+                        // If suspended, redirect to logout
+                        window.location.href = '{{ route('logout') }}';
+                    } else {
+                        // Store the suspension check result in sessionStorage
+                        sessionStorage.setItem('suspensionChecked', true);
+                    }
+                }
+            });
+        }, 20000); // Poll every 20 seconds
+    }
+</script>
+
 @if(count($getNews) > 0)
 @foreach ($getNews as $getNew)
 <div class="marquee">
