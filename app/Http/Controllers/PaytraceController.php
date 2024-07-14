@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Services\Cart;
 use Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Mail\InvoiceEmailAdmin;
+
 
 class PaytraceController extends Controller
 {
@@ -342,8 +346,7 @@ class PaytraceController extends Controller
 
                      // MAIL SENDING STARTS HERE 
                      $adminEmail = User::first()->email;
-                     Mail::to($adminEmail)->send(new InvoiceMail($orderitems));
-
+                     Mail::to($adminEmail)->send(new InvoiceEmailAdmin($orderitems,$orders,$dateInLocal,$customers,$states));
                   // MAIL SENDING STARTS HERE 
 
 

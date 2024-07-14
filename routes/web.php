@@ -229,7 +229,7 @@ Route::post('reset-password/{email}/{hash}', [UserController::class, 'resetPassw
     
         // MAIL SENDING STARTS HERE 
         $adminEmail = User::first()->email;
-        Mail::to($adminEmail)->send(new InvoiceEmailAdmin($orderitems,$orders,$dateInLocal,$customers));
+        Mail::to($adminEmail)->send(new InvoiceEmailAdmin($orderitems,$orders,$dateInLocal,$customers,$states));
     
         return response()->json(['message' => 'Test email sent successfully']);
     });

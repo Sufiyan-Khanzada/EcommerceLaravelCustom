@@ -19,14 +19,18 @@ class InvoiceEmailAdmin extends Mailable
     public $orders;
     public $dateInLocal;
     public $customers;
+    public $states;
+
    
 
-    public function __construct($orderItems,$orders,$dateInLocal,$customers)
+    public function __construct($orderItems,$orders,$dateInLocal,$customers,$states)
     {
         $this->orderItems = $orderItems;
         $this->orders = $orders;
        $this->dateInLocal=$dateInLocal;
        $this->customers=$customers;
+       $this->states=$states;
+       
     }
 
     public function build()
