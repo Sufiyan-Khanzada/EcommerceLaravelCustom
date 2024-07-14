@@ -302,23 +302,47 @@ class PaytraceController extends Controller
 
                   // $message .='<p>Team at firequick</p>';
                   // $message .='</body></html>';
-                  $order_id = $orders_email->order_id;
+                  // $order_id = $orders_email->order_id;
+                  // $orderitems = DB::table('orderitems')
+                  //    ->join('products', 'orderitems.product_id', '=', 'products.product_id')
+                  //    ->where('orderitems.order_id', $order_id)
+                  //    ->select('orderitems.*', 'products.title')
+                  //    ->get();
+
+
+                  // $orders = DB::table('orders')->where('order_id', $order_id)->first();
+                  // $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
+                  // $states = DB::table('states')->where('id', $customers->state_id)->first();
+                  // $time = strtotime($orders->timestamp);
+                  // $dateInLocal = date("d-m-Y", $time);
+                  
+
+                  $order_id = $orders->order_id;
+
                   $orderitems = DB::table('orderitems')
-                     ->join('products', 'orderitems.product_id', '=', 'products.product_id')
-                     ->where('orderitems.order_id', $order_id)
-                     ->select('orderitems.*', 'products.title')
-                     ->get();
+                  ->join('products', 'orderitems.product_id', '=', 'products.product_id')
+                  ->where('orderitems.order_id', $order_id)
+                  ->select('orderitems.*', 'products.title')
+                  ->get()
+                  ->map(function ($item) {
+                      return (array) $item; // Convert each item to an array
+                  })
+                  ->toArray();
 
+                     // dd($orderitems);
 
-                  $orders = DB::table('orders')->where('order_id', $order_id)->first();
-                  $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
-                  $states = DB::table('states')->where('id', $customers->state_id)->first();
-                  $time = strtotime($orders->timestamp);
-                  $dateInLocal = date("d-m-Y", $time);
+                     $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
+                     if (!$customers) {
+                     return response()->json(['error' => 'Customer not found'], 404);
+                     }
 
+                     $states = DB::table('states')->where('id', $customers->state_id)->first();
+                     $time = strtotime($orders->timestamp);
+                     $dateInLocal = date("d-m-Y", $time);
 
-
-
+                     // MAIL SENDING STARTS HERE 
+                     $adminEmail = User::first()->email;
+                     Mail::to($adminEmail)->send(new InvoiceMail($orderitems));
 
                   // MAIL SENDING STARTS HERE 
 

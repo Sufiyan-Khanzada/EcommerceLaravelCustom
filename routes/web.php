@@ -6,7 +6,10 @@ use App\Http\Controllers\Frontend\ContactUsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaytraceController;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Mail\InvoiceEmailAdmin;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -195,5 +198,50 @@ Route::post('reset-password/{email}/{hash}', [UserController::class, 'resetPassw
 
 
     Route::get('/check-suspension', [UserController::class, 'checkSuspension'])->name('check-suspension');
+
+    Route::get('/test-email', function () {
+        // Replace with a valid order email
+        $orderEmail = 'testing@fortune5.pro';
+    
+        // Retrieve order details
+        $orders = DB::table('orders')->where('customer_email', $orderEmail)->first();
+        if (!$orders) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+    
+        $order_id = $orders->order_id;
+    
+        $orderitems = DB::table('orderitems')
+            ->join('products', 'orderitems.product_id', '=', 'products.product_id')
+            ->where('orderitems.order_id', $order_id)
+            ->select('orderitems.*', 'products.title')
+            ->get()
+            ->toArray(); // Convert the collection to an array
+    // dd($orderitems);
+        $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
+        if (!$customers) {
+            return response()->json(['error' => 'Customer not found'], 404);
+        }
+    
+        $states = DB::table('states')->where('id', $customers->state_id)->first();
+        $time = strtotime($orders->timestamp);
+        $dateInLocal = date("d-m-Y", $time);
+    
+        // MAIL SENDING STARTS HERE 
+        $adminEmail = User::first()->email;
+        Mail::to($adminEmail)->send(new InvoiceEmailAdmin($orderitems,$orders,$dateInLocal,$customers));
+    
+        return response()->json(['message' => 'Test email sent successfully']);
+    });
+
+
+
+
+
+
+
+
+
+
 
 });
