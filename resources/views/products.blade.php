@@ -88,13 +88,23 @@
                                                 <div class="product-title">
                                                     <h3><a href="{{ route('single.product', ['productId' => $product->product_id, 'productTitle' => \Str::slug($product->title)]) }}">{{$product->title}}</a></h3>
                                                 </div>
+                                                
+                                                
+                                            <div class="product-price"> <br>
+                                               
+                                             @if($product->sale_price == 0)
+                                                <ins>${{ $product->regular_price }}</ins>
+                                            @else
+                                             <del>${{ $product->regular_price }}</del>
+                                                <ins>${{ $product->sale_price }}</ins>
+                                               
+                                            @endif
 
-                                                <div class="product-price"> <br>
-                                                    
-                                                    <ins>${{$product->regular_price}}</ins> 
 
-
-                                                </div>                                            
+                                            </div>
+                                                
+                                                
+                                                                                 
                                             </div>
                                         </div>
                                     </div>

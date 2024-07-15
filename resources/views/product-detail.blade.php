@@ -39,9 +39,21 @@
                                 <div class="product-title">
                                     <h3><a >{{$product->title}}</a></h3>
                                 </div>
-                                <div class="product-price">
-                                    Price :<ins> ${{$product->regular_price}}</ins>                                
-                                </div>
+                                
+                                  <div class="product-price"> <br>
+                                               
+                                             @if($product->sale_price == 0)
+                                               Price :  <ins>${{ $product->regular_price }}</ins>
+                                            @else
+                                             <del>${{ $product->regular_price }}</del>
+                                                Price : <ins>${{ $product->sale_price }}</ins>
+                                               
+                                            @endif
+
+
+                                            </div>
+                                
+                               
                                 @if ($product->restricted_status == 'yes')
                                 <div class="seperator m-b-10"></div>
                                 <p style="color: #555; font-weight: bold; font-family: 'PT Sans', sans-serif;"> NOTE: This is a restricted product. To order it to your ship to address you must be <span style="color: #ff4000;">pre-validated by Firequick.</span> If you are not a pre-validated customer, you will be notified at the checkout.</p>
@@ -68,11 +80,8 @@
                                 </div>
                                 <div class="seperator m-t-20 m-b-10"></div>
                             </div>
-
-
-                         
-
-                            <?php if($product->optional_info_status == 1 && !empty($product->optional_info_discripition) ){?>           
+                            
+                         <?php if($product->optional_info_status == 1 && !empty($product->optional_info_discripition) ){?>           
                         <div class="row">               
                             <div class="col-md-6 form-group">
                                  <label>Write a Optional Info</label>
@@ -137,12 +146,15 @@
                                 </div>
                             </div>
                 
-               
-
-
-
+                         
+                         
+                         
+                         
+                         
+                         
                             <div class="row">
                                 <div class="col-md-6">
+                                    
                                 </div>
                             </div>
                             @if($product->item_marked == 1)

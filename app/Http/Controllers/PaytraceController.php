@@ -17,7 +17,7 @@ use Exception;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Mail\InvoiceEmailAdmin;
-
+use App\Mail\InvoiceEmailCustomer;
 
 class PaytraceController extends Controller
 {
@@ -320,18 +320,20 @@ class PaytraceController extends Controller
                   // $time = strtotime($orders->timestamp);
                   // $dateInLocal = date("d-m-Y", $time);
                   
+                  $orders = DB::table('orders')->where('customer_email', $orders_email)->first();
+                  // dd($orders);
+                  if (!$orders) {
+                      return response()->json(['error' => 'Order not found'], 404);
+                  }
 
                   $order_id = $orders->order_id;
 
                   $orderitems = DB::table('orderitems')
                   ->join('products', 'orderitems.product_id', '=', 'products.product_id')
                   ->where('orderitems.order_id', $order_id)
-                  ->select('orderitems.*', 'products.title')
+                  ->select('orderitems.*', 'products.title','products.image_id')
                   ->get()
-                  ->map(function ($item) {
-                      return (array) $item; // Convert each item to an array
-                  })
-                  ->toArray();
+                  ->toArray(); // Convert the collection to an array
 
                      // dd($orderitems);
 
@@ -943,6 +945,9 @@ class PaytraceController extends Controller
                   //                      $mail->Subject = 'Order at Firequick.com';
                   //                      $mail->Body  = $m;
                   //                      $mail->send();
+
+                  Mail::to($orders_email)->send(new InvoiceEmailCustomer($customers));
+
 
                   $cartService = new Cart;
                   $cartService->destroy();

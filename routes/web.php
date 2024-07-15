@@ -201,10 +201,19 @@ Route::post('reset-password/{email}/{hash}', [UserController::class, 'resetPassw
 
     Route::get('/test-email', function () {
         // Replace with a valid order email
-        $orderEmail = 'testing@fortune5.pro';
+       // $orderEmail = 'testing@fortune5.pro';
+
+        $orders_email = DB::table('orders')
+        ->where('customer_email', $this->user->email)
+        ->where('payment_id', $json->transaction_id)
+        ->orderBy('order_id', 'desc')
+        ->first();
+
+        dd();
     
         // Retrieve order details
         $orders = DB::table('orders')->where('customer_email', $orderEmail)->first();
+        // dd($orders);
         if (!$orders) {
             return response()->json(['error' => 'Order not found'], 404);
         }
@@ -214,14 +223,18 @@ Route::post('reset-password/{email}/{hash}', [UserController::class, 'resetPassw
         $orderitems = DB::table('orderitems')
             ->join('products', 'orderitems.product_id', '=', 'products.product_id')
             ->where('orderitems.order_id', $order_id)
-            ->select('orderitems.*', 'products.title')
+            ->select('orderitems.*', 'products.title','products.image_id')
             ->get()
             ->toArray(); // Convert the collection to an array
-    // dd($orderitems);
-        $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
+   // dd($orderitems);
+
+   
+    $customers = DB::table('customers')->where('email', $orders->customer_email)->first();
         if (!$customers) {
             return response()->json(['error' => 'Customer not found'], 404);
         }
+
+      //  dd($customers);
     
         $states = DB::table('states')->where('id', $customers->state_id)->first();
         $time = strtotime($orders->timestamp);
